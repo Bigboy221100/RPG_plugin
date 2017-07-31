@@ -1,0 +1,24 @@
+main: main.rpg_main
+version: 0.1
+name: RPG
+author: B1GB0Y
+
+commands:
+     createnewcharacter:
+          description: Erstelle einen neuen Character
+     loadcharacter:
+          description: Lädt einen Character
+     logoutcharacter:
+         description: Logout aus Character
+     deletecharacter:
+         description: Löscht Character
+     listcharacter:
+         description: Listet Character auf
+     saveinv:
+          description: Speichert Inv
+     loadinv:
+          description: Ladet Inv
+     rpg commands:
+          description: Zeigt alle Befehle an
+     rpg version:
+          description: Zeigt Plugin Version an
