@@ -23,6 +23,7 @@ public class listchars implements CommandExecutor {
                     File files[] = maindir.listFiles();
                     String [] list=new String[files.length];
                     for(int i=0;i<list.length;i++){
+                        System.out.println(list[i]);
                         p.sendMessage(list[i]);
                     }
                 }else{

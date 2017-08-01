@@ -3,7 +3,6 @@
     <output-path>$USER_HOME$/Desktop/Minecraft/Plugins</output-path>
     <root id="archive" name="RPG_plugin.jar">
       <element id="module-output" name="RPG_plugin" />
-      <element id="extracted-dir" path="$USER_HOME$/Desktop/Minecraft/1.12 server/craftbukkit-1.12.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
