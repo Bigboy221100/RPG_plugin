@@ -75,7 +75,7 @@ public class Archer extends CharPlayer {
             YamlConfiguration c = new YamlConfiguration();
             c.set("inventory.armor", p.getInventory().getArmorContents());
             c.set("inventory.content", p.getInventory().getContents());
-            c.save(new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+"inv_.yml"));
+            c.save(new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+"_inv.yml"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {
