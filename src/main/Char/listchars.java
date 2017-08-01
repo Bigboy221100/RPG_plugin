@@ -21,8 +21,8 @@ public class listchars implements CommandExecutor {
                 if(p.hasPermission("rpg.character.list")){
                     File maindir = new File("plugins/RPG/Chars/"+p.getUniqueId());
                     String files[] = maindir.list();
+                    p.sendMessage("Ihre Character lauten");
                     for(int i=0;i<files.length;i++){
-                        System.out.println(files[i]);
                         p.sendMessage(files[i]);
                     }
                 }else{
