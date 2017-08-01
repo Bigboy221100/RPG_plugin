@@ -1,8 +1,18 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="RPG_plugin:jar">
+<<<<<<< HEAD
     <output-path>$PROJECT_DIR$/../../../../Minecraft Server2/plugins</output-path>
     <root id="archive" name="RPG_plugin.jar">
       <element id="module-output" name="RPG_plugin" />
+=======
+    <output-path>$USER_HOME$/Desktop/Minecraft/Plugins</output-path>
+    <root id="archive" name="RPG_plugin.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$USER_HOME$/Desktop/Minecraft/Plugins/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="RPG_plugin" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/Minecraft/1.12 server/craftbukkit-1.12.jar" path-in-jar="/" />
+>>>>>>> origin/master
     </root>
   </artifact>
 </component>
