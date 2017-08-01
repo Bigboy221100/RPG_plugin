@@ -20,11 +20,11 @@ public class deletechar implements CommandExecutor {
                 Player p=(Player)sender;
                 if(p.hasPermission("rpg.character.delete")){
                     if(args.length==1){
-                        File deltxt = new File("plugins/RPG/Chars/" + p.getUniqueId() + "/" + args[0] + ".txt");
+                        File deltxt = new File("plugins/RPG/Chars/" + p.getUniqueId() + "/" + args[0] + "/"+args[0]+".txt");
                         if(!deltxt.exists()){
                             p.sendMessage("Diesen main.Char gibt es nicht oder gehört nicht ihnen");
                         }
-                        File delyml = new File("plugins/RPG/Chars/" + p.getUniqueId() + "/" + args[0] + "_inv.yml");
+                        File delyml = new File("plugins/RPG/Chars/" + p.getUniqueId() + "/" + args[0] + "/"+args[0]+"_inv.yml");
                         boolean gingtxt=deltxt.delete();
                         boolean gingyml=delyml.delete();
                         if(gingtxt==true && gingyml==true){
