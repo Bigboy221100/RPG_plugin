@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class rpg_main extends JavaPlugin {
     public void onEnable(){
-        //CharsCommand
+        //Commands
         this.getCommand("createnewcharacter").setExecutor(new createnewcharacter());
         this.getCommand("loadcharacter").setExecutor(new loadcharacter());
         this.getCommand("logoutcharacter").setExecutor(new logoutcharacter());
