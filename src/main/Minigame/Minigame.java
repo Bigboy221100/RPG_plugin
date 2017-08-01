@@ -29,17 +29,15 @@ public class Minigame implements CommandExecutor, Listener {
                     minigameName = args[1];
                     try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))) {
                         writer.write(minigameName);
-                        p.sendMessage("MiniGame erfolgreich erstellt!");
+                        p.sendMessage("Du kannst jetzt mit /minigame Punkte (Minigame-Name) Punkt(Wo du dich befindest) eine Spielbegrenzung erstellen!");
                     } catch (IOException e) {
                         p.sendMessage("Das Minigame konnte nicht erstellt werden!");
                     }
                 } else {
                     p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
-                    p.sendMessage("Fehler!");
                 }
             } else if (args.length <= 1) {
                 p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
-                p.sendMessage("Fehler!");
             }
         }
         return false;
