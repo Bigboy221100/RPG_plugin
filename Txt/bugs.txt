@@ -1,3 +1,3 @@
 Nachrichten wie z.b. aufgeloggt... werden an alle geschickt
 Text farbig
-items verdoppeln bei nur loadcharacter (droppen ... laden aufhebne)
+items verdoppeln bei nur loadcharacter (droppen ... laden aufheben)
