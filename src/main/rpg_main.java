@@ -1,6 +1,7 @@
 package main;
 
 import main.Char.*;
+import main.Minigame.Minigame;
 import main.text.info.commands;
 import main.text.info.version;
 import org.bukkit.Bukkit;
@@ -24,12 +25,12 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("rpg commands").setExecutor(new commands());
         this.getCommand("rpg version").setExecutor(new version());
 
+        this.getCommand("minigame").setExecutor(new Minigame());
+
         PluginManager pm= Bukkit.getPluginManager();
         pm.registerEvents(new PlayerEvents(),this);
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory","true");
-
-        System.out.println("test2");
 
         System.out.println("Rpg enabled");
     }

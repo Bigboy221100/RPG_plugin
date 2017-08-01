@@ -22,3 +22,5 @@ commands:
           description: Zeigt alle Befehle an
      rpg version:
           description: Zeigt Plugin Version an
+     minigame:
+          description: Erzeugt ein Minigame
