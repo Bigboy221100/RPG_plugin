@@ -29,6 +29,8 @@ public class rpg_main extends JavaPlugin {
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory","true");
 
+        System.out.println("test");
+
         System.out.println("Rpg enabled");
     }
 
