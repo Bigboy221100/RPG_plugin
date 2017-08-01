@@ -20,13 +20,28 @@ public class Minigame implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         Player p = (Player) commandSender;
         String minigameName="";
-        if(args.length >= 2) {
-            if (args[2].equals("erstellen")) {
+        if(args.length == 3) {
+            if (args[2].equalsIgnoreCase("erstellen")) {
                 minigameName = args[3];
                 try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("/RPG/Minigame/"), Charset.forName("UTF-8"))){
                     writer.write(minigameName);
+                    p.sendMessage("MiniGame erfolgreich erstellt!");
                 } catch (IOException e) {
                     p.sendMessage("Das Minigame konnte nicht erstellt werden!");
+                }
+            }
+        } else {
+            if(args.length < 2) {
+                p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
+                p.sendMessage("Fehler 1");
+            }
+            if(args.length == 2) {
+                if(args[2].equalsIgnoreCase("erstellen")) {
+                    p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
+                    p.sendMessage("Fehler 2");
+                } else {
+                    p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
+                    p.sendMessage("Fehler 3");
                 }
             }
         }
