@@ -1,0 +1,2 @@
+Nachrichten wie z.b. aufgeloggt... werden an alle geschickt
+Text farbig
