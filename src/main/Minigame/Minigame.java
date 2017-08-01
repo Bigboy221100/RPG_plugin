@@ -26,7 +26,6 @@ public class Minigame implements CommandExecutor, Listener {
                 try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("/RPG/Minigame/"), Charset.forName("UTF-8"))){
                     writer.write(minigameName);
                 } catch (IOException e) {
-
                     p.sendMessage("Das Minigame konnte nicht erstellt werden!");
                 }
             }
