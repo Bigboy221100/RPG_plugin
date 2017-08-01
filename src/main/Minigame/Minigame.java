@@ -22,6 +22,7 @@ public class Minigame implements CommandExecutor, Listener {
         String minigameName="";
         p.sendMessage(args.length+"");
         if(args.length == 2) {
+            p.sendMessage("Versuche Minigame zu speicher ...");
             if (args[1].equalsIgnoreCase("erstellen")) {
                 minigameName = args[2];
                 try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("/RPG/Minigame/"), Charset.forName("UTF-8"))){
@@ -31,17 +32,9 @@ public class Minigame implements CommandExecutor, Listener {
                     p.sendMessage("Das Minigame konnte nicht erstellt werden!");
                 }
             }
-        } else if(args.length == 0) {
+        } else if(args.length <= 1) {
             p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
-            p.sendMessage("Fehler 1");
-        } else if(args.length == 1) {
-            if(args[1].equalsIgnoreCase("erstellen")) {
-                p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
-                p.sendMessage("Fehler 2");
-            } else {
-                p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
-                p.sendMessage("Fehler 3");
-            }
+            p.sendMessage("Fehler!");
         }
         return false;
     }
