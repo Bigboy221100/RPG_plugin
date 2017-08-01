@@ -27,10 +27,11 @@ public class Archer extends CharPlayer {
         ausrüsten();
     }
     //nur zum Laden gedacht
-    public Archer(UUID player, String name, String klasse, int level, int xp){
+    public Archer(UUID player, String name, String klasse, int money,int level, int xp){
         this.player=player;
         this.name=name;
         this.klasse=klasse;
+        this.money=money;
         this.level=level;
         this.xp=xp;
         Player p=Bukkit.getPlayer(player);
@@ -60,18 +61,21 @@ public class Archer extends CharPlayer {
         p.setLevel(level);
         PrintWriter pWriter = null;
         try {
-            File file = new File("plugins/RPG/Chars/"+player+"/"+name+".txt");
-            file.getParentFile().mkdirs();
-            pWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+            //create Char txt
+            File inv = new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+".txt");
+            inv.getParentFile().mkdirs();
+            pWriter = new PrintWriter(new BufferedWriter(new FileWriter(inv)));
             pWriter.println(player);
             pWriter.println(name);
             pWriter.println(klasse);
+            pWriter.println(money);
             pWriter.println(level);
             pWriter.println(xp);
+            //Create inv txt
             YamlConfiguration c = new YamlConfiguration();
             c.set("inventory.armor", p.getInventory().getArmorContents());
             c.set("inventory.content", p.getInventory().getContents());
-            c.save(new File("plugins/RPG/Chars/"+player+"/"+name+"_inv.yml"));
+            c.save(new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+"inv_.yml"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {

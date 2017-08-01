@@ -1,6 +1,6 @@
 package main.Char;
 
-
+//Wird nicht funktionieren
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

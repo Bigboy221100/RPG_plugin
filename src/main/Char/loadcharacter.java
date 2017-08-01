@@ -23,18 +23,19 @@ public class loadcharacter implements CommandExecutor {
                     if(args.length==1) {
                         try {
                             UUID player=p.getUniqueId();
-                            FileReader fr = new FileReader("plugins/RPG/Chars/"+player+"/"+args[0]+".txt");
+                            FileReader fr = new FileReader("plugins/RPG/Chars/"+player+"/"+args[0]+"/"+args[0]+".txt");
                             BufferedReader reader = new BufferedReader(fr);
                             String UUID=reader.readLine();
                             UUID uuidr= java.util.UUID.fromString(UUID);
                             String name=reader.readLine();
                             String klasse=reader.readLine();
+                            int money=Integer.parseInt(reader.readLine());
                             String level=reader.readLine();
                             int levelr=Integer.parseInt(level);
                             String xp=reader.readLine();
                             int xpr= Integer.parseInt(xp);
                             if(player.equals(uuidr)) {
-                                CharPlayer charPlayer = new Archer(uuidr, name, klasse, levelr, xpr);
+                                CharPlayer charPlayer = new Archer(uuidr, name, klasse, money,levelr, xpr);
                                 p.sendMessage("Sie haben sich erfolgreich in ihren Level " + levelr + " " + klasse + " " + name + " eingeloggt");
                             }else{
                                 p.sendMessage("Dieser Character gehört ihnen nicht");
