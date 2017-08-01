@@ -20,7 +20,10 @@ public class money implements CommandExecutor{
                 Player p=(Player)sender;
                 if(p.hasPermission("rpg.money.credit")){
                     try {
-                        FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + p.getDisplayName() + "/" + p.getDisplayName() + ".txt");
+                        String charname[]=p.getDisplayName().split("\\s+");
+                        p.sendMessage(charname);
+                        FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + charname + "/" + charname + ".txt");
+
                         BufferedReader reader = new BufferedReader(fr);
                         for(int i=0;i<3;i++) {
                             reader.readLine();
