@@ -31,19 +31,16 @@ public class Minigame implements CommandExecutor, Listener {
                     p.sendMessage("Das Minigame konnte nicht erstellt werden!");
                 }
             }
-        } else {
-            if(args.length < 1) {
-                p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
-                p.sendMessage("Fehler 1");
-            }
-            if(args.length == 1) {
-                if(args[1].equalsIgnoreCase("erstellen")) {
-                    p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
-                    p.sendMessage("Fehler 2");
-                } else {
-                    p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
-                    p.sendMessage("Fehler 3");
-                }
+        } else if(args.length == 0) {
+            p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
+            p.sendMessage("Fehler 1");
+        } else if(args.length == 1) {
+            if(args[1].equalsIgnoreCase("erstellen")) {
+                p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
+                p.sendMessage("Fehler 2");
+            } else {
+                p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein");
+                p.sendMessage("Fehler 3");
             }
         }
         return false;
