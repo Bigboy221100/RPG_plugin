@@ -1,6 +1,7 @@
 package main;
 
 import main.Char.*;
+import main.Char.Klassen.money;
 import main.Minigame.Minigame;
 import main.text.info.commands;
 import main.text.info.version;
@@ -19,6 +20,7 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("logoutcharacter").setExecutor(new logoutcharacter());
         this.getCommand("deletecharacter").setExecutor(new deletechar());
         this.getCommand("listcharacter").setExecutor(new listchars());
+        this.getCommand("money").setExecutor(new money());
         this.getCommand("saveinv").setExecutor(new invtest());
         this.getCommand("loadinv").setExecutor(new invtest());
 
