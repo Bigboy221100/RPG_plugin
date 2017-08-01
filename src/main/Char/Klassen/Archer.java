@@ -42,8 +42,8 @@ public class Archer extends CharPlayer {
         content = ((List<ItemStack>) c.get("inventory.content")).toArray(new ItemStack[0]);
         p.getInventory().setContents(content);
         p.setLevel(this.level);
-        p.setDisplayName("[Archer] " + name);
-        p.setPlayerListName("[Archer] " + name);
+        p.setDisplayName("§1[§7Archer§1]§6 " + name);
+        p.setPlayerListName("§1[§7Archer§1]§6 " + name);
 
     }
 
@@ -51,9 +51,9 @@ public class Archer extends CharPlayer {
         this.level=1;
         Player p= Bukkit.getPlayer(player);
         p.getInventory().clear();
-        p.setDisplayName("[Archer] " + name);
-        p.setPlayerListName("[Archer] " + name);
-        p.setCustomName("[Archer] " + name);
+        p.setDisplayName("§1[§7Archer§1]§6 " + name);
+        p.setPlayerListName("§1[§7Archer§1]§6 " + name);
+        p.setCustomName("§1[§7Archer§1]§6 " + name);
         p.getInventory().addItem(new ItemStack(Material.BOW));
         for(int i=0;i<16;i++) {
             p.getInventory().addItem(new ItemStack(Material.ARROW));
