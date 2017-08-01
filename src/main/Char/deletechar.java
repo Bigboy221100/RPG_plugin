@@ -28,7 +28,7 @@ public class deletechar implements CommandExecutor {
                         boolean gingtxt=deltxt.delete();
                         boolean gingyml=delyml.delete();
                         if(gingtxt==true && gingyml==true){
-                            p.sendMessage("Der Character " + args[0]+"  erfolgreich gelöscht");
+                            p.sendMessage("Der Character " + args[0]+" wurde erfolgreich gelöscht");
                             CharPlayer charPlayer=new Normal(p);
                         }else{
                             if(deltxt.exists()) {
