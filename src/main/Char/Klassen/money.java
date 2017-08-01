@@ -22,6 +22,7 @@ public class money implements CommandExecutor{
                     try {
                         String charname[]=p.getDisplayName().split("\\s+");
                         p.sendMessage(charname);
+
                         FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + charname + "/" + charname + ".txt");
 
                         BufferedReader reader = new BufferedReader(fr);
