@@ -72,6 +72,7 @@ public class Archer extends CharPlayer {
             pWriter.println(level);
             pWriter.println(xp);
             //Create inv yml
+
             YamlConfiguration c = new YamlConfiguration();
             c.set("inventory.armor", p.getInventory().getArmorContents());
             c.set("inventory.content", p.getInventory().getContents());
