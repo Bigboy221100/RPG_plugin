@@ -11,8 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Created by Fabian on 19.07.2017.
  */
 public class rpg_main extends JavaPlugin {
-
     public void onEnable(){
+        //Commands
         this.getCommand("createnewcharacter").setExecutor(new createnewcharacter());
         this.getCommand("loadcharacter").setExecutor(new loadcharacter());
         this.getCommand("logoutcharacter").setExecutor(new logoutcharacter());
