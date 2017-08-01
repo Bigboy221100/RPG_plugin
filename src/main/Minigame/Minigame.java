@@ -25,9 +25,9 @@ public class Minigame implements CommandExecutor, Listener {
             if (args.length == 2) {
                 p.sendMessage(args[0] + "" + args[1]);
                 if (args[0].equalsIgnoreCase("erstellen")) {
-                    p.sendMessage("Versuche Minigame zu speicher ...");
+                    p.sendMessage("Versuche Minigame zu speichern ...");
                     minigameName = args[1];
-                    try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("/RPG/Minigame/"), Charset.forName("UTF-8"))) {
+                    try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))) {
                         writer.write(minigameName);
                         p.sendMessage("MiniGame erfolgreich erstellt!");
                     } catch (IOException e) {
