@@ -12,6 +12,10 @@ Chars{
   }
 }
 
+Allgemein{
+  Klasse für Helpvoids
+}
+
 
 //Max
 Finished:
