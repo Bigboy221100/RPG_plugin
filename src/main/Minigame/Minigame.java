@@ -29,8 +29,8 @@ public class Minigame implements CommandExecutor, Listener {
                 if (args[0].equalsIgnoreCase("erstellen")) {
                     p.sendMessage("Versuche Minigame zu speichern ...");
                     minigameName = args[1];
+                    PrintWriter pWriter;
                     try {
-                        PrintWriter pWriter = null;
                         File minigamePfad = new File("plugins/RPG/MinigameTest/minigame.txt");
                         minigamePfad.getParentFile().mkdirs();
                         pWriter = new PrintWriter(new BufferedWriter(new FileWriter(minigamePfad)));
