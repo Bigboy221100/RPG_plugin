@@ -10,3 +10,9 @@ Chars{
     Level 2-5 bekommt man Lederrüstung (orange dyed)
   }
 }
+
+
+//Max
+Finished:
+In Progress: Minigame
+Ideas:
