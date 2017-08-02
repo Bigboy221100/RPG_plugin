@@ -2,6 +2,8 @@ package main.Char.Klassen;
 
 
 
+import javafx.event.EventHandler;
+
 import java.util.UUID;
 
 /**
@@ -22,7 +24,6 @@ public class CharPlayer{
         this.level=1;
         this.xp=0;
         this.klasse=klasse;
-
     }
 
     public CharPlayer() {
@@ -52,4 +53,6 @@ public class CharPlayer{
     public int getMoney() {
         return money;
     }
+
+
 }
