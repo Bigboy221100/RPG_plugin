@@ -27,6 +27,7 @@ public class Minigame implements CommandExecutor, Listener {
                     minigameName = args[1];
                     PrintWriter pWriter = null;
                     try {
+
                         pWriter = new PrintWriter(new BufferedWriter(new FileWriter("plugins/RPG/MinigameTest/minigame.txt")));
                         FileReader freader = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
                         BufferedReader reader = new BufferedReader(freader);
