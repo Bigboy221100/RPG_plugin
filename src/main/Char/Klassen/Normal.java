@@ -29,7 +29,7 @@ public class Normal extends CharPlayer{
             YamlConfiguration c = new YamlConfiguration();
             c.set("inventory.armor", p.getInventory().getArmorContents());
             c.set("inventory.content", p.getInventory().getContents());
-            c.save(new File("plugins/RPG/Chars/"+player+"/"+charname[1]+"_inv.yml"));
+            c.save(new File("plugins/RPG/Chars/"+player+"/"+charname[1]+"/"+charname[1]+"_inv.yml"));
             p.getInventory().clear();
 
             p.setDisplayName("§1[§7Normal§1]§2 " + name+"§f");
