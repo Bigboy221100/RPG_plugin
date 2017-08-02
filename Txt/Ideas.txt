@@ -1,2 +1,12 @@
-
-Geld für Mobkills
+Chars{
+  Allgemein{
+    Geld für Mobkills
+    Rüstung nur bis Leder, rest durch loots erfarmbar, bzw. kaufbar(teuer)
+  }
+  Archer{
+    Distanz des Kills als Multiplyer
+    Alle 5 Level öffnet sich(bzw. lässt sich) ein Virt. Inv öffnen mit
+    Enchantmentbüchern, die man per click auf den bogen machen kann
+    Level 2-5 bekommt man Lederrüstung (orange dyed)
+  }
+}
