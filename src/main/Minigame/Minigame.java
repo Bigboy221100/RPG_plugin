@@ -47,6 +47,7 @@ public class Minigame implements CommandExecutor, Listener {
                 } else {
                     p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
                 }
+
                 /*
                 if (args[0].equalsIgnoreCase("löschen")) {
                     p.sendMessage("Versuche Minigame zu löschen ...");
