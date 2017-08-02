@@ -1,9 +1,7 @@
 package main.Minigame;
 
 
-import io.netty.handler.codec.string.LineSeparator;
-import org.apache.logging.log4j.core.config.yaml.YamlConfiguration;
-import org.bukkit.Bukkit;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +12,6 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class Minigame implements CommandExecutor, Listener {
 
@@ -29,19 +26,27 @@ public class Minigame implements CommandExecutor, Listener {
                 if (args[0].equalsIgnoreCase("erstellen")) {
                     p.sendMessage("Versuche Minigame zu speichern ...");
                     minigameName = args[1];
-                    PrintWriter pWriter;
+                    PrintWriter pWriter = null;
                     try {
                         File minigamePfad = new File("plugins/RPG/MinigameTest/minigame.txt");
                         minigamePfad.getParentFile().mkdirs();
                         pWriter = new PrintWriter(new BufferedWriter(new FileWriter(minigamePfad)));
-                        /*FileReader freader = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
+                        FileReader freader = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
                         BufferedReader reader = new BufferedReader(freader);
                         String line;
                         while ((line=reader.readLine()) != null) {
+                            p.sendMessage("Test");
                             pWriter.println(line);
-                        }*/
+                        }
                         pWriter.println(minigameName + " 0" + " 0");
-                    } catch (IOException e) {}
+                    } catch (IOException e) {
+
+                    } finally {
+                        if (pWriter != null){
+                            pWriter.flush();
+                            pWriter.close();
+                        }
+                    }
                     p.sendMessage("Du kannst jetzt mit /minigame Punkte (Minigame-Name) (Punkt1,Punkt2) eine Spielbegrenzung erstellen!");
                 } else {
                     p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
