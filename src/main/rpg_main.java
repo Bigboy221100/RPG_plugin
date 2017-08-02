@@ -29,8 +29,8 @@ public class rpg_main extends JavaPlugin {
 
         this.getCommand("minigame").setExecutor(new Minigame());
 
-        PluginManager pm= Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerEvents(),this);
+        PluginManager plev= Bukkit.getPluginManager();
+        plev.registerEvents(new PlayerEvents(),this);
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory","true");
 
