@@ -19,7 +19,6 @@ public class Minigame implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         Player p = (Player) commandSender;
         String minigameName = "";
-        p.sendMessage(args.length + "");
         if (command.getName().equalsIgnoreCase("minigame")) {
             //MiniGame erstellen und löschen
             if (args.length == 2) {
@@ -28,20 +27,17 @@ public class Minigame implements CommandExecutor, Listener {
                     minigameName = args[1];
                     PrintWriter pWriter = null;
                     try {
-                        File minigamePfad = new File("plugins/RPG/MinigameTest/minigame.txt");
-                        minigamePfad.getParentFile().mkdirs();
-                        pWriter = new PrintWriter(new BufferedWriter(new FileWriter(minigamePfad)));
-                        FileReader fr = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
-                        BufferedReader reader = new BufferedReader(fr);
-                        p.sendMessage(reader.readLine());
-                        String line;
+
+                        pWriter = new PrintWriter(new BufferedWriter(new FileWriter("plugins/RPG/MinigameTest/minigame.txt")));
+                        FileReader freader = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
+                        BufferedReader reader = new BufferedReader(freader);
+                        String line="";
                         while ((line=reader.readLine()) != null) {
                             p.sendMessage("Test");
                             pWriter.println(line);
                         }
                         pWriter.println(minigameName + " 0" + " 0");
                     } catch (IOException e) {
-
                     } finally {
                         if (pWriter != null){
                             pWriter.flush();
