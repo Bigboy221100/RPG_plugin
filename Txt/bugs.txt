@@ -1,5 +1,0 @@
-
-Text farbig
-items verdoppeln bei nur loadcharacter (droppen ... laden ... aufheben)
-beim leaven wird Inv nicht gelöscht
-beim reloaden erstellt sich eine inv.yml
