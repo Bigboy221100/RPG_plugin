@@ -36,7 +36,7 @@ public class Archer extends CharPlayer {
         this.xp=xp;
         Player p=Bukkit.getPlayer(player);
         p.getInventory().clear();
-        YamlConfiguration c = YamlConfiguration.loadConfiguration(new File("plugins/RPG/Chars/"+player+"/"+name+"_inv.yml"));
+        YamlConfiguration c = YamlConfiguration.loadConfiguration(new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+"_inv.yml"));
         ItemStack[] content = ((List<ItemStack>) c.get("inventory.armor")).toArray(new ItemStack[0]);
         p.getInventory().setArmorContents(content);
         content = ((List<ItemStack>) c.get("inventory.content")).toArray(new ItemStack[0]);
