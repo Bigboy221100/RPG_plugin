@@ -34,12 +34,12 @@ public class Minigame implements CommandExecutor, Listener {
                         File minigamePfad = new File("plugins/RPG/MinigameTest/minigame.txt");
                         minigamePfad.getParentFile().mkdirs();
                         pWriter = new PrintWriter(new BufferedWriter(new FileWriter(minigamePfad)));
-                        FileReader freader = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
+                        /*FileReader freader = new FileReader("plugins/RPG/MinigameTest/minigame.txt");
                         BufferedReader reader = new BufferedReader(freader);
                         String line;
                         while ((line=reader.readLine()) != null) {
                             pWriter.println(line);
-                        }
+                        }*/
                         pWriter.println(minigameName + " 0" + " 0");
                     } catch (IOException e) {}
                     p.sendMessage("Du kannst jetzt mit /minigame Punkte (Minigame-Name) (Punkt1,Punkt2) eine Spielbegrenzung erstellen!");
