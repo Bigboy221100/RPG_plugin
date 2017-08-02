@@ -1,6 +1,6 @@
 package main.Char;
 
-import main.Char.Klassen.Archer;
+import main.Char.Klassen.Archer.Archer;
 import main.Char.Klassen.CharPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

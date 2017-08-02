@@ -1,4 +1,4 @@
-package main.Char.Klassen;
+package main.Char.Klassen.Archer;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -23,6 +23,21 @@ public class Archerevents implements Listener{
                 LeatherArmorMeta chest=(LeatherArmorMeta) chestp.getItemMeta();
                 chest.setColor(Color.ORANGE);
                 p.getInventory().addItem(chestp);
+                break;
+            case 3:ItemStack leggi=new ItemStack(Material.LEATHER_LEGGINGS);
+                LeatherArmorMeta trouser=(LeatherArmorMeta) leggi.getItemMeta();
+                trouser.setColor(Color.ORANGE);
+                p.getInventory().addItem(leggi);
+                break;
+            case 4:ItemStack helme=new ItemStack(Material.LEATHER_HELMET);
+                LeatherArmorMeta helm=(LeatherArmorMeta) helme.getItemMeta();
+                helm.setColor(Color.ORANGE);
+                p.getInventory().addItem(helme);
+                break;
+            case 5:ItemStack boots=new ItemStack(Material.LEATHER_BOOTS);
+                LeatherArmorMeta boot=(LeatherArmorMeta) boots.getItemMeta();
+                boot.setColor(Color.ORANGE);
+                p.getInventory().addItem(boots);
                 break;
         }
     }

@@ -1,14 +1,12 @@
 package main;
 
 import main.Char.*;
-import main.Char.Klassen.Archer;
-import main.Char.Klassen.Archerevents;
+import main.Char.Klassen.Archer.Archerevents;
 import main.Char.Klassen.money;
 import main.Minigame.Minigame;
 import main.text.info.commands;
 import main.text.info.version;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**

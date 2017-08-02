@@ -1,6 +1,7 @@
-package main.Char.Klassen;
+package main.Char.Klassen.Archer;
 
 
+import main.Char.Klassen.CharPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
