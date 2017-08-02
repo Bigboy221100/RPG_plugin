@@ -23,7 +23,7 @@ public class loadcharacter implements CommandExecutor {
                     if(args.length==1) {
                         try {
                             UUID player=p.getUniqueId();
-                            FileReader fr = new FileReader("plugins/RPG/Chars/"+player+"/"+args[0]+"/"+args[0]+".txt");
+                            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+args[0]+"/"+args[0]+".txt");
                             BufferedReader reader = new BufferedReader(fr);
                             String UUID=reader.readLine();
                             UUID uuidr= java.util.UUID.fromString(UUID);
