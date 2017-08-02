@@ -86,6 +86,7 @@ public class Minigame implements CommandExecutor, Listener{
             if(args.length == 2) {
                 if (args[0].equalsIgnoreCase("Punkt")) {
 
+
                 }
             }
         }
