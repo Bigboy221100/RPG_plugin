@@ -1,10 +1,16 @@
 package main.Char.Klassen;
 
+
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.io.*;
 import java.util.List;
@@ -13,7 +19,7 @@ import java.util.UUID;
 /**
  * Created by Fabian on 19.07.2017.
  */
-public class Archer extends CharPlayer {
+public class Archer extends CharPlayer implements Listener{
     //nur zum Erstellen gedacht
     public Archer(UUID player, String name, String klasse) {
         super(player, name, klasse);
@@ -84,7 +90,18 @@ public class Archer extends CharPlayer {
                 pWriter.close();
             }
         }
-
-
+    }
+    @EventHandler
+    public void onLevel(PlayerLevelChangeEvent e){
+        Player p=e.getPlayer();
+        p.sendMessage("Sie sind nun Level "+ e.getNewLevel());
+        switch (e.getNewLevel()){
+            case 2:
+                ItemStack chestp=new ItemStack(Material.LEATHER_CHESTPLATE);
+                LeatherArmorMeta chest=(LeatherArmorMeta) chestp.getItemMeta();
+                chest.setColor(Color.ORANGE);
+                p.getInventory().addItem(chestp);
+                break;
+        }
     }
 }
