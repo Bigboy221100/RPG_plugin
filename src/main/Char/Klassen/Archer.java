@@ -1,9 +1,11 @@
 package main.Char.Klassen;
 
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.*;
@@ -13,7 +15,7 @@ import java.util.UUID;
 /**
  * Created by Fabian on 19.07.2017.
  */
-public class Archer extends CharPlayer {
+public class Archer extends CharPlayer implements Listener {
     //nur zum Erstellen gedacht
     public Archer(UUID player, String name, String klasse) {
         super(player, name, klasse);
