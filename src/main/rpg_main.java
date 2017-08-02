@@ -1,6 +1,8 @@
 package main;
 
 import main.Char.*;
+import main.Char.Klassen.Archer;
+import main.Char.Klassen.Archerevents;
 import main.Char.Klassen.money;
 import main.Minigame.Minigame;
 import main.text.info.commands;
@@ -29,8 +31,9 @@ public class rpg_main extends JavaPlugin {
 
         this.getCommand("minigame").setExecutor(new Minigame());
 
-        PluginManager plev= Bukkit.getPluginManager();
-        plev.registerEvents(new PlayerEvents(),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerEvents(),this);
+        Bukkit.getPluginManager().registerEvents(new Archerevents(),this);
+
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory","true");
 

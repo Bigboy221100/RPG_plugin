@@ -21,6 +21,9 @@ import java.util.UUID;
  */
 public class Archer extends CharPlayer implements Listener{
     //nur zum Erstellen gedacht
+    public Archer(){
+
+    }
     public Archer(UUID player, String name, String klasse) {
         super(player, name, klasse);
         ausrüsten();
@@ -91,17 +94,6 @@ public class Archer extends CharPlayer implements Listener{
             }
         }
     }
-    @EventHandler
-    public void onLevel(PlayerLevelChangeEvent e){
-        Player p=e.getPlayer();
-        p.sendMessage("Sie sind nun Level "+ e.getNewLevel());
-        switch (e.getNewLevel()){
-            case 2:
-                ItemStack chestp=new ItemStack(Material.LEATHER_CHESTPLATE);
-                LeatherArmorMeta chest=(LeatherArmorMeta) chestp.getItemMeta();
-                chest.setColor(Color.ORANGE);
-                p.getInventory().addItem(chestp);
-                break;
-        }
-    }
+
+
 }
