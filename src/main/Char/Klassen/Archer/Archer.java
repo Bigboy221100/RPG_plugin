@@ -99,5 +99,4 @@ public class Archer extends CharPlayer implements Listener{
         }
     }
 
-
 }
