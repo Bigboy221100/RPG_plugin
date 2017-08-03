@@ -218,6 +218,7 @@ public class Minigame implements CommandExecutor, Listener{
                                 loc.getBlock().setType(Material.SNOW_BLOCK);
                             }
                         }
+
                         hoehe=hoehe-6;
                     }
                 }
