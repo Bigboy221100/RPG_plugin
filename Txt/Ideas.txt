@@ -3,6 +3,7 @@ Chars{
   Allgemein{
     Geld für Mobkills
     Rüstung nur bis Leder, rest durch loots erfarmbar, bzw. kaufbar(teuer)
+    event. anderes Levelsystem
   }
   Archer{
     Distanz des Kills als Multiplyer
