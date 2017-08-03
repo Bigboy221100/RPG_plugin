@@ -210,14 +210,15 @@ public class Minigame implements CommandExecutor, Listener{
                         minY=Integer.parseInt(minigame[3]);
                         maxY=Integer.parseInt(minigame[6]);
                     }
-                    for(int x = minX; x <= maxX; x++){
-                        for(int y = minY; y <= maxY; y++){
-                            p.sendMessage(x+"");
-                            p.sendMessage(y+"");
-                            Location loc = new Location(Bukkit.getServer().getWorld("world"),Integer.parseInt(minigame[2]),83,y);
-                            loc.getBlock().setType(Material.DIRT);
-                            p.sendMessage("Test");
+                    int hoehe=Integer.parseInt(minigame[2]);
+                    for(int zeilenhoehe=0; zeilenhoehe<=1; zeilenhoehe++) {
+                        for (int x = minX; x <= maxX; x++) {
+                            for (int y = minY; y <= maxY; y++) {
+                                Location loc = new Location(Bukkit.getServer().getWorld("world"), x, hoehe, y);
+                                loc.getBlock().setType(Material.SNOW_BLOCK);
+                            }
                         }
+                        hoehe=hoehe-6;
                     }
                 }
             }
