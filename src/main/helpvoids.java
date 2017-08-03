@@ -13,6 +13,11 @@ import java.util.UUID;
  */
 public class helpvoids {
 
+    public helpvoids(){
+
+    }
+
+
     public UUID getcharacteruuid(String displayname){
         UUID player=null;
         Player p= Bukkit.getServer().getPlayer(displayname);
