@@ -41,6 +41,7 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e){
         Player p = (Player) e.getPlayer();
+        CharPlayer charPlayer=new Normal(p);
         e.setQuitMessage("§1[§2-§1]§6 " + p.getName());
     }
 
