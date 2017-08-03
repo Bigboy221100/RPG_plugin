@@ -52,7 +52,7 @@ public class Archerevents implements Listener{
     @EventHandler
     public void repairWeapons(EntityDamageByEntityEvent e){
         if(e.getDamager() instanceof Player){
-            ((Player) e.getDamager()).getInventory().getItemInHand().setDurability((short) -1);
+            ((Player) e.getDamager()).getInventory().getItemInMainHand().setDurability((short) -1);
         }else if(e.getEntity() instanceof Player){
             ItemStack[] armor = ((Player) e.getEntity()).getInventory().getArmorContents();
             for(ItemStack i : armor){
