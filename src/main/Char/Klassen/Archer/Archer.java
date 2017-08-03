@@ -57,7 +57,6 @@ public class Archer extends CharPlayer implements Listener{
         p.setLevel(this.level);
         p.setDisplayName("§1[§6Archer§1]§2 " + name+"§f");
         p.setPlayerListName("§1[§6Archer§1]§2 " + name+"§f");
-
     }
 
     private void ausrüsten(){
