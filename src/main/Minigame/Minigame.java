@@ -11,6 +11,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -218,9 +220,17 @@ public class Minigame implements CommandExecutor, Listener{
                                 loc.getBlock().setType(Material.SNOW_BLOCK);
                             }
                         }
-
                         hoehe=hoehe-6;
                     }
+                    try {
+                        for(int i=10; i>=0; i--) {
+                            p.sendMessage("Das Spiel"+minigame[0]+" wurde gestartet!");
+                            Thread.sleep(1000);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         }

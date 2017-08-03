@@ -8,6 +8,7 @@ import main.text.info.commands;
 import main.text.info.version;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 
 /**
  * Created by Fabian on 19.07.2017.
@@ -29,7 +30,6 @@ public class rpg_main extends JavaPlugin {
 
         this.getCommand("minigame").setExecutor(new Minigame());
 
-
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(),this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(),this);
 
@@ -41,6 +41,16 @@ public class rpg_main extends JavaPlugin {
 
     public void onDisable(){
         System.out.println("Rpg disabled");
+    }
+
+    public void countdown(){
+        BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 0L, 20L);
     }
 
 }
