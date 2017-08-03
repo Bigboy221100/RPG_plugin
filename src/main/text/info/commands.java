@@ -15,8 +15,8 @@ public class commands implements CommandExecutor {
             if(sender instanceof Player){
                 Player p=(Player)sender;
                 if(p.hasPermission("rpg.text.commands")){
-                    if(args.length()==1){
-                        if(args[0].equalsIgnoreCase("commands){
+                    if(args.length==1){
+                        if(args[0].equalsIgnoreCase("commands")){
                             p.sendMessage("Wichtige Befehle für dich");
                         }
                     }

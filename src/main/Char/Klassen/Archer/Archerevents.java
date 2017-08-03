@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -39,6 +40,13 @@ public class Archerevents implements Listener{
                 boot.setColor(Color.ORANGE);
                 p.getInventory().addItem(boots);
                 break;
+        }
+    }
+    @EventHandler
+    public void bowShoot(EntityShootBowEvent e) {
+        Player p = (Player) e.getEntity();
+        if (p.getItemInHand().getType() == Material.BOW) {
+            p.getItemInHand().setDurability((short) 0);
         }
     }
 }
