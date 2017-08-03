@@ -193,6 +193,7 @@ public class Minigame implements CommandExecutor, Listener{
                         }
                     } catch(IOException e) {}
 
+
                 }
             }
         }
