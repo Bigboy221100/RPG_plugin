@@ -213,11 +213,11 @@ public class Minigame implements CommandExecutor, Listener{
                     for(int x = minX; x <= maxX; x++){
                         for(int y = minY; y <= maxY; y++){
 
-
-                            Location loc = new Location(Bukkit.getServer().getWorld("world"),x,Integer.parseInt(minigame[4]),y);
-                            loc.getBlock().setType(Material.DIRT);
                             p.sendMessage(x+"");
                             p.sendMessage(y+"");
+                            Location loc = new Location(Bukkit.getServer().getWorld("world"),x,Integer.parseInt(minigame[4]),y);
+                            loc.getBlock().setType(Material.DIRT);
+
                         }
                     }
                 }
