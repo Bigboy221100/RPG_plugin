@@ -11,11 +11,15 @@ import org.bukkit.entity.Player;
 public class commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("rpg commands")){
+        if(cmd.getName().equalsIgnoreCase("rpg")){
             if(sender instanceof Player){
                 Player p=(Player)sender;
                 if(p.hasPermission("rpg.text.commands")){
-                    p.sendMessage("Wichtige Befehle für dich");
+                    if(args.length==1){
+                        if(args[0].equalsIgnoreCase("commands")){
+                            p.sendMessage("Wichtige Befehle für dich");
+                        }
+                    }
                 }
             }
         }
