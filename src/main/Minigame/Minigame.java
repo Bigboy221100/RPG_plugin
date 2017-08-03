@@ -222,6 +222,8 @@ public class Minigame implements CommandExecutor, Listener{
                         }
                         hoehe=hoehe-6;
                     }
+
+
                     try {
                         for(int i=10; i>=0; i--) {
                             p.sendMessage("Das Spiel"+minigame[0]+" wurde gestartet!");
