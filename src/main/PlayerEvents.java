@@ -35,8 +35,9 @@ public class PlayerEvents implements Listener {
         if(!p.hasPlayedBefore()){
             Bukkit.broadcastMessage(p.getName()+ " hat zum ersten Mal den Server betreten");
         }
-        e.setJoinMessage("§1[§2+§1]§6 " + p.getName());
         CharPlayer charPlayer=new Normal(p);
+        e.setJoinMessage("§1[§2+§1]§6 " + p.getName());
+
     }
     @EventHandler
     public void onLeave(PlayerQuitEvent e){

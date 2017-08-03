@@ -1,6 +1,7 @@
 package main.Char.Klassen;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -25,11 +26,14 @@ public class Normal extends CharPlayer{
         this.xp=0;
         try {
             String charname[]=p.getDisplayName().split("\\s+");
+            if(name.equalsIgnoreCase(Bukkit.getPlayer(player).getDisplayName())) {
 
-            YamlConfiguration c = new YamlConfiguration();
-            c.set("inventory.armor", p.getInventory().getArmorContents());
-            c.set("inventory.content", p.getInventory().getContents());
-            c.save(new File("plugins/RPG/Chars/"+player+"/"+charname[1]+"/"+charname[1]+"_inv.yml"));
+            }else{
+                YamlConfiguration c = new YamlConfiguration();
+                c.set("inventory.armor", p.getInventory().getArmorContents());
+                c.set("inventory.content", p.getInventory().getContents());
+                c.save(new File("plugins/RPG/Chars/" + player + "/" + charname[1] + "/" + charname[1] + "_inv.yml"));
+            }
             p.getInventory().clear();
             p.setDisplayName("§1[§7Normal§1]§2 " + name+"§f");
             p.setPlayerListName("§1[§7Normal§1]§2 " + name+"§f");
