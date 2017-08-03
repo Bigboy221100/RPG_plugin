@@ -97,7 +97,7 @@ public class Minigame implements CommandExecutor, Listener{
             if(args.length == 3) {
                 if (args[0].equalsIgnoreCase("Punkt")) {
                     Location targetloc = p.getLocation();
-                    String minigame[]=new String[4];
+                    String minigame[]=new String[7];
                     try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
                         String line="";
                         while((line=reader.readLine()) != null){
@@ -115,18 +115,84 @@ public class Minigame implements CommandExecutor, Listener{
                     } catch (IOException e) {
                         p.sendMessage("Die Puntke konnten nicht gespeichert werden!");
                     }
-                    if (args[2].equalsIgnoreCase("1")) {
+                    if (args[1].equalsIgnoreCase(minigame[0]) && args[2].equalsIgnoreCase("1")) {
                         minigame[1]=targetloc.getBlockX()+"";
                         minigame[2]=targetloc.getBlockY()+"";
                         minigame[3]=targetloc.getBlockZ()+"";
                         p.sendMessage(minigame[1]+minigame[2]+minigame[3]);
+                        String gesamt="";
+                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                            String line="";
+                            while((line=reader.readLine()) != null){
+                                String[]minigameArray=line.split(" ");
+                                if(args[1].equalsIgnoreCase(minigameArray[0])) {
+                                    gesamt+=minigameArray[0] + " " + minigame[1] + " " + minigame[2] + " " + minigame[3] + " " + minigameArray[4] + " " + minigameArray[5] + " " + minigameArray[6];
+                                    gesamt+=System.lineSeparator();
+                                    break;
+                                }
+                                gesamt+=line;
+                                gesamt+=System.lineSeparator();
+                            }
+                        } catch (IOException e) {
+                            p.sendMessage("Punkt 1 konnte nicht gespeichert werden!");
+                        }
+                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))) {
+                            writer.write(gesamt);
+                        } catch (IOException e) {
+                            p.sendMessage(e.toString());
+                        }
                     }
-                    if (args[2].equalsIgnoreCase("2")) {
+                    if (args[1].equalsIgnoreCase(minigame[0]) && args[2].equalsIgnoreCase("2")) {
                         minigame[4]=targetloc.getBlockX()+"";
                         minigame[5]=targetloc.getBlockY()+"";
                         minigame[6]=targetloc.getBlockZ()+"";
                         p.sendMessage(minigame[4]+minigame[5]+minigame[6]);
+                        String gesamt="";
+                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                            String line="";
+                            while((line=reader.readLine()) != null){
+                                String[]minigameArray=line.split(" ");
+                                if(args[1].equalsIgnoreCase(minigameArray[0])) {
+                                    gesamt+=minigameArray[0] + " " + minigameArray[1] + " " + minigameArray[2] + " " + minigameArray[3] + " " + minigame[4] + " " + minigame[5] + " " + minigame[6];
+                                    gesamt+=System.lineSeparator();
+                                    break;
+                                }
+                                gesamt+=line;
+                                gesamt+=System.lineSeparator();
+                            }
+                        } catch (IOException e) {
+                            p.sendMessage("Punkt 2 konnte nicht gespeichert werden!");
+                        }
+                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))) {
+                            writer.write(gesamt);
+                        } catch (IOException e) {
+                            p.sendMessage(e.toString());
+                        }
                     }
+                }
+            }
+
+
+            //Minigame starten
+            if(args.length == 2) {
+                if(args[0].equalsIgnoreCase("starten")) {
+                    String[]minigame=new String[7];
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))){
+                        String line="";
+                        while((line=reader.readLine()) != null){
+                            String[]split=line.split(" ");
+                            if(args[1].equalsIgnoreCase(split[0])){
+                                minigame[0]=split[0];
+                                minigame[1]=split[1];
+                                minigame[2]=split[2];
+                                minigame[3]=split[3];
+                                minigame[4]=split[4];
+                                minigame[5]=split[5];
+                                minigame[6]=split[6];
+                            }
+                        }
+                    } catch(IOException e) {}
+
                 }
             }
         }
