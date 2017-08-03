@@ -22,7 +22,7 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e){
         Player p=(Player)e.getEntity().getPlayer();
-        e.setDeathMessage("Sie sind gestorben und wurden aus ihrem Character ausgeloggt");
+        p.sendMessage("Sie sind gestorben und wurden aus ihrem Character ausgeloggt");
         CharPlayer charPlayer=new Normal(p);
     }
     @EventHandler
