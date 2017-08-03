@@ -14,6 +14,10 @@ Chars{
 
 Allgemein{
   Klasse für Helpvoids
+  Dungeon mit "speziellen Mobs"{
+    Zonen mit Bossen
+    angehaucht an WoW
+  }
 }
 
 
