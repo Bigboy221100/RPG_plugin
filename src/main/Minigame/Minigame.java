@@ -2,7 +2,10 @@ package main.Minigame;
 
 
 
+import net.minecraft.server.v1_12_R1.World;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -192,8 +195,29 @@ public class Minigame implements CommandExecutor, Listener{
                             }
                         }
                     } catch(IOException e) {}
-
-
+                    int minX, maxX, minY, maxY;
+                    if(Integer.parseInt(minigame[1])>Integer.parseInt(minigame[4])) {
+                        minX=Integer.parseInt(minigame[4]);
+                        maxX=Integer.parseInt(minigame[1]);
+                    } else {
+                        minX=Integer.parseInt(minigame[1]);
+                        maxX=Integer.parseInt(minigame[4]);
+                    }
+                    if(Integer.parseInt(minigame[3])>Integer.parseInt(minigame[6])) {
+                        minY=Integer.parseInt(minigame[6]);
+                        maxY=Integer.parseInt(minigame[3]);
+                    } else {
+                        minY=Integer.parseInt(minigame[3]);
+                        maxY=Integer.parseInt(minigame[6]);
+                    }
+                    for(int x = minX; x <= maxX; x++){
+                        for(int y = minY; y <= maxY; y++){
+                            p.sendMessage(x+"");
+                            p.sendMessage(y+"");
+                            Location loc = new Location(Bukkit.getServer().getWorld("world"),x,Integer.parseInt(minigame[4]),y);
+                            loc.getBlock().setType(Material.DIRT);
+                        }
+                    }
                 }
             }
         }
