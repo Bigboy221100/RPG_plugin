@@ -31,7 +31,6 @@ public class Normal extends CharPlayer{
             c.set("inventory.content", p.getInventory().getContents());
             c.save(new File("plugins/RPG/Chars/"+player+"/"+charname[1]+"/"+charname[1]+"_inv.yml"));
             p.getInventory().clear();
-
             p.setDisplayName("§1[§7Normal§1]§2 " + name+"§f");
             p.setPlayerListName("§1[§7Normal§1]§2 " + name+"§f");
             p.setLevel(0);
