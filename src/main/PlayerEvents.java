@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
@@ -46,6 +47,10 @@ public class PlayerEvents implements Listener {
         e.setQuitMessage("§1[§2-§1]§6 " + p.getName());
     }
 
+    @EventHandler
+    public void food(FoodLevelChangeEvent e){
+        e.setFoodLevel(20);
+    }
 
 
 }
