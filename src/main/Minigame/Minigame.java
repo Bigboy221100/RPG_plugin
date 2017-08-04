@@ -1,25 +1,33 @@
 package main.Minigame;
 
-
-
-import net.minecraft.server.v1_12_R1.World;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
 
-public class Minigame implements CommandExecutor, Listener{
+public class Minigame implements CommandExecutor, Listener {
+
+    public static Plugin pl;
+    int id=0;
+    int id2=0;
+    int minX, maxX, minY, maxY;
+    String[]minigame=new String[7];
+
+    public Minigame(Plugin pl) {
+        this.pl = pl;
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args){
@@ -181,7 +189,6 @@ public class Minigame implements CommandExecutor, Listener{
             //Minigame starten
             if(args.length == 2) {
                 if(args[0].equalsIgnoreCase("starten")) {
-                    String[]minigame=new String[7];
                     try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))){
                         String line="";
                         while((line=reader.readLine()) != null){
@@ -197,7 +204,6 @@ public class Minigame implements CommandExecutor, Listener{
                             }
                         }
                     } catch(IOException e) {}
-                    int minX, maxX, minY, maxY;
                     if(Integer.parseInt(minigame[1])>Integer.parseInt(minigame[4])) {
                         minX=Integer.parseInt(minigame[4]);
                         maxX=Integer.parseInt(minigame[1]);
@@ -222,20 +228,62 @@ public class Minigame implements CommandExecutor, Listener{
                         }
                         hoehe=hoehe-6;
                     }
-
-
-                    try {
-                        for(int i=10; i>=0; i--) {
-                            p.sendMessage("Das Spiel"+minigame[0]+" wurde gestartet!");
-                            Thread.sleep(1000);
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
+                    Countdown();
                 }
             }
         }
         return false;
+    }
+
+
+    public void Countdown(){
+         id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
+            int countdown=10;
+            @Override
+            public void run() {
+                Bukkit.getServer().broadcastMessage("Das Minigame " + ChatColor.RED + minigame[0] + ChatColor.WHITE + " startet in " + ChatColor.GREEN + countdown + ChatColor.WHITE + " Sekunden!");
+                countdown--;
+                if(countdown==-1) {
+                    Bukkit.getServer().broadcastMessage("Das Game " + ChatColor.RED + minigame[0] + "hat gestartet!");
+                    int hoehe=Integer.parseInt(minigame[2]);
+                    for(Player p : Bukkit.getOnlinePlayers()) {
+                        int x=0;
+                        int y=0;
+                        x = ((maxX-minX)/2)+minX;
+                        y = ((maxY-minY)/2)+minY;
+                        hoehe++;
+                        p.setGameMode(GameMode.ADVENTURE);
+                        p.getInventory().addItem(new ItemStack(Material.DIAMOND_SPADE));
+                        Location loc = new Location(Bukkit.getServer().getWorld("world"),x, hoehe,y);
+                        p.teleport(loc);
+                    }
+                    Countdown2();
+                    Bukkit.getScheduler().cancelTask(id);
+                }
+            }
+        }, 1*20,1*20);
+    }
+
+    public void Countdown2(){
+        id2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
+            int countdown=5;
+            @Override
+            public void run() {
+                Bukkit.broadcastMessage("Das Spiel geht in " + ChatColor.RED + countdown + ChatColor.WHITE + " Sekunden los!");
+                countdown--;
+
+                if(countdown == -1) {
+                    for(Player p : Bukkit.getOnlinePlayers()) {
+                        p.setGameMode(GameMode.SURVIVAL);
+                    }
+                    hoehetester();
+                    Bukkit.getScheduler().cancelTask(id2);
+                }
+            }
+        }, 1*20,1*20);
+    }
+
+    public void hoehetester(){
+
     }
 }

@@ -28,7 +28,7 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("rpg commands").setExecutor(new commands());
         this.getCommand("rpg version").setExecutor(new version());
 
-        this.getCommand("minigame").setExecutor(new Minigame());
+        this.getCommand("minigame").setExecutor(new Minigame(this));
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(),this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(),this);
