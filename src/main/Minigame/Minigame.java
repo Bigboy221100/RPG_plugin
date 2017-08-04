@@ -16,12 +16,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 public class Minigame implements CommandExecutor, Listener {
 
     public static Plugin pl;
     int id=0;
     int id2=0;
+    int id3=0;
     int minX, maxX, minY, maxY;
     String[]minigame=new String[7];
 
@@ -253,7 +255,10 @@ public class Minigame implements CommandExecutor, Listener {
                         y = ((maxY-minY)/2)+minY;
                         hoehe++;
                         p.setGameMode(GameMode.ADVENTURE);
-                        p.getInventory().addItem(new ItemStack(Material.DIAMOND_SPADE));
+                        p.getPlayer().getInventory().clear();
+                        ItemStack item = new ItemStack(Material.DIAMOND_SPADE);
+                        item.setDurability((short)999999);
+                        p.getInventory().addItem(item);
                         Location loc = new Location(Bukkit.getServer().getWorld("world"),x, hoehe,y);
                         p.teleport(loc);
                     }
@@ -284,6 +289,19 @@ public class Minigame implements CommandExecutor, Listener {
     }
 
     public void hoehetester(){
-
+        id3 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
+            int hoehe = Integer.parseInt(minigame[2])-8;
+            Location spawn = Bukkit.getServer().getWorld("world").getSpawnLocation();
+            @Override
+            public void run() {
+                for(Player p: Bukkit.getOnlinePlayers()) {
+                    double loc;
+                    loc = p.getLocation().getY();
+                    if(loc<=hoehe){
+                        p.teleport(spawn);
+                    }
+                }
+            }
+        }, 0, 1);
     }
 }
