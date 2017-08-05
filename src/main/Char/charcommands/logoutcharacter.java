@@ -1,30 +1,24 @@
-package main.Char;
+package main.Char.charcommands;
 
-//Wird nicht funktionieren
-
+import main.Char.Klassen.CharPlayer;
+import main.Char.Klassen.Normal;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-
 /**
  * Created by user on 28.07.2017.
  */
-public class listchars implements CommandExecutor {
+public class logoutcharacter implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("listcharacter")){
+        if(cmd.getName().equalsIgnoreCase("logoutcharacter")){
             if(sender instanceof Player){
                 Player p=(Player)sender;
-                if(p.hasPermission("rpg.character.list")){
-                    File maindir = new File("plugins/RPG/Chars/"+p.getUniqueId());
-                    String files[] = maindir.list();
-                    p.sendMessage("Ihre Character lauten");
-                    for(int i=0;i<files.length;i++){
-                        p.sendMessage(files[i]);
-                    }
+                if(p.hasPermission("rpg.character.logout")){
+                    CharPlayer charPlayer=new Normal(p);
+                    p.sendMessage("Du wurdest ausgelogt");
                 }else{
                     p.sendMessage("Du hast dafür keine Berechtigungen");
                 }

@@ -1,4 +1,4 @@
-package main.Char;
+package main.Char.charcommands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

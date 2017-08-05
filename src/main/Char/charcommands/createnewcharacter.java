@@ -1,4 +1,4 @@
-package main.Char;
+package main.Char.charcommands;
 
 import main.Char.Klassen.Archer.Archer;
 import main.Char.Klassen.CharPlayer;

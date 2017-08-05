@@ -1,4 +1,4 @@
-package main.Char;
+package main.Char.charcommands;
 
 import main.Char.Klassen.CharPlayer;
 import main.Char.Klassen.Normal;

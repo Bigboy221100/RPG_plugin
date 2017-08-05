@@ -1,8 +1,7 @@
 package main;
 
-import main.Char.*;
 import main.Char.Klassen.Archer.Archerevents;
-import main.Char.money;
+import main.Char.charcommands.*;
 import main.Minigame.Minigame;
 import main.text.info.commands;
 import main.text.info.version;
