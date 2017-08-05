@@ -124,6 +124,36 @@ public class helpvoids {
         return level;
     }
 
+    public void setcharacterlevel(String displayname, int level){
+        Player p= Bukkit.getServer().getPlayer(displayname);
+        try {
+            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + displayname + "/" + displayname + ".txt");
+            BufferedReader reader = new BufferedReader(fr);
+            String UUID=reader.readLine();
+            UUID uuidr= java.util.UUID.fromString(UUID);
+            String name=reader.readLine();
+            String klasse=reader.readLine();
+            int moneyr=Integer.parseInt(reader.readLine());
+            String levelr=reader.readLine();
+            int levelrr=Integer.parseInt(levelr);
+            String xp=reader.readLine();
+            int xpr= Integer.parseInt(xp);
+            PrintWriter pWriter = null;
+            File inv = new File("plugins/RPG/Chars/"+p.getUniqueId()+"/"+displayname+"/"+displayname+".txt");
+            inv.getParentFile().mkdirs();
+            pWriter = new PrintWriter(new BufferedWriter(new FileWriter(inv)));
+            pWriter.println(uuidr);
+            pWriter.println(name);
+            pWriter.println(klasse);
+            pWriter.println(moneyr);
+            pWriter.println(levelrr);
+            pWriter.println(xpr);
+        }catch (IOException e){
+            System.out.println("Fehler");
+            p.sendMessage("Fehler");
+        }
+    }
+
     public int getcharacterxp(String displayname){
         int xp=0;
         Player p= Bukkit.getServer().getPlayer(displayname);
@@ -139,5 +169,35 @@ public class helpvoids {
             System.out.println("Fehler");
         }
         return xp;
+    }
+
+    public void setcharacterxp(String displayname, int xp){
+        Player p= Bukkit.getServer().getPlayer(displayname);
+        try {
+            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + displayname + "/" + displayname + ".txt");
+            BufferedReader reader = new BufferedReader(fr);
+            String UUID=reader.readLine();
+            UUID uuidr= java.util.UUID.fromString(UUID);
+            String name=reader.readLine();
+            String klasse=reader.readLine();
+            int moneyr=Integer.parseInt(reader.readLine());
+            String level=reader.readLine();
+            int levelr=Integer.parseInt(level);
+            String xpr=reader.readLine();
+            int xprr= Integer.parseInt(xpr);
+            PrintWriter pWriter = null;
+            File inv = new File("plugins/RPG/Chars/"+p.getUniqueId()+"/"+displayname+"/"+displayname+".txt");
+            inv.getParentFile().mkdirs();
+            pWriter = new PrintWriter(new BufferedWriter(new FileWriter(inv)));
+            pWriter.println(uuidr);
+            pWriter.println(name);
+            pWriter.println(klasse);
+            pWriter.println(moneyr);
+            pWriter.println(levelr);
+            pWriter.println(xprr);
+        }catch (IOException e){
+            System.out.println("Fehler");
+            p.sendMessage("Fehler");
+        }
     }
 }
