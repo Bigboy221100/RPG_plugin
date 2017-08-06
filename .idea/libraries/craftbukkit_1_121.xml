@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="craftbukkit-1.121">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/Minecraft/1.12 server/craftbukkit-1.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Minecraft/1.12 Server/craftbukkit-1.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/Desktop/Minecraft/1.12 server/craftbukkit-1.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Minecraft/1.12 Server/craftbukkit-1.12.jar!/" />
     </SOURCES>
   </library>
 </component>

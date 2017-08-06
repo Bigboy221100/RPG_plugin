@@ -11,7 +11,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 /**
@@ -24,7 +26,6 @@ public class Archerevents implements Listener{
         Player p=e.getPlayer();
         helpvoids helpvoids=new helpvoids();
         if(helpvoids.getcharacterklasse(p.getDisplayName()).equalsIgnoreCase("Archer")) {
-
             p.sendMessage("Sie sind nun Level " + e.getNewLevel());
             switch (e.getNewLevel()) {
                 case 2:
@@ -54,10 +55,22 @@ public class Archerevents implements Listener{
                     boot.setColor(Color.ORANGE);
                     boot.setUnbreakable(true);
                     p.getInventory().addItem(boots);
+
                     break;
             }
         }
     }
+
+    public void bowupgrades(Player p){
+        Inventory inv=p.getServer().createInventory(null,27,"Upgraden sie ihren Bogen");
+        ItemStack power =new ItemStack(Material.ENCHANTED_BOOK);
+        ItemMeta metapower= power.getItemMeta();
+        metapower.setDisplayName("Power");
+        power.setItemMeta(metapower);
+        inv.setItem(12,power);
+        p.openInventory(inv);
+    }
+
     @EventHandler
     public void repairWeapons(EntityDamageByEntityEvent e){
         if(e.getDamager() instanceof Player){
