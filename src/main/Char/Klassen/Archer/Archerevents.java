@@ -55,7 +55,6 @@ public class Archerevents implements Listener{
                     boot.setColor(Color.ORANGE);
                     boot.setUnbreakable(true);
                     p.getInventory().addItem(boots);
-
                     break;
             }
         }
