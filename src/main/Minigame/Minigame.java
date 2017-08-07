@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.UUID;
 
 public class Minigame implements CommandExecutor, Listener {
 
@@ -27,12 +28,13 @@ public class Minigame implements CommandExecutor, Listener {
     int minX, maxX, minY, maxY;
     String[]minigame=new String[7];
 
+    public Minigame(){}
     public Minigame(Plugin pl) {
         this.pl = pl;
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args){
+    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         Player p = (Player) commandSender;
         String minigameName = "";
         if (command.getName().equalsIgnoreCase("minigame")) {
@@ -42,7 +44,7 @@ public class Minigame implements CommandExecutor, Listener {
                     p.sendMessage("Versuche Minigame zu erstellen ...");
                     minigameName = args[1];
                     String gesamt="";
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))) {
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))) {
                         String line="";
                         while((line=reader.readLine()) != null){
                             gesamt+=line;
@@ -51,7 +53,7 @@ public class Minigame implements CommandExecutor, Listener {
                     } catch(IOException e) {
                         p.sendMessage(e.toString());
                     }
-                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))) {
+                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))) {
                         writer.write(gesamt);
                         writer.write(minigameName + " 0" + " 0" + " 0" + " 0" + " 0" + " 0" );
                     } catch(IOException e) {
@@ -67,7 +69,7 @@ public class Minigame implements CommandExecutor, Listener {
                 if (args[0].equalsIgnoreCase("löschen")) {
                     p.sendMessage("Versuche Minigame zu löschen ...");
                     String gesamt="";
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
                         String line="";
                         while((line=reader.readLine()) != null){
                             String[]minigameArray=line.split(" ");
@@ -80,7 +82,7 @@ public class Minigame implements CommandExecutor, Listener {
                     } catch (IOException e) {
                         p.sendMessage("Das Minigame konnte nicht löschen werden!");
                     }
-                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))) {
+                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))) {
                         writer.write(gesamt);
                     } catch (IOException e) {
                         p.sendMessage(e.toString());
@@ -92,7 +94,7 @@ public class Minigame implements CommandExecutor, Listener {
             //Minigame list
             } else if (args.length <= 1) {
                 if (args[0].equalsIgnoreCase("list")) {
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
                         String line="";
                         while((line=reader.readLine()) != null){
                             String[]minigameArray=line.split(" ");
@@ -113,7 +115,7 @@ public class Minigame implements CommandExecutor, Listener {
                 if (args[0].equalsIgnoreCase("Punkt")) {
                     Location targetloc = p.getLocation();
                     String minigame[]=new String[7];
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
                         String line="";
                         while((line=reader.readLine()) != null){
                             String[]minigameArray=line.split(" ");
@@ -136,7 +138,7 @@ public class Minigame implements CommandExecutor, Listener {
                         minigame[3]=targetloc.getBlockZ()+"";
                         p.sendMessage(minigame[1]+minigame[2]+minigame[3]);
                         String gesamt="";
-                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
                             String line="";
                             while((line=reader.readLine()) != null){
                                 String[]minigameArray=line.split(" ");
@@ -151,7 +153,7 @@ public class Minigame implements CommandExecutor, Listener {
                         } catch (IOException e) {
                             p.sendMessage("Punkt 1 konnte nicht gespeichert werden!");
                         }
-                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))) {
+                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))) {
                             writer.write(gesamt);
                         } catch (IOException e) {
                             p.sendMessage(e.toString());
@@ -163,7 +165,7 @@ public class Minigame implements CommandExecutor, Listener {
                         minigame[6]=targetloc.getBlockZ()+"";
                         p.sendMessage(minigame[4]+minigame[5]+minigame[6]);
                         String gesamt="";
-                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"), Charset.forName("UTF-8"))){
+                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
                             String line="";
                             while((line=reader.readLine()) != null){
                                 String[]minigameArray=line.split(" ");
@@ -178,7 +180,7 @@ public class Minigame implements CommandExecutor, Listener {
                         } catch (IOException e) {
                             p.sendMessage("Punkt 2 konnte nicht gespeichert werden!");
                         }
-                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))) {
+                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))) {
                             writer.write(gesamt);
                         } catch (IOException e) {
                             p.sendMessage(e.toString());
@@ -191,7 +193,7 @@ public class Minigame implements CommandExecutor, Listener {
             //Minigame starten
             if(args.length == 2) {
                 if(args[0].equalsIgnoreCase("starten")) {
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/MinigameTest/minigame.txt"),Charset.forName("UTF-8"))){
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))){
                         String line="";
                         while((line=reader.readLine()) != null){
                             String[]split=line.split(" ");
@@ -234,6 +236,52 @@ public class Minigame implements CommandExecutor, Listener {
                 }
             }
         }
+        //Minigame Challenge
+        if(args.length == 3) {
+            if (args[0].equalsIgnoreCase("challenge")) {
+                Player eingeladenerSpieler = Bukkit.getServer().getPlayer(args[1]);
+                String gesamtCurrentGames="";
+                try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
+                    String line="";
+                    while((line=reader.readLine()) != null){
+                        gesamtCurrentGames+=line;
+                        gesamtCurrentGames+=System.lineSeparator();
+                    }
+                } catch (IOException e) {}
+                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
+                    writer.write(gesamtCurrentGames);
+                    eingeladenerSpieler.sendMessage("Sie wurden zu einem Battle von " + p.getName() + " in der Arena " + args[2] + " herausgefordert!");
+                    eingeladenerSpieler.sendMessage("Nimm die Andrage mit /minigame annehmen <Arena> an");
+                    writer.write(args[2] + " " + p.getName() + " " + args[1] + " false" );
+                } catch (IOException e) {}
+            }
+        }
+
+        //Minigame annehmen
+        if(args.length == 2) {
+            if (args[0].equalsIgnoreCase("annehmen")) {
+                String angenommen="false";
+                String eingeladeneSpielerGesamt="";
+                try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
+                    String line="";
+                    while((line=reader.readLine()) != null) {
+                        String[]splitArray = line.split(" ");
+                        if(args[1].equalsIgnoreCase(splitArray[0]) && p.getName().equalsIgnoreCase(splitArray[2])) {
+                            p.sendMessage("Du hast die Anfrage von " + splitArray[1] + " für die Arena " + splitArray[0] + " angenommen!");
+                            splitArray[3]="true";
+                            eingeladeneSpielerGesamt+=splitArray[0] + " " + splitArray[1] + " " + splitArray[2] + " " + splitArray[3];
+                            eingeladeneSpielerGesamt+=System.lineSeparator();
+                            break;
+                        }
+                        eingeladeneSpielerGesamt+=line;
+                        eingeladeneSpielerGesamt+=System.lineSeparator();
+                    }
+                } catch (IOException e) {}
+                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
+                    writer.write(eingeladeneSpielerGesamt);
+                } catch (IOException e) {}
+            }
+        }
         return false;
     }
 
@@ -248,18 +296,21 @@ public class Minigame implements CommandExecutor, Listener {
                 if(countdown==-1) {
                     Bukkit.getServer().broadcastMessage("Das Game " + ChatColor.RED + minigame[0] + "hat gestartet!");
                     int hoehe=Integer.parseInt(minigame[2]);
-                    for(Player p : Bukkit.getOnlinePlayers()) {
-                        int x=0;
-                        int y=0;
-                        x = ((maxX-minX)/2)+minX;
-                        y = ((maxY-minY)/2)+minY;
+                    try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/currentminigame.txt"), Charset.forName("UTF-8"))) {
+
+                    } catch (IOException e){}
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        int x = 0;
+                        int y = 0;
+                        x = ((maxX - minX) / 2) + minX;
+                        y = ((maxY - minY) / 2) + minY;
                         hoehe++;
                         p.setGameMode(GameMode.ADVENTURE);
                         p.getPlayer().getInventory().clear();
                         ItemStack item = new ItemStack(Material.DIAMOND_SPADE);
-                        item.setDurability((short)999999);
+                        item.setDurability((short) -1);
                         p.getInventory().addItem(item);
-                        Location loc = new Location(Bukkit.getServer().getWorld("world"),x, hoehe,y);
+                        Location loc = new Location(Bukkit.getServer().getWorld("world"), x, hoehe, y);
                         p.teleport(loc);
                     }
                     Countdown2();
@@ -276,7 +327,6 @@ public class Minigame implements CommandExecutor, Listener {
             public void run() {
                 Bukkit.broadcastMessage("Das Spiel geht in " + ChatColor.RED + countdown + ChatColor.WHITE + " Sekunden los!");
                 countdown--;
-
                 if(countdown == -1) {
                     for(Player p : Bukkit.getOnlinePlayers()) {
                         p.setGameMode(GameMode.SURVIVAL);

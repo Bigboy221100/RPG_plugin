@@ -26,3 +26,10 @@ Allgemein{
 Finished:
 In Progress: Minigame
 Ideas:
+
+Minigame:
+    Beim Start von Minigame Inventar speichern + beim Ende wieder bekommen.
+    Beim Minigame spielen darf man keine Items aufsammeln dürfen.
+    Gewinner asuwerten.
+    Minigame Stats
+
