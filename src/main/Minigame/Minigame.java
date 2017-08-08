@@ -232,11 +232,38 @@ public class Minigame implements CommandExecutor, Listener {
                         }
                         hoehe=hoehe-6;
                     }
-                    Countdown();
+
+                    Player p1;
+                    Player p2;
+                    String running="true";
+                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/currentminigame.txt"),Charset.forName("UTF-8"))){
+                        String line="";
+                        while ((line=reader.readLine()) != null) {
+                            String[]arraySplit=line.split(" ");
+                            if(args[1].equalsIgnoreCase(arraySplit[0])){
+                                if(arraySplit[1].equalsIgnoreCase("false")){
+                                    running="false";
+                                }
+                            }
+                        }
+                        p.sendMessage(running);
+                    } catch (IOException e) {}
+                    try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
+                        String line="";
+                        while ((line=reader.readLine()) != null) {
+                            String[]splitArray=line.split(" ");
+                            if(splitArray[3].equalsIgnoreCase("true") && args[1].equalsIgnoreCase(splitArray[0])){
+                                p1 = Bukkit.getPlayer(splitArray[1]);
+                                p2 = Bukkit.getPlayer(splitArray[2]);
+                                Countdown(p1, p2);
+                                break;
+                            }
+                        }
+                    } catch (IOException e) {}
                 }
             }
         }
-        //Minigame Challenge
+        //Minigame-Anfrage stellen
         if(args.length == 3) {
             if (args[0].equalsIgnoreCase("challenge")) {
                 Player eingeladenerSpieler = Bukkit.getServer().getPlayer(args[1]);
@@ -256,8 +283,7 @@ public class Minigame implements CommandExecutor, Listener {
                 } catch (IOException e) {}
             }
         }
-
-        //Minigame annehmen
+        //Minigame-Anfrage annehmen
         if(args.length == 2) {
             if (args[0].equalsIgnoreCase("annehmen")) {
                 String angenommen="false";
@@ -286,7 +312,7 @@ public class Minigame implements CommandExecutor, Listener {
     }
 
 
-    public void Countdown(){
+    public void Countdown(Player p1, Player p2){
          id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
             int countdown=10;
             @Override
@@ -295,32 +321,35 @@ public class Minigame implements CommandExecutor, Listener {
                 countdown--;
                 if(countdown==-1) {
                     Bukkit.getServer().broadcastMessage("Das Game " + ChatColor.RED + minigame[0] + "hat gestartet!");
-                    int hoehe=Integer.parseInt(minigame[2]);
+                    int hoehe = Integer.parseInt(minigame[2]);
                     try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/currentminigame.txt"), Charset.forName("UTF-8"))) {
 
-                    } catch (IOException e){}
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        int x = 0;
-                        int y = 0;
-                        x = ((maxX - minX) / 2) + minX;
-                        y = ((maxY - minY) / 2) + minY;
-                        hoehe++;
-                        p.setGameMode(GameMode.ADVENTURE);
-                        p.getPlayer().getInventory().clear();
-                        ItemStack item = new ItemStack(Material.DIAMOND_SPADE);
-                        item.setDurability((short) -1);
-                        p.getInventory().addItem(item);
-                        Location loc = new Location(Bukkit.getServer().getWorld("world"), x, hoehe, y);
-                        p.teleport(loc);
+                    } catch (IOException e) {
                     }
-                    Countdown2();
+                    int x = 0;
+                    int y = 0;
+                    x = ((maxX - minX) / 2) + minX;
+                    y = ((maxY - minY) / 2) + minY;
+                    hoehe++;
+                    p1.setGameMode(GameMode.ADVENTURE);
+                    p2.setGameMode(GameMode.ADVENTURE);
+                    p1.getPlayer().getInventory().clear();
+                    p2.getPlayer().getInventory().clear();
+                    ItemStack item = new ItemStack(Material.DIAMOND_SPADE);
+                    item.setDurability((short) -1);
+                    p1.getInventory().addItem(item);
+                    p2.getInventory().addItem(item);
+                    Location loc = new Location(Bukkit.getServer().getWorld("world"), x, hoehe, y);
+                    p1.teleport(loc);
+                    p2.teleport(loc);
+                    Countdown2(p1, p2);
                     Bukkit.getScheduler().cancelTask(id);
                 }
             }
         }, 1*20,1*20);
     }
 
-    public void Countdown2(){
+    public void Countdown2(Player p1, Player p2){
         id2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
             int countdown=5;
             @Override
@@ -328,28 +357,29 @@ public class Minigame implements CommandExecutor, Listener {
                 Bukkit.broadcastMessage("Das Spiel geht in " + ChatColor.RED + countdown + ChatColor.WHITE + " Sekunden los!");
                 countdown--;
                 if(countdown == -1) {
-                    for(Player p : Bukkit.getOnlinePlayers()) {
-                        p.setGameMode(GameMode.SURVIVAL);
-                    }
-                    hoehetester();
+                    p1.setGameMode(GameMode.SURVIVAL);
+                    p2.setGameMode(GameMode.SURVIVAL);
+                    hoehetester(p1, p2);
                     Bukkit.getScheduler().cancelTask(id2);
                 }
             }
         }, 1*20,1*20);
     }
 
-    public void hoehetester(){
+    public void hoehetester(Player p1, Player p2){
         id3 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
             int hoehe = Integer.parseInt(minigame[2])-8;
             Location spawn = Bukkit.getServer().getWorld("world").getSpawnLocation();
             @Override
             public void run() {
-                for(Player p: Bukkit.getOnlinePlayers()) {
-                    double loc;
-                    loc = p.getLocation().getY();
-                    if(loc<=hoehe){
-                        p.teleport(spawn);
-                    }
+                double loc;
+                loc = p1.getLocation().getY();
+                if (loc <= hoehe) {
+                    p1.teleport(spawn);
+                }
+                loc = p2.getLocation().getY();
+                if (loc <= hoehe) {
+                    p2.teleport(spawn);
                 }
             }
         }, 0, 1);
