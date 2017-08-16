@@ -1,387 +1,220 @@
 package main.Minigame;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.UUID;
 
-public class Minigame implements CommandExecutor, Listener {
+    public class Minigame implements CommandExecutor, Listener {
 
-    public static Plugin pl;
-    int id=0;
-    int id2=0;
-    int id3=0;
-    int minX, maxX, minY, maxY;
-    String[]minigame=new String[7];
+        public static Plugin pl;
+        int id1;
+        public ArrayList<MinigameArena> minigameArenas = new ArrayList<MinigameArena>(0);
+        public ArrayList<MinigameQueue> minigameQueues = new ArrayList<MinigameQueue>(0);
 
-    public Minigame(){}
-    public Minigame(Plugin pl) {
-        this.pl = pl;
-    }
+        public Minigame() {
+            queueTesten();
+        }
 
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
-        Player p = (Player) commandSender;
-        String minigameName = "";
-        if (command.getName().equalsIgnoreCase("minigame")) {
-            //MiniGame erstellen und löschen
-            if (args.length == 2) {
-                if (args[0].equalsIgnoreCase("erstellen")) {
-                    p.sendMessage("Versuche Minigame zu erstellen ...");
-                    minigameName = args[1];
-                    String gesamt="";
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))) {
-                        String line="";
-                        while((line=reader.readLine()) != null){
-                            gesamt+=line;
-                            gesamt+=System.lineSeparator();
-                        }
-                    } catch(IOException e) {
-                        p.sendMessage(e.toString());
-                    }
-                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))) {
-                        writer.write(gesamt);
-                        writer.write(minigameName + " 0" + " 0" + " 0" + " 0" + " 0" + " 0" );
-                    } catch(IOException e) {
-                        p.sendMessage(e.toString());
-                    }
-                    p.sendMessage("Du kannst jetzt mit /minigame Punkte (Minigame-Name) (Punkt1,Punkt2) eine Spielbegrenzung erstellen!");
-                } else {
-                    p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
-                }
+        public Minigame(Plugin pl) {
+            this.pl = pl;
+            queueTesten();
+        }
 
-
-                //Minigame löschen
-                if (args[0].equalsIgnoreCase("löschen")) {
-                    p.sendMessage("Versuche Minigame zu löschen ...");
-                    String gesamt="";
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
-                        String line="";
-                        while((line=reader.readLine()) != null){
-                            String[]minigameArray=line.split(" ");
-                            if(args[1].equalsIgnoreCase(minigameArray[0])) {
-                                break;
-                            }
-                            gesamt+=line;
-                            gesamt+=System.lineSeparator();
-                        }
-                    } catch (IOException e) {
-                        p.sendMessage("Das Minigame konnte nicht löschen werden!");
-                    }
-                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))) {
-                        writer.write(gesamt);
-                    } catch (IOException e) {
-                        p.sendMessage(e.toString());
-                    }
-                }
-
-
-
-            //Minigame list
-            } else if (args.length <= 1) {
-                if (args[0].equalsIgnoreCase("list")) {
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
-                        String line="";
-                        while((line=reader.readLine()) != null){
-                            String[]minigameArray=line.split(" ");
-                            p.sendMessage(minigameArray[0]);
-                        }
-                    } catch (IOException e) {
-                        p.sendMessage("Die Liste für Minigames konnte nicht ausgegeben werden!");
-                    }
-                } else {
-                    p.sendMessage("Bitte gib /minigame erstellen (Minigame-Name) ein.");
-                }
-            }
-
-
-
-            //MiniGame Punkte erstellen
-            if(args.length == 3) {
-                if (args[0].equalsIgnoreCase("Punkt")) {
-                    Location targetloc = p.getLocation();
-                    String minigame[]=new String[7];
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
-                        String line="";
-                        while((line=reader.readLine()) != null){
-                            String[]minigameArray=line.split(" ");
-                            if(args[1].equalsIgnoreCase(minigameArray[0])) {
-                                minigame[0]=minigameArray[0];
-                                minigame[1]=minigameArray[1];
-                                minigame[2]=minigameArray[2];
-                                minigame[3]=minigameArray[3];
-                                minigame[4]=minigameArray[4];
-                                minigame[5]=minigameArray[5];
-                                minigame[6]=minigameArray[6];
-                            }
-                        }
-                    } catch (IOException e) {
-                        p.sendMessage("Die Puntke konnten nicht gespeichert werden!");
-                    }
-                    if (args[1].equalsIgnoreCase(minigame[0]) && args[2].equalsIgnoreCase("1")) {
-                        minigame[1]=targetloc.getBlockX()+"";
-                        minigame[2]=targetloc.getBlockY()+"";
-                        minigame[3]=targetloc.getBlockZ()+"";
-                        p.sendMessage(minigame[1]+minigame[2]+minigame[3]);
-                        String gesamt="";
-                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
-                            String line="";
-                            while((line=reader.readLine()) != null){
-                                String[]minigameArray=line.split(" ");
-                                if(args[1].equalsIgnoreCase(minigameArray[0])) {
-                                    gesamt+=minigameArray[0] + " " + minigame[1] + " " + minigame[2] + " " + minigame[3] + " " + minigameArray[4] + " " + minigameArray[5] + " " + minigameArray[6];
-                                    gesamt+=System.lineSeparator();
-                                    break;
-                                }
-                                gesamt+=line;
-                                gesamt+=System.lineSeparator();
-                            }
-                        } catch (IOException e) {
-                            p.sendMessage("Punkt 1 konnte nicht gespeichert werden!");
-                        }
-                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))) {
-                            writer.write(gesamt);
-                        } catch (IOException e) {
-                            p.sendMessage(e.toString());
-                        }
-                    }
-                    if (args[1].equalsIgnoreCase(minigame[0]) && args[2].equalsIgnoreCase("2")) {
-                        minigame[4]=targetloc.getBlockX()+"";
-                        minigame[5]=targetloc.getBlockY()+"";
-                        minigame[6]=targetloc.getBlockZ()+"";
-                        p.sendMessage(minigame[4]+minigame[5]+minigame[6]);
-                        String gesamt="";
-                        try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"), Charset.forName("UTF-8"))){
-                            String line="";
-                            while((line=reader.readLine()) != null){
-                                String[]minigameArray=line.split(" ");
-                                if(args[1].equalsIgnoreCase(minigameArray[0])) {
-                                    gesamt+=minigameArray[0] + " " + minigameArray[1] + " " + minigameArray[2] + " " + minigameArray[3] + " " + minigame[4] + " " + minigame[5] + " " + minigame[6];
-                                    gesamt+=System.lineSeparator();
-                                    break;
-                                }
-                                gesamt+=line;
-                                gesamt+=System.lineSeparator();
-                            }
-                        } catch (IOException e) {
-                            p.sendMessage("Punkt 2 konnte nicht gespeichert werden!");
-                        }
-                        try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))) {
-                            writer.write(gesamt);
-                        } catch (IOException e) {
-                            p.sendMessage(e.toString());
-                        }
-                    }
-                }
-            }
-
-
-            //Minigame starten
-            if(args.length == 2) {
-                if(args[0].equalsIgnoreCase("starten")) {
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigame.txt"),Charset.forName("UTF-8"))){
-                        String line="";
-                        while((line=reader.readLine()) != null){
-                            String[]split=line.split(" ");
-                            if(args[1].equalsIgnoreCase(split[0])){
-                                minigame[0]=split[0];
-                                minigame[1]=split[1];
-                                minigame[2]=split[2];
-                                minigame[3]=split[3];
-                                minigame[4]=split[4];
-                                minigame[5]=split[5];
-                                minigame[6]=split[6];
-                            }
-                        }
-                    } catch(IOException e) {}
-                    if(Integer.parseInt(minigame[1])>Integer.parseInt(minigame[4])) {
-                        minX=Integer.parseInt(minigame[4]);
-                        maxX=Integer.parseInt(minigame[1]);
-                    } else {
-                        minX=Integer.parseInt(minigame[1]);
-                        maxX=Integer.parseInt(minigame[4]);
-                    }
-                    if(Integer.parseInt(minigame[3])>Integer.parseInt(minigame[6])) {
-                        minY=Integer.parseInt(minigame[6]);
-                        maxY=Integer.parseInt(minigame[3]);
-                    } else {
-                        minY=Integer.parseInt(minigame[3]);
-                        maxY=Integer.parseInt(minigame[6]);
-                    }
-                    int hoehe=Integer.parseInt(minigame[2]);
-                    for(int zeilenhoehe=0; zeilenhoehe<=1; zeilenhoehe++) {
-                        for (int x = minX; x <= maxX; x++) {
-                            for (int y = minY; y <= maxY; y++) {
-                                Location loc = new Location(Bukkit.getServer().getWorld("world"), x, hoehe, y);
-                                loc.getBlock().setType(Material.SNOW_BLOCK);
-                            }
-                        }
-                        hoehe=hoehe-6;
-                    }
-
-                    Player p1;
-                    Player p2;
-                    String running="true";
-                    try(BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/currentminigame.txt"),Charset.forName("UTF-8"))){
-                        String line="";
-                        while ((line=reader.readLine()) != null) {
-                            String[]arraySplit=line.split(" ");
-                            if(args[1].equalsIgnoreCase(arraySplit[0])){
-                                if(arraySplit[1].equalsIgnoreCase("false")){
-                                    running="false";
-                                }
-                            }
-                        }
-                        p.sendMessage(running);
-                    } catch (IOException e) {}
-                    try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
-                        String line="";
-                        while ((line=reader.readLine()) != null) {
-                            String[]splitArray=line.split(" ");
-                            if(splitArray[3].equalsIgnoreCase("true") && args[1].equalsIgnoreCase(splitArray[0])){
-                                p1 = Bukkit.getPlayer(splitArray[1]);
-                                p2 = Bukkit.getPlayer(splitArray[2]);
-                                Countdown(p1, p2);
+        @Override
+        public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
+            if (commandSender instanceof Player) {
+                Player p = (Player) commandSender;
+                if (args.length == 2) {
+                    //Minigame erstellen
+                    if (args[0].equalsIgnoreCase("erstellen")) {
+                        boolean istNichtVorhanden = true;
+                        for (MinigameArena a : minigameArenas) {
+                            if (args[1].equalsIgnoreCase(a.arenaName)) {
+                                istNichtVorhanden = false;
+                                p.sendMessage("Die Arena " + a.arenaName + " gibt es schon!");
                                 break;
                             }
                         }
-                    } catch (IOException e) {}
-                }
-            }
-        }
-        //Minigame-Anfrage stellen
-        if(args.length == 3) {
-            if (args[0].equalsIgnoreCase("challenge")) {
-                Player eingeladenerSpieler = Bukkit.getServer().getPlayer(args[1]);
-                String gesamtCurrentGames="";
-                try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
-                    String line="";
-                    while((line=reader.readLine()) != null){
-                        gesamtCurrentGames+=line;
-                        gesamtCurrentGames+=System.lineSeparator();
-                    }
-                } catch (IOException e) {}
-                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
-                    writer.write(gesamtCurrentGames);
-                    eingeladenerSpieler.sendMessage("Sie wurden zu einem Battle von " + p.getName() + " in der Arena " + args[2] + " herausgefordert!");
-                    eingeladenerSpieler.sendMessage("Nimm die Andrage mit /minigame annehmen <Arena> an");
-                    writer.write(args[2] + " " + p.getName() + " " + args[1] + " false" );
-                } catch (IOException e) {}
-            }
-        }
-        //Minigame-Anfrage annehmen
-        if(args.length == 2) {
-            if (args[0].equalsIgnoreCase("annehmen")) {
-                String angenommen="false";
-                String eingeladeneSpielerGesamt="";
-                try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
-                    String line="";
-                    while((line=reader.readLine()) != null) {
-                        String[]splitArray = line.split(" ");
-                        if(args[1].equalsIgnoreCase(splitArray[0]) && p.getName().equalsIgnoreCase(splitArray[2])) {
-                            p.sendMessage("Du hast die Anfrage von " + splitArray[1] + " für die Arena " + splitArray[0] + " angenommen!");
-                            splitArray[3]="true";
-                            eingeladeneSpielerGesamt+=splitArray[0] + " " + splitArray[1] + " " + splitArray[2] + " " + splitArray[3];
-                            eingeladeneSpielerGesamt+=System.lineSeparator();
-                            break;
+                        if (istNichtVorhanden) {
+                            minigameArenas.add(new MinigameArena(args[1]));
                         }
-                        eingeladeneSpielerGesamt+=line;
-                        eingeladeneSpielerGesamt+=System.lineSeparator();
+                        p.sendMessage(minigameArenas.size() + "");
                     }
-                } catch (IOException e) {}
-                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/inviteminigame.txt"), Charset.forName("UTF-8"))) {
-                    writer.write(eingeladeneSpielerGesamt);
-                } catch (IOException e) {}
+                    //Minigame löschen
+                    if (args[0].equalsIgnoreCase("löschen")) {
+                        int i = 0;
+                        for (MinigameArena a : minigameArenas) {
+                            if (args[1].equalsIgnoreCase(a.arenaName)) {
+                                minigameArenas.remove(i);
+                                p.sendMessage(minigameArenas.size() + "");
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+                }
+                //Minigame list
+                if (args.length == 1) {
+                    if (args[0].equalsIgnoreCase("list")) {
+                        for (MinigameArena a : minigameArenas) {
+                            p.sendMessage(a.arenaName);
+                        }
+                    }
+                }
+                //Punkte erstellen
+                if (args.length == 3) {
+                    if (args[0].equalsIgnoreCase("Punkt")) {
+                        if (args[1].equalsIgnoreCase("1")) {
+                            for (MinigameArena a : minigameArenas) {
+                                if (args[2].equalsIgnoreCase(a.arenaName)) {
+                                    a.setLocation1(p.getLocation());
+                                    p.sendMessage("Punkt 1 erstellt");
+                                }
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("2")) {
+                            for (MinigameArena a : minigameArenas) {
+                                if (args[2].equalsIgnoreCase(a.arenaName)) {
+                                    a.setLocation2(p.getLocation());
+                                    p.sendMessage("Punkt 2 erstellt");
+                                }
+                            }
+                        }
+                    }
+                }
+                //Anfrage senden
+                if (args.length == 3) {
+                    if (args[0].equalsIgnoreCase("challenge")) {
+                        boolean isGegnerOnline = false;
+                        for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
+                            if (onlinePlayers.getName().equalsIgnoreCase(args[1])) {
+                                isGegnerOnline = true;
+                            }
+                        }
+                        if (isGegnerOnline == false) {
+                            p.sendMessage("Dein Gegner ist nicht online!");
+                        }
+                        if (isGegnerOnline) {
+                            Player gegner = Bukkit.getPlayer(args[1]);
+                            boolean istNichtSpielerGequeuet = true;
+                            for (MinigameQueue q : minigameQueues) {
+                                if (q.p1.getUniqueId().equals(p.getUniqueId())) {
+                                    p.sendMessage("Du wurdest oder hast schon wenn herausgefordert!");
+                                    istNichtSpielerGequeuet = false;
+                                    break;
+                                }
+                                if (q.p2.getUniqueId().equals(p.getUniqueId())) {
+                                    p.sendMessage("Du wurdest oder hast schon wenn herausgefordert!");
+                                    istNichtSpielerGequeuet = false;
+                                    break;
+                                }
+                                if (q.p1.getUniqueId().equals(gegner.getUniqueId())) {
+                                    p.sendMessage("Du wurdest oder hast schon wenn herausgefordert!");
+                                    istNichtSpielerGequeuet = false;
+                                    break;
+                                }
+                                if (q.p2.getUniqueId().equals(gegner.getUniqueId())) {
+                                    p.sendMessage("Du wurdest oder hast schon wenn herausgefordert!");
+                                    istNichtSpielerGequeuet = false;
+                                    break;
+                                }
+                            }
+                            if (istNichtSpielerGequeuet) {
+                                String arena = args[2];
+                                p.sendMessage("Du hast " + gegner.getName() + " zu einem Duel in der Arena " + arena + " herausgefordert!");
+                                gegner.sendMessage("Du wurdest von " + p.getName() + " zu einem Duel in der Arena " + arena + " herausgefordert!");
+                                gegner.sendMessage("Du kannst mit /minigame annehmen <Name des Gegners> das Duel annehmen oder mit /minigame ablehnen <Name des Gegners> ablehnen");
+                                minigameQueues.add(new MinigameQueue(p, gegner, arena));
+                                Bukkit.broadcastMessage(minigameQueues.size()+"");
+                            }
+                        }
+                    }
+                }
+                //Anfrage annehmen
+                if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase("annehmen")) {
+                        boolean isGegnerOnline = false;
+                        for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
+                            if (onlinePlayers.getName().equalsIgnoreCase(args[1])) {
+                                isGegnerOnline = true;
+                            }
+                        }
+                        if (isGegnerOnline) {
+                            boolean annahmenGefunden = false;
+                            Player gegner = Bukkit.getPlayer(args[1]);
+                            for (MinigameQueue q : minigameQueues) {
+                                if (q.p1.getUniqueId().equals(gegner.getUniqueId())) {
+                                    q.annehmen();
+                                    annahmenGefunden = true;
+                                    p.sendMessage("Du hast die Duel-Anfrage angenommen!");
+                                }
+                            }
+                            if (annahmenGefunden == false) {
+                                p.sendMessage("Du hast von dieser Person keine Anfrage bekommen!");
+                            }
+                        } else {
+                            p.sendMessage("Dein Gegner ist nicht online!");
+                        }
+                    }
+                }
+                //Anfrage ablehnen
+                if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase("ablehnen")) {
+                        boolean isGegnerOnline = false;
+                        for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
+                            if (onlinePlayers.getName().equalsIgnoreCase(args[1])) {
+                                isGegnerOnline = true;
+                            }
+                        }
+                        if (isGegnerOnline) {
+                            Player gegner = Bukkit.getPlayer(args[1]);
+                            int i = 0;
+                            for (MinigameQueue q : minigameQueues) {
+                                if (q.p1.getUniqueId().equals(gegner.getUniqueId())) {
+                                    minigameQueues.remove(i);
+                                    p.sendMessage(minigameQueues.size() + "");
+                                    break;
+                                }
+                                i++;
+                            }
+                        } else {
+                            p.sendMessage("Dein Gegner ist nicht online!");
+                        }
+                    }
+                }
             }
+            return true;
         }
-        return false;
-    }
 
-
-    public void Countdown(Player p1, Player p2){
-         id = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
-            int countdown=10;
-            @Override
-            public void run() {
-                Bukkit.getServer().broadcastMessage("Das Minigame " + ChatColor.RED + minigame[0] + ChatColor.WHITE + " startet in " + ChatColor.GREEN + countdown + ChatColor.WHITE + " Sekunden!");
-                countdown--;
-                if(countdown==-1) {
-                    Bukkit.getServer().broadcastMessage("Das Game " + ChatColor.RED + minigame[0] + "hat gestartet!");
-                    int hoehe = Integer.parseInt(minigame[2]);
-                    try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/currentminigame.txt"), Charset.forName("UTF-8"))) {
-
-                    } catch (IOException e) {
+        //Migame Queue testen
+        public void queueTesten() {
+            id1= Bukkit.getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
+                @Override
+                public void run() {
+                    int MinigameQueuei=0;
+                    for(MinigameQueue q : minigameQueues) {
+                        if(q.istAngenommen) {
+                            for(MinigameArena a : minigameArenas){
+                                if(a.arenaName.equalsIgnoreCase(q.arena)) {
+                                    a.starten(pl, q.p1, q.p2, minigameQueues, MinigameQueuei);
+                                    break;
+                                }
+                            }
+                        }
+                        MinigameQueuei++;
                     }
-                    int x = 0;
-                    int y = 0;
-                    x = ((maxX - minX) / 2) + minX;
-                    y = ((maxY - minY) / 2) + minY;
-                    hoehe++;
-                    p1.setGameMode(GameMode.ADVENTURE);
-                    p2.setGameMode(GameMode.ADVENTURE);
-                    p1.getPlayer().getInventory().clear();
-                    p2.getPlayer().getInventory().clear();
-                    ItemStack item = new ItemStack(Material.DIAMOND_SPADE);
-                    item.setDurability((short) -1);
-                    p1.getInventory().addItem(item);
-                    p2.getInventory().addItem(item);
-                    Location loc = new Location(Bukkit.getServer().getWorld("world"), x, hoehe, y);
-                    p1.teleport(loc);
-                    p2.teleport(loc);
-                    Countdown2(p1, p2);
-                    Bukkit.getScheduler().cancelTask(id);
                 }
-            }
-        }, 1*20,1*20);
+            },10*20,20);
+        }
     }
-
-    public void Countdown2(Player p1, Player p2){
-        id2 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
-            int countdown=5;
-            @Override
-            public void run() {
-                Bukkit.broadcastMessage("Das Spiel geht in " + ChatColor.RED + countdown + ChatColor.WHITE + " Sekunden los!");
-                countdown--;
-                if(countdown == -1) {
-                    p1.setGameMode(GameMode.SURVIVAL);
-                    p2.setGameMode(GameMode.SURVIVAL);
-                    hoehetester(p1, p2);
-                    Bukkit.getScheduler().cancelTask(id2);
-                }
-            }
-        }, 1*20,1*20);
-    }
-
-    public void hoehetester(Player p1, Player p2){
-        id3 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
-            int hoehe = Integer.parseInt(minigame[2])-8;
-            Location spawn = Bukkit.getServer().getWorld("world").getSpawnLocation();
-            @Override
-            public void run() {
-                double loc;
-                loc = p1.getLocation().getY();
-                if (loc <= hoehe) {
-                    p1.teleport(spawn);
-                }
-                loc = p2.getLocation().getY();
-                if (loc <= hoehe) {
-                    p2.teleport(spawn);
-                }
-            }
-        }, 0, 1);
-    }
-}
