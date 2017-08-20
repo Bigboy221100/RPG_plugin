@@ -6,6 +6,9 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by maxim on 08.08.2017.
  */
-public class MinigameArena {
+public class MinigameArena{
     String arenaName;
     Location Rand1, Rand2;
     Player p1, p2;
@@ -123,6 +126,7 @@ public class MinigameArena {
 
             @Override
             public void run() {
+                new MinigameNoDamage(p1,p2);
                 p1.sendMessage("Das Spiel geht in " + i + " Sekunden los!");
                 p2.sendMessage("Das Spiel geht in " + i + " Sekunden los!");
                 if(i==0) {
@@ -147,6 +151,7 @@ public class MinigameArena {
     }
 
     public void tester2(Player p1, Player p2) {
+        new MinigameNoDamage(p1,p2);
         if(p1.getLocation().getY() < Rand1.getY()-8) {
             Bukkit.getServer().broadcastMessage("Der Spieler " + p2.getName() + " hat " + p1.getName() + " besiegt!");
             p1.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
