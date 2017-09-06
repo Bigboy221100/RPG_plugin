@@ -2,6 +2,7 @@ package main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventException;
 
 import java.io.*;
 import java.util.UUID;
@@ -46,9 +47,14 @@ public class helpvoids {
     }
     public String getcharacterklasse(String displayname){
         String klasse="";
-        Player p= Bukkit.getServer().getPlayer(displayname);
+        System.out.println("ging1");
+        String help[]=displayname.split("\\s+");
+        System.out.println(help[1]);
+        Player p= Bukkit.getPlayer(displayname);
+        System.out.println("ging3");
+        p.sendMessage(help[1]);
         try {
-            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + displayname + "/" + displayname + ".txt");
+            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+help[1]+"/"+help[1]+".txt");
             BufferedReader reader = new BufferedReader(fr);
             for(int i=0;i<2;i++){
                 reader.readLine();
