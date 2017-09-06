@@ -25,9 +25,7 @@ public class Archerevents implements Listener{
     public void onLevel(PlayerLevelChangeEvent e){
         Player p=e.getPlayer();
         helpvoids help=new helpvoids();
-        p.sendMessage(p.getDisplayName());
-        p.sendMessage(help.getcharacterklasse("[Archer] test"));
-        if((help.getcharacterklasse(p.getDisplayName()+"")).equalsIgnoreCase("Archer")) {
+        if((help.getcharacterklasse(p.getDisplayName()+"",p)).equalsIgnoreCase("Archer")) {
             p.sendMessage("Sie sind nun Level " + e.getNewLevel());
             switch (e.getNewLevel()) {
                 case 2:

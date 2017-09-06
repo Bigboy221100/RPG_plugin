@@ -3,6 +3,7 @@ package main;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventException;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.util.UUID;
@@ -45,25 +46,25 @@ public class helpvoids {
         }
         return name;
     }
-    public String getcharacterklasse(String displayname){
+    public String getcharacterklasse(String displayname,Player p){
         String klasse="";
-        System.out.println("ging1");
         String help[]=displayname.split("\\s+");
-        System.out.println(help[1]);
-        Player p= Bukkit.getPlayer(displayname);
-        System.out.println("ging3");
-        p.sendMessage(help[1]);
+        String help1[]=help[1].split("§");
         try {
-            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+help[1]+"/"+help[1]+".txt");
+            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+help1[0]+"/"+help1[0]+".txt");
             BufferedReader reader = new BufferedReader(fr);
             for(int i=0;i<2;i++){
                 reader.readLine();
             }
             klasse=reader.readLine();
         }catch (IOException e){
-            p.sendMessage("Fehler");
-            System.out.println("Fehler");
+            p.sendMessage("IO Fehler");
+            System.out.println("IO Fehler");
+        }catch (NullPointerException a){
+            p.sendMessage("Null Fehler");
+            System.out.println("Null Fehler");
         }
+        System.out.println(klasse);
         return klasse;
     }
     public int getcharactermoney(String displayname){
