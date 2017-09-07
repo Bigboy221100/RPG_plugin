@@ -99,7 +99,7 @@ public class Archerevents implements Listener{
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e){
         Player p=e.getPlayer();
-        if(p.getItemInHand() == (new ItemStack(Material.SKULL))){
+        if(p.getItemInHand() == (new ItemStack(Material.SKULL_ITEM))){
             if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Benutzerinterface")){
                 Inventory inv=p.getServer().createInventory(null,27,"Benutzerinterface");
                 ItemStack bow=new ItemStack(Material.BOW);

@@ -30,12 +30,7 @@ public class CharPlayer{
         this.level=1;
         this.xp=0;
         this.klasse=klasse;
-        Player p= Bukkit.getPlayer(player);
-        ItemStack head=new ItemStack(Material.SKULL,1);
-        ItemMeta skull=head.getItemMeta();
-        skull.setDisplayName("Benutzerinterface");
-        head.setItemMeta(skull);
-        p.getInventory().setItem(8,head);
+
     }
 
     public CharPlayer() {
