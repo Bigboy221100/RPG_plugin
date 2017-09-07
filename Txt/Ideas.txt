@@ -4,6 +4,7 @@ Chars{
     Geld für Mobkills
     Rüstung nur bis Leder, rest durch loots erfarmbar, bzw. kaufbar(teuer)
     event. anderes Levelsystem
+    Hotbar Slot 9 hat Player Head (Skillbaum, etc.)
   }
   Archer{
     Distanz des Kills als Multiplyer

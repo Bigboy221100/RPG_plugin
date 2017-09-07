@@ -55,6 +55,7 @@ public class Archer extends CharPlayer implements Listener{
         content = ((List<ItemStack>) c.get("inventory.content")).toArray(new ItemStack[0]);
         p.getInventory().setContents(content);
         p.setLevel(this.level);
+        p.setExp(xp);
         p.setDisplayName("§1[§6Archer§1]§2 " + name+"§f");
         p.setPlayerListName("§1[§6Archer§1]§2 " + name+"§f");
     }
@@ -71,6 +72,7 @@ public class Archer extends CharPlayer implements Listener{
             p.getInventory().addItem(new ItemStack(Material.ARROW));
         }
         p.setLevel(level);
+        p.setExp(0);
         PrintWriter pWriter = null;
         try {
             //create Char txt
