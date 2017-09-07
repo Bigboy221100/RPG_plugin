@@ -3,6 +3,12 @@ package main.Char.Klassen;
 
 
 import javafx.event.EventHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.UUID;
 
@@ -24,6 +30,12 @@ public class CharPlayer{
         this.level=1;
         this.xp=0;
         this.klasse=klasse;
+        Player p= Bukkit.getPlayer(player);
+        ItemStack head=new ItemStack(Material.SKULL,1);
+        ItemMeta skull=head.getItemMeta();
+        skull.setDisplayName("Benutzerinterface");
+        head.setItemMeta(skull);
+        p.getInventory().setItem(8,head);
     }
 
     public CharPlayer() {

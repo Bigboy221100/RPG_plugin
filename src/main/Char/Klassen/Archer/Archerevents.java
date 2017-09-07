@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.Inventory;
@@ -33,29 +34,29 @@ public class Archerevents implements Listener{
                     LeatherArmorMeta chest = (LeatherArmorMeta) chestp.getItemMeta();
                     chest.setColor(Color.ORANGE);
                     chest.setUnbreakable(true);
-                    p.getInventory().addItem(chestp);
+                    p.getInventory().setChestplate(chestp);
                     break;
                 case 3:
                     ItemStack leggi = new ItemStack(Material.LEATHER_LEGGINGS);
                     LeatherArmorMeta trouser = (LeatherArmorMeta) leggi.getItemMeta();
                     trouser.setColor(Color.ORANGE);
                     trouser.setUnbreakable(true);
-                    p.getInventory().addItem(leggi);
+                    p.getInventory().setLeggings(leggi);
                     break;
                 case 4:
                     ItemStack helme = new ItemStack(Material.LEATHER_HELMET);
                     LeatherArmorMeta helm = (LeatherArmorMeta) helme.getItemMeta();
                     helm.setColor(Color.ORANGE);
                     helm.setUnbreakable(true);
-                    p.getInventory().addItem(helme);
+                    p.getInventory().setHelmet(helme);
                     break;
                 case 5:
                     ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
                     LeatherArmorMeta boot = (LeatherArmorMeta) boots.getItemMeta();
                     boot.setColor(Color.ORANGE);
                     boot.setUnbreakable(true);
-                    p.getInventory().addItem(boots);
-
+                    p.getInventory().setBoots(boots);
+                    p.sendMessage("Ihr Bogen ist zum Upgraden bereit!");
                     break;
             }
         }
@@ -94,5 +95,24 @@ public class Archerevents implements Listener{
     public void onItemBreakDamage(PlayerItemBreakEvent e){
         ItemStack item = new ItemStack(e.getBrokenItem().getType());
         e.getPlayer().getInventory().addItem(item);
+    }
+    @EventHandler
+    public void onPlayerUse(PlayerInteractEvent e){
+        Player p=e.getPlayer();
+        if(p.getItemInHand() == (new ItemStack(Material.SKULL))){
+            if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Benutzerinterface")){
+                Inventory inv=p.getServer().createInventory(null,27,"Benutzerinterface");
+                ItemStack bow=new ItemStack(Material.BOW);
+                ItemMeta metabow=bow.getItemMeta();
+                metabow.setDisplayName("Bow upgraden");
+                bow.setItemMeta(metabow);
+                p.openInventory(inv);
+            }
+        }
+        if(p.getItemInHand() == (new ItemStack(Material.BOW))) {
+            if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Bow upgraden")) {
+                bowupgrades(p);
+            }
+        }
     }
 }
