@@ -47,7 +47,7 @@ import java.util.ArrayList;
                             }
                         }
                         if (istNichtVorhanden) {
-                            minigameArenas.add(new MinigameArena(args[1]));
+                            minigameArenas.add(new MinigameArena(args[1], pl));
                         }
                         p.sendMessage(minigameArenas.size() + "");
                     }

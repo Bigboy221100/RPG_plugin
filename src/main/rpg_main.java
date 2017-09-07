@@ -12,6 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Created by Fabian on 19.07.2017.
  */
 public class rpg_main extends JavaPlugin {
+
+
     public void onEnable(){
         //Commands
         this.getCommand("createnewcharacter").setExecutor(new createnewcharacter());
@@ -39,6 +41,7 @@ public class rpg_main extends JavaPlugin {
 
     public void onDisable(){
         System.out.println("Rpg disabled");
+
     }
 
 }
