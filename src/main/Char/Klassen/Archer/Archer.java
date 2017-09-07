@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.metadata.Metadatable;
 
@@ -56,23 +57,30 @@ public class Archer extends CharPlayer implements Listener{
         p.getInventory().setContents(content);
         p.setLevel(this.level);
         p.setExp(xp);
-        p.setDisplayName("§1[§6Archer§1]§2 " + name+"§f");
-        p.setPlayerListName("§1[§6Archer§1]§2 " + name+"§f");
+        p.setDisplayName("§1[§6Archer§1]§2 " + name);
+        p.setPlayerListName("§1[§6Archer§1]§2 " + name);
     }
 
     private void ausrüsten(){
         this.level=1;
         Player p= Bukkit.getPlayer(player);
         p.getInventory().clear();
-        p.setDisplayName("§1[§6Archer§1]§2 " + name+"§f");
-        p.setPlayerListName("§1[§6Archer§1]§2 " + name+"§f");
-        p.setCustomName("§1[§6Archer§1]§2 " + name+"§f");
+        p.setDisplayName("§1[§6Archer§1]§2 " + name);
+        p.setPlayerListName("§1[§6Archer§1]§2 " + name);
+        p.setCustomName("§1[§6Archer§1]§2 " + name);
         p.getInventory().addItem(new ItemStack(Material.BOW));
         for(int i=0;i<16;i++) {
             p.getInventory().addItem(new ItemStack(Material.ARROW));
         }
         p.setLevel(level);
         p.setExp(0);
+
+        ItemStack head=new ItemStack(Material.SKULL_ITEM);
+        ItemMeta skull=head.getItemMeta();
+        skull.setDisplayName("Benutzerinterface");
+        head.setItemMeta(skull);
+        p.getInventory().setItem(8,head);
+
         PrintWriter pWriter = null;
         try {
             //create Char txt

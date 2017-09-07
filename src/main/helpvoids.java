@@ -49,9 +49,8 @@ public class helpvoids {
     public String getcharacterklasse(String displayname,Player p){
         String klasse="";
         String help[]=displayname.split("\\s+");
-        String help1[]=help[1].split("§");
         try {
-            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+help1[0]+"/"+help1[0]+".txt");
+            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+help[1]+"/"+help[1]+".txt");
             BufferedReader reader = new BufferedReader(fr);
             for(int i=0;i<2;i++){
                 reader.readLine();
