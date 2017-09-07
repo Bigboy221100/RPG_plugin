@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -99,20 +100,14 @@ public class Archerevents implements Listener{
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e){
         Player p=e.getPlayer();
-        if(p.getItemInHand() == (new ItemStack(Material.SKULL_ITEM))){
-            if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Benutzerinterface")){
-                Inventory inv=p.getServer().createInventory(null,27,"Benutzerinterface");
-                ItemStack bow=new ItemStack(Material.BOW);
-                ItemMeta metabow=bow.getItemMeta();
-                metabow.setDisplayName("Bow upgraden");
-                bow.setItemMeta(metabow);
-                p.openInventory(inv);
-            }
-        }
-
-        if(p.getItemInHand() == (new ItemStack(Material.BOW))) {
-            if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Bow upgraden")) {
-                bowupgrades(p);
+        if(e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (e.getMaterial().equals(Material.SLIME_BALL)) {
+                    Inventory inv = p.getServer().createInventory(null, 27, "Benutzerinterface");
+                    ItemStack bow = new ItemStack(Material.BOW);
+                    ItemMeta metabow = bow.getItemMeta();
+                    metabow.setDisplayName("Bow upgraden");
+                    bow.setItemMeta(metabow);
+                    p.openInventory(inv);
             }
         }
     }
