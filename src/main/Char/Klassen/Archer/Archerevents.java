@@ -109,6 +109,7 @@ public class Archerevents implements Listener{
                 p.openInventory(inv);
             }
         }
+
         if(p.getItemInHand() == (new ItemStack(Material.BOW))) {
             if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase("Bow upgraden")) {
                 bowupgrades(p);
