@@ -13,24 +13,24 @@ import org.bukkit.entity.Player;
 public class createnewcharacter implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(command.getName().equalsIgnoreCase("createnewcharacter")){
-            if(sender instanceof Player){
-                Player p=(Player)sender;
-                if(p.hasPermission("rpg.character.new")){
-                    if(args.length==2){
-                        if(args[0].equalsIgnoreCase("Archer")){
-                            CharPlayer charPlayer=new Archer(p.getUniqueId(),args[1]);
+        if (command.getName().equalsIgnoreCase("createnewcharacter")) {
+            if (sender instanceof Player) {
+                Player p = (Player) sender;
+                if (p.hasPermission("rpg.character.new")) {
+                    if (args.length == 2) {
+                        if (args[0].equalsIgnoreCase("Archer")) {
+                            CharPlayer charPlayer = new Archer(p.getUniqueId(), args[1]);
                             p.sendMessage("Sie sind nun ein Level 1 Bogenschütze mit dem Namen " + args[1]);
-                        }else{
+                        } else {
                             p.sendMessage("Diese Klasse gibt es nicht");
                         }
-                    }else{
+                    } else {
                         p.sendMessage("Fehler...  createnewcharacter <Klasse> <Name>");
                     }
-                }else{
+                } else {
                     p.sendMessage("Du hast dafür keine Berechtigungen");
                 }
-            }else{
+            } else {
                 System.out.println("Nur Spieler können diesen Befehl ausführen");
             }
         }

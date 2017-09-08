@@ -21,34 +21,36 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  */
 public class PlayerEvents implements Listener {
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e){
-        Player p=(Player)e.getEntity().getPlayer();
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        Player p = (Player) e.getEntity().getPlayer();
         p.sendMessage("Sie sind gestorben und wurden aus ihrem Character ausgeloggt");
-        CharPlayer charPlayer=new Normal(p);
+        CharPlayer charPlayer = new Normal(p);
     }
+
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
-        Player p=(Player)e.getPlayer();
+    public void onJoin(PlayerJoinEvent e) {
+        Player p = (Player) e.getPlayer();
         p.sendMessage("========RPG-Server========");
         p.sendMessage("Willkommen auf dem Server");
         p.sendMessage("===" + p.getName() + "===");
         p.sendMessage("=========================");
-        if(!p.hasPlayedBefore()){
-            Bukkit.broadcastMessage(p.getName()+ " hat zum ersten Mal den Server betreten");
+        if (!p.hasPlayedBefore()) {
+            Bukkit.broadcastMessage(p.getName() + " hat zum ersten Mal den Server betreten");
         }
-        CharPlayer charPlayer=new Normal(p);
+        CharPlayer charPlayer = new Normal(p);
         e.setJoinMessage("§1[§2+§1]§6 " + p.getName());
 
     }
+
     @EventHandler
-    public void onLeave(PlayerQuitEvent e){
+    public void onLeave(PlayerQuitEvent e) {
         Player p = (Player) e.getPlayer();
-        CharPlayer charPlayer=new Normal(p);
+        CharPlayer charPlayer = new Normal(p);
         e.setQuitMessage("§1[§2-§1]§6 " + p.getName());
     }
 
     @EventHandler
-    public void food(FoodLevelChangeEvent e){
+    public void food(FoodLevelChangeEvent e) {
         e.setFoodLevel(20);
     }
 

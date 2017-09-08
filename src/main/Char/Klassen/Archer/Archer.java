@@ -24,33 +24,36 @@ import java.util.UUID;
 /**
  * Created by Fabian on 19.07.2017.
  */
-public class Archer extends CharPlayer implements Listener{
+public class Archer extends CharPlayer implements Listener {
     //nur zum Erstellen gedacht
-    public Archer(){
+    public Archer() {
 
     }
+
     public Archer(UUID player, String name, String klasse) {
         super(player, name, klasse);
         ausrüsten();
     }
+
     //nur zum Erstellen gedacht
-    public Archer(UUID player, String name){
-        this.player=player;
-        this.name=name;
-        this.klasse="Archer";
+    public Archer(UUID player, String name) {
+        this.player = player;
+        this.name = name;
+        this.klasse = "Archer";
         ausrüsten();
     }
+
     //nur zum Laden gedacht
-    public Archer(UUID player, String name, String klasse, int money,int level, int xp){
-        this.player=player;
-        this.name=name;
-        this.klasse=klasse;
-        this.money=money;
-        this.level=level;
-        this.xp=xp;
-        Player p=Bukkit.getPlayer(player);
+    public Archer(UUID player, String name, String klasse, int money, int level, int xp) {
+        this.player = player;
+        this.name = name;
+        this.klasse = klasse;
+        this.money = money;
+        this.level = level;
+        this.xp = xp;
+        Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
-        YamlConfiguration c = YamlConfiguration.loadConfiguration(new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+"_inv.yml"));
+        YamlConfiguration c = YamlConfiguration.loadConfiguration(new File("plugins/RPG/Chars/" + player + "/" + name + "/" + name + "_inv.yml"));
         ItemStack[] content = ((List<ItemStack>) c.get("inventory.armor")).toArray(new ItemStack[0]);
         p.getInventory().setArmorContents(content);
         content = ((List<ItemStack>) c.get("inventory.content")).toArray(new ItemStack[0]);
@@ -61,30 +64,30 @@ public class Archer extends CharPlayer implements Listener{
         p.setPlayerListName("§1[§6Archer§1]§2 " + name);
     }
 
-    private void ausrüsten(){
-        this.level=1;
-        Player p= Bukkit.getPlayer(player);
+    private void ausrüsten() {
+        this.level = 1;
+        Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
         p.setPlayerListName("§1[§6Archer§1]§2 " + name);
         p.setCustomName("§1[§6Archer§1]§2 " + name);
         p.getInventory().addItem(new ItemStack(Material.BOW));
-        for(int i=0;i<16;i++) {
+        for (int i = 0; i < 16; i++) {
             p.getInventory().addItem(new ItemStack(Material.ARROW));
         }
         p.setLevel(level);
         p.setExp(0);
 
-        ItemStack head=new ItemStack(Material.SKULL_ITEM);
-        ItemMeta skull=head.getItemMeta();
+        ItemStack head = new ItemStack(Material.SKULL_ITEM);
+        ItemMeta skull = head.getItemMeta();
         skull.setDisplayName("Benutzerinterface");
         head.setItemMeta(skull);
-        p.getInventory().setItem(8,head);
+        p.getInventory().setItem(8, head);
 
         PrintWriter pWriter = null;
         try {
             //create Char txt
-            File inv = new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+".txt");
+            File inv = new File("plugins/RPG/Chars/" + player + "/" + name + "/" + name + ".txt");
             inv.getParentFile().mkdirs();
             pWriter = new PrintWriter(new BufferedWriter(new FileWriter(inv)));
             pWriter.println(player);
@@ -97,11 +100,11 @@ public class Archer extends CharPlayer implements Listener{
             YamlConfiguration c = new YamlConfiguration();
             c.set("inventory.armor", p.getInventory().getArmorContents());
             c.set("inventory.content", p.getInventory().getContents());
-            c.save(new File("plugins/RPG/Chars/"+player+"/"+name+"/"+name+"_inv.yml"));
+            c.save(new File("plugins/RPG/Chars/" + player + "/" + name + "/" + name + "_inv.yml"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {
-            if (pWriter != null){
+            if (pWriter != null) {
                 pWriter.flush();
                 pWriter.close();
             }

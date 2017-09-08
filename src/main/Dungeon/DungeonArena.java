@@ -13,8 +13,8 @@ public class DungeonArena {
     ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
 
     public DungeonArena(String name, Location spawn) {
-        this.name=name;
-        this.spawn=spawn;
+        this.name = name;
+        this.spawn = spawn;
     }
 
     public void addMob(String mobName, Location locMob) {

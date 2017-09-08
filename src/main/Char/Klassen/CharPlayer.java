@@ -1,7 +1,6 @@
 package main.Char.Klassen;
 
 
-
 import javafx.event.EventHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,7 +14,7 @@ import java.util.UUID;
 /**
  * Created by Fabian on 19.07.2017.
  */
-public class CharPlayer{
+public class CharPlayer {
     protected UUID player;
     protected String name;
     protected String klasse;
@@ -23,13 +22,13 @@ public class CharPlayer{
     protected int level;
     protected int xp;
 
-    public CharPlayer(UUID player, String name, String klasse){
-        this.player=player;
-        this.name=name;
-        this.money=0;
-        this.level=1;
-        this.xp=0;
-        this.klasse=klasse;
+    public CharPlayer(UUID player, String name, String klasse) {
+        this.player = player;
+        this.name = name;
+        this.money = 0;
+        this.level = 1;
+        this.xp = 0;
+        this.klasse = klasse;
 
     }
 
