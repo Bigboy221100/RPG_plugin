@@ -41,7 +41,11 @@ public class Dungeon implements CommandExecutor{
             }
             if(args.length == 3) {
                 if(args[0].equalsIgnoreCase("mob")) {
-
+                    for(DungeonArena a : dungeonArenas) {
+                        if(a.name.equalsIgnoreCase(args[2])) {
+                            a.addMob(args[1], p.getLocation());
+                        }
+                    }
                 }
                 if(args[0].equalsIgnoreCase("boss")) {
 
