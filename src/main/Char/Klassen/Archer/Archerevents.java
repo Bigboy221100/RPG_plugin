@@ -100,8 +100,8 @@ public class Archerevents implements Listener{
     @EventHandler
     public void onPlayerUse(PlayerInteractEvent e){
         Player p=e.getPlayer();
-        if(e.getAction() == Action.RIGHT_CLICK_AIR | e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            if (e.getMaterial().equals(Material.SLIME_BALL)) {
+        if(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (e.getMaterial().equals(Material.SKULL_ITEM)) {
                     Inventory inv = p.getServer().createInventory(null, 27, "Benutzerinterface");
                     ItemStack bow = new ItemStack(Material.BOW);
                     ItemMeta metabow = bow.getItemMeta();
