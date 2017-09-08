@@ -1,4 +1,4 @@
-package main.Char.charcommands;
+package main.Money;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,10 +23,6 @@ public class money implements CommandExecutor{
                         String charname[]=p.getDisplayName().split("\\s+");
                         FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + charname[1] + "/" + charname[1] + ".txt");
                         BufferedReader reader = new BufferedReader(fr);
-                        for(int i=0;i<3;i++) {
-                            reader.readLine();
-                        }
-                        p.sendMessage(reader.readLine());
                     }catch (IOException e){
                         p.sendMessage("Fehler");
                     }
