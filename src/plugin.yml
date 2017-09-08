@@ -27,4 +27,4 @@ commands:
      minigame:
           description: Erzeugt ein Minigame
      dungeon:
-          description: Erzeugt einen dungeons
+          description: Erzeugt einen dungeon
