@@ -1,11 +1,8 @@
 package main.Minigame;
 
+import com.mysql.jdbc.Buffer;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-
-import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,6 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
     public class Minigame implements CommandExecutor, Listener {
@@ -21,10 +24,6 @@ import java.util.ArrayList;
         int id1;
         public ArrayList<MinigameArena> minigameArenas = new ArrayList<MinigameArena>(0);
         public ArrayList<MinigameQueue> minigameQueues = new ArrayList<MinigameQueue>(0);
-
-        public Minigame() {
-            queueTesten();
-        }
 
         public Minigame(Plugin pl) {
             this.pl = pl;
@@ -47,7 +46,10 @@ import java.util.ArrayList;
                             }
                         }
                         if (istNichtVorhanden) {
-                            minigameArenas.add(new MinigameArena(args[1]));
+                            minigameArenas.add(new MinigameArena(args[1], pl));
+                            try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigames.txt"),Charset.forName("UTF-8"));) {
+                                writer.write(args[1] + " 0" + " 0");
+                            } catch (IOException e) {}
                         }
                         p.sendMessage(minigameArenas.size() + "");
                     }
@@ -79,7 +81,24 @@ import java.util.ArrayList;
                             for (MinigameArena a : minigameArenas) {
                                 if (args[2].equalsIgnoreCase(a.arenaName)) {
                                     a.setLocation1(p.getLocation());
+                                    StringBuilder builder=new StringBuilder();
+                                    try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigames.txt"),Charset.forName("UTF-8"));) {
+                                        String line="";
+                                        while((line=reader.readLine()) != null) {
+                                            String[]test=line.split(" ");
+                                            if(args[2].equalsIgnoreCase(test[0])) {
+                                                line = test[0] + " " + p.getLocation() + " " + test[2];
+                                                Bukkit.broadcastMessage(line);
+                                            }
+                                            builder.append(line);
+                                            builder.append(System.lineSeparator());
+                                        }
+                                    } catch (IOException e) {}
+                                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigames.txt"),Charset.forName("UTF-8"));) {
+                                        writer.write(builder.toString());
+                                    } catch (IOException ev) {}
                                     p.sendMessage("Punkt 1 erstellt");
+                                    break;
                                 }
                             }
                         }
@@ -87,7 +106,24 @@ import java.util.ArrayList;
                             for (MinigameArena a : minigameArenas) {
                                 if (args[2].equalsIgnoreCase(a.arenaName)) {
                                     a.setLocation2(p.getLocation());
+                                    StringBuilder builder=new StringBuilder();
+                                    try (BufferedReader reader = Files.newBufferedReader(Paths.get("plugins/RPG/Minigame/minigames.txt"),Charset.forName("UTF-8"));) {
+                                        String line="";
+                                        while((line=reader.readLine()) != null) {
+                                            String[]test=line.split(" ");
+                                            if(args[2].equalsIgnoreCase(test[0])) {
+                                                line = test[0] + " " + test[1] + " " + p.getLocation();
+                                                Bukkit.broadcastMessage(line);
+                                            }
+                                            builder.append(line);
+                                            builder.append(System.lineSeparator());
+                                        }
+                                    } catch (IOException e) {}
+                                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("plugins/RPG/Minigame/minigames.txt"),Charset.forName("UTF-8"));) {
+                                        writer.write(builder.toString());
+                                    } catch (IOException ev) {}
                                     p.sendMessage("Punkt 2 erstellt");
+                                    break;
                                 }
                             }
                         }
@@ -96,6 +132,7 @@ import java.util.ArrayList;
                 //Anfrage senden
                 if (args.length == 3) {
                     if (args[0].equalsIgnoreCase("challenge")) {
+                        Bukkit.broadcastMessage("test");
                         boolean isGegnerOnline = false;
                         for (Player onlinePlayers : Bukkit.getServer().getOnlinePlayers()) {
                             if (onlinePlayers.getName().equalsIgnoreCase(args[1])) {

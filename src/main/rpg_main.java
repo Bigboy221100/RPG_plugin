@@ -2,7 +2,9 @@ package main;
 
 import main.Char.Klassen.Archer.Archerevents;
 import main.Char.charcommands.*;
+import main.Dungeon.Dungeon;
 import main.Minigame.Minigame;
+import main.Money.money;
 import main.text.info.commands;
 import main.text.info.version;
 import org.bukkit.Bukkit;
@@ -12,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Created by Fabian on 19.07.2017.
  */
 public class rpg_main extends JavaPlugin {
+
     public void onEnable(){
         //Commands
         this.getCommand("createnewcharacter").setExecutor(new createnewcharacter());
@@ -27,6 +30,7 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("rpg version").setExecutor(new version());
 
         this.getCommand("minigame").setExecutor(new Minigame(this));
+        this.getCommand("dungeon").setExecutor(new Dungeon(this));
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(),this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(),this);
