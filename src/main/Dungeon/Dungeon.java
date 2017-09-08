@@ -44,6 +44,7 @@ public class Dungeon implements CommandExecutor{
                     for(DungeonArena a : dungeonArenas) {
                         if(a.name.equalsIgnoreCase(args[2])) {
                             a.addMob(args[1], p.getLocation());
+                            Bukkit.broadcastMessage("Mob " + args[1] + "wurde bei" + p.getLocation() + " erstellt!");
                         }
                     }
                 }
