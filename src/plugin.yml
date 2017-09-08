@@ -26,3 +26,5 @@ commands:
           description: Zeigt Plugin Version an
      minigame:
           description: Erzeugt ein Minigame
+     dungeon:
+          description: Erzeugt einen dungeon
