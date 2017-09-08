@@ -39,8 +39,13 @@ public class Dungeon implements CommandExecutor{
                     }
                 }
             }
-            if(args.length == ) {
+            if(args.length == 3) {
+                if(args[0].equalsIgnoreCase("mob")) {
 
+                }
+                if(args[0].equalsIgnoreCase("boss")) {
+
+                }
             }
         }
 
