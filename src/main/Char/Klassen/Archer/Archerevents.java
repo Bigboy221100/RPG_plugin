@@ -114,7 +114,7 @@ public class Archerevents implements Listener {
             }
         }
     }
-
+    @EventHandler
     public void onPlayerInvItemClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
         if (e.getCurrentItem() == new ItemStack(Material.BOW)) {
