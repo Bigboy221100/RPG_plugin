@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Dungeon implements CommandExecutor{
     Plugin pl;
+    int dungeonid=0;
     ArrayList<DungeonArena> dungeonArenas = new ArrayList<DungeonArena>(0);
 
     public Dungeon(Plugin pl) {
@@ -26,7 +27,8 @@ public class Dungeon implements CommandExecutor{
             Player p = (Player) commandSender;
             if(args.length == 2) {
                 if(args[0].equalsIgnoreCase("erstellen")) {
-                    dungeonArenas.add(new DungeonArena(args[1], p.getLocation()));
+                    dungeonArenas.add(new DungeonArena(args[1], p.getLocation(), pl, dungeonid));
+                    dungeonid++;
                     Bukkit.broadcastMessage("Dungeon erstellt");
                 }
                 if(args[0].equalsIgnoreCase("löschen")) {
@@ -39,17 +41,27 @@ public class Dungeon implements CommandExecutor{
                     }
                 }
             }
-            if(args.length == 3) {
+            if(args.length == 4) {
                 if(args[0].equalsIgnoreCase("mob")) {
                     for(DungeonArena a : dungeonArenas) {
-                        if(a.name.equalsIgnoreCase(args[2])) {
-                            a.addMob(args[1], p.getLocation());
+                        if(a.name.equalsIgnoreCase(args[3])) {
+                            a.addMob(args[1], p.getLocation(), args[2]);
                             Bukkit.broadcastMessage("Mob " + args[1] + "wurde bei" + p.getLocation() + " erstellt!");
                         }
                     }
                 }
                 if(args[0].equalsIgnoreCase("boss")) {
 
+                }
+            }
+            if(args.length == 2) {
+                if(args[0].equalsIgnoreCase("starten")) {
+                    for(DungeonArena a : dungeonArenas) {
+                        if(a.name.equalsIgnoreCase(args[1])) {
+                            a.start(pl);
+                            break;
+                        }
+                    }
                 }
             }
         }
