@@ -30,6 +30,7 @@ public class DungeonArena implements Listener{
         this.name=name;
         this.spawn=spawn;
         this.dungeonid=dungeonid;
+
         this.pl = pl;
     }
 
