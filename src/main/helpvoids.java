@@ -115,11 +115,11 @@ public class helpvoids {
         }
     }
 
-    public int getcharacterlevel(String displayname) {
+    public int getcharacterlevel(String displayname, Player p) {
+        String help[] = displayname.split("\\s+");
         int level = 0;
-        Player p = Bukkit.getServer().getPlayer(displayname);
         try {
-            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + displayname + "/" + displayname + ".txt");
+            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + help[1] + "/" + help[1] + ".txt");
             BufferedReader reader = new BufferedReader(fr);
             for (int i = 0; i < 4; i++) {
                 reader.readLine();
@@ -132,18 +132,16 @@ public class helpvoids {
         return level;
     }
 
-    public void setcharacterlevel(String displayname, int level) {
-        Player p = Bukkit.getServer().getPlayer(displayname);
+    public void setcharacterlevel(String displayname,Player p, int level) {
+        String help[] = displayname.split("\\s+");
         try {
-            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + displayname + "/" + displayname + ".txt");
+            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + help[1] + "/" + help[1] + ".txt");
             BufferedReader reader = new BufferedReader(fr);
             String UUID = reader.readLine();
             UUID uuidr = java.util.UUID.fromString(UUID);
             String name = reader.readLine();
             String klasse = reader.readLine();
             int moneyr = Integer.parseInt(reader.readLine());
-            String levelr = reader.readLine();
-            int levelrr = Integer.parseInt(levelr);
             String xp = reader.readLine();
             int xpr = Integer.parseInt(xp);
             PrintWriter pWriter = null;
@@ -154,7 +152,7 @@ public class helpvoids {
             pWriter.println(name);
             pWriter.println(klasse);
             pWriter.println(moneyr);
-            pWriter.println(levelrr);
+            pWriter.println(level);
             pWriter.println(xpr);
         } catch (IOException e) {
             System.out.println("Fehler");
