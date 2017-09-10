@@ -13,16 +13,16 @@ import org.bukkit.entity.Player;
 public class logoutcharacter implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("logoutcharacter")){
-            if(sender instanceof Player){
-                Player p=(Player)sender;
-                if(p.hasPermission("rpg.character.logout")){
-                    CharPlayer charPlayer=new Normal(p);
+        if (cmd.getName().equalsIgnoreCase("logoutcharacter")) {
+            if (sender instanceof Player) {
+                Player p = (Player) sender;
+                if (p.hasPermission("rpg.character.logout")) {
+                    CharPlayer charPlayer = new Normal(p);
                     p.sendMessage("Du wurdest ausgelogt");
-                }else{
+                } else {
                     p.sendMessage("Du hast dafür keine Berechtigungen");
                 }
-            }else{
+            } else {
                 System.out.println("Nur Spieler können diesen Befehl ausführen");
             }
         }

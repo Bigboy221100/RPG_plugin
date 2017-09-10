@@ -13,11 +13,11 @@ public class MinigameQueue {
     public MinigameQueue(Player p1, Player p2, String arena) {
         this.p1 = p1;
         this.p2 = p2;
-        this.arena=arena;
-        istAngenommen=false;
+        this.arena = arena;
+        istAngenommen = false;
     }
 
-    public void annehmen(){
-        istAngenommen=true;
+    public void annehmen() {
+        istAngenommen = true;
     }
 }

@@ -15,20 +15,20 @@ import java.io.File;
 public class listchars implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("listcharacter")){
-            if(sender instanceof Player){
-                Player p=(Player)sender;
-                if(p.hasPermission("rpg.character.list")){
-                    File maindir = new File("plugins/RPG/Chars/"+p.getUniqueId());
+        if (cmd.getName().equalsIgnoreCase("listcharacter")) {
+            if (sender instanceof Player) {
+                Player p = (Player) sender;
+                if (p.hasPermission("rpg.character.list")) {
+                    File maindir = new File("plugins/RPG/Chars/" + p.getUniqueId());
                     String files[] = maindir.list();
                     p.sendMessage("Ihre Character lauten");
-                    for(int i=0;i<files.length;i++){
+                    for (int i = 0; i < files.length; i++) {
                         p.sendMessage(files[i]);
                     }
-                }else{
+                } else {
                     p.sendMessage("Du hast dafür keine Berechtigungen");
                 }
-            }else{
+            } else {
                 System.out.println("Nur Spieler können diesen Befehl ausführen");
             }
         }

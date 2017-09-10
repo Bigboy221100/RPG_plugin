@@ -12,8 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * Created by maxim on 18.08.2017.
  */
-public class MinigameNoDamage implements Listener{
-    Player p1,p2;
+public class MinigameNoDamage implements Listener {
+    Player p1, p2;
     int id1;
     Plugin pl;
 
@@ -27,10 +27,11 @@ public class MinigameNoDamage implements Listener{
     @EventHandler
     public void NoDamage(EntityDamageEvent e) {
         id1 = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
-            int i=20;
+            int i = 20;
+
             @Override
             public void run() {
-                if(e.getEntity() instanceof Player) {
+                if (e.getEntity() instanceof Player) {
                     Player p = (Player) e;
                     if (p.getUniqueId() == p1.getUniqueId() || p.getUniqueId() == p2.getUniqueId()) {
                         if (e.getCause() != EntityDamageEvent.DamageCause.VOID) {
@@ -38,7 +39,7 @@ public class MinigameNoDamage implements Listener{
                         }
                     }
                 }
-                if(i==0) {
+                if (i == 0) {
                     Bukkit.getScheduler().cancelTask(id1);
                 }
                 i--;

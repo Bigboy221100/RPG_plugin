@@ -64,15 +64,6 @@ public class Archerevents implements Listener {
         }
     }
 
-    public void bowupgrades(Player p) {
-        Inventory inv = p.getServer().createInventory(null, 27, "Upgraden sie ihren Bogen");
-        ItemStack power = new ItemStack(Material.ENCHANTED_BOOK);
-        ItemMeta metapower = power.getItemMeta();
-        metapower.setDisplayName("Power");
-        power.setItemMeta(metapower);
-        inv.setItem(12, power);
-        p.openInventory(inv);
-    }
 
     @EventHandler
     public void repairWeapons(EntityDamageByEntityEvent e) {
@@ -109,17 +100,34 @@ public class Archerevents implements Listener {
                 ItemMeta metabow = bow.getItemMeta();
                 metabow.setDisplayName("Bow upgraden");
                 bow.setItemMeta(metabow);
-                inv.setItem(10,bow);
+                inv.setItem(10, bow);
                 p.openInventory(inv);
             }
         }
     }
+
     @EventHandler
     public void onPlayerInvItemClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if (e.getCurrentItem() == new ItemStack(Material.BOW)) {
-
+        helpvoids help=new helpvoids();
+        if (e.getSlot() == 10) {
+            if(help.getcharacterlevel(p.getDisplayName())==5){
+                bowupgrades(p);
+            }else{
+                p.sendMessage("Ihr Bogen ist noch nicht zum Upgraden bereit");
+            }
         }
+    }
+
+
+    public void bowupgrades(Player p) {
+        Inventory inv = p.getServer().createInventory(null, 27, "Upgraden sie ihren Bogen");
+        ItemStack power = new ItemStack(Material.ENCHANTED_BOOK);
+        ItemMeta metapower = power.getItemMeta();
+        metapower.setDisplayName("Power");
+        power.setItemMeta(metapower);
+        inv.setItem(12, power);
+        p.openInventory(inv);
     }
 
 }

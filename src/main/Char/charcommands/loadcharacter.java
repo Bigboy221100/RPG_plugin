@@ -16,41 +16,41 @@ import java.util.UUID;
 public class loadcharacter implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("loadcharacter")){
-            if(sender instanceof Player){
-                Player p=(Player)sender;
-                if(p.hasPermission("rpg.character.load")){
-                    if(args.length==1) {
+        if (cmd.getName().equalsIgnoreCase("loadcharacter")) {
+            if (sender instanceof Player) {
+                Player p = (Player) sender;
+                if (p.hasPermission("rpg.character.load")) {
+                    if (args.length == 1) {
                         try {
-                            UUID player=p.getUniqueId();
-                            FileReader fr = new FileReader("plugins/RPG/Chars/"+p.getUniqueId()+"/"+args[0]+"/"+args[0]+".txt");
+                            UUID player = p.getUniqueId();
+                            FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + args[0] + "/" + args[0] + ".txt");
                             BufferedReader reader = new BufferedReader(fr);
-                            String UUID=reader.readLine();
-                            UUID uuidr= java.util.UUID.fromString(UUID);
-                            String name=reader.readLine();
-                            String klasse=reader.readLine();
-                            int money=Integer.parseInt(reader.readLine());
-                            String level=reader.readLine();
-                            int levelr=Integer.parseInt(level);
-                            String xp=reader.readLine();
-                            int xpr= Integer.parseInt(xp);
-                            if(player.equals(uuidr)) {
-                                CharPlayer charPlayer = new Archer(uuidr, name, klasse, money,levelr, xpr);
+                            String UUID = reader.readLine();
+                            UUID uuidr = java.util.UUID.fromString(UUID);
+                            String name = reader.readLine();
+                            String klasse = reader.readLine();
+                            int money = Integer.parseInt(reader.readLine());
+                            String level = reader.readLine();
+                            int levelr = Integer.parseInt(level);
+                            String xp = reader.readLine();
+                            int xpr = Integer.parseInt(xp);
+                            if (player.equals(uuidr)) {
+                                CharPlayer charPlayer = new Archer(uuidr, name, klasse, money, levelr, xpr);
                                 p.sendMessage("Sie haben sich erfolgreich in ihren Level " + levelr + " " + klasse + " " + name + " eingeloggt");
-                            }else{
+                            } else {
                                 p.sendMessage("Dieser Character gehört ihnen nicht");
                             }
-                        }catch (FileNotFoundException e){
+                        } catch (FileNotFoundException e) {
                             p.sendMessage("Diesen Character gibt es nicht");
                             System.out.println("Diese Datei gibt es nicht");
-                        }catch (IOException a){
+                        } catch (IOException a) {
                             System.out.println("Fehler");
                         }
                     }
-                }else{
+                } else {
                     p.sendMessage("Du hast dafür keine Berechtigungen");
                 }
-            }else{
+            } else {
                 System.out.println("Nur Spieler können diesen Befehl ausführen");
             }
         }

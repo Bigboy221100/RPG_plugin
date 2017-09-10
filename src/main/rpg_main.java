@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class rpg_main extends JavaPlugin {
 
-    public void onEnable(){
+    public void onEnable() {
         //Commands
         this.getCommand("createnewcharacter").setExecutor(new createnewcharacter());
         this.getCommand("loadcharacter").setExecutor(new loadcharacter());
@@ -32,16 +32,16 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("minigame").setExecutor(new Minigame(this));
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
 
-        Bukkit.getPluginManager().registerEvents(new PlayerEvents(),this);
-        Bukkit.getPluginManager().registerEvents(new Archerevents(),this);
+        Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
 
 
-        Bukkit.getWorld("world").setGameRuleValue("keepInventory","true");
+        Bukkit.getWorld("world").setGameRuleValue("keepInventory", "true");
 
         System.out.println("Rpg enabled");
     }
 
-    public void onDisable(){
+    public void onDisable() {
         System.out.println("Rpg disabled");
     }
 

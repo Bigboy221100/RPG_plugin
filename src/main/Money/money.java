@@ -12,18 +12,18 @@ import java.io.IOException;
 /**
  * Created by Fabian on 01.08.2017.
  */
-public class money implements CommandExecutor{
+public class money implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("money")){
-            if(sender instanceof Player){
-                Player p=(Player)sender;
-                if(p.hasPermission("rpg.money.credit")){
+        if (cmd.getName().equalsIgnoreCase("money")) {
+            if (sender instanceof Player) {
+                Player p = (Player) sender;
+                if (p.hasPermission("rpg.money.credit")) {
                     try {
-                        String charname[]=p.getDisplayName().split("\\s+");
+                        String charname[] = p.getDisplayName().split("\\s+");
                         FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + charname[1] + "/" + charname[1] + ".txt");
                         BufferedReader reader = new BufferedReader(fr);
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         p.sendMessage("Fehler");
                     }
                 }

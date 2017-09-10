@@ -17,30 +17,30 @@ import java.util.UUID;
 /**
  * Created by user on 28.07.2017.
  */
-public class Normal extends CharPlayer{
-    public Normal(Player p){
-        this.player=p.getUniqueId();
-        this.name=p.getName();
-        this.klasse="Normal";
-        this.level=0;
-        this.xp=0;
+public class Normal extends CharPlayer {
+    public Normal(Player p) {
+        this.player = p.getUniqueId();
+        this.name = p.getName();
+        this.klasse = "Normal";
+        this.level = 0;
+        this.xp = 0;
         try {
-            String charname[]=p.getDisplayName().split("\\s+");
-            if(name.equalsIgnoreCase(Bukkit.getPlayer(player).getDisplayName())) {
+            String charname[] = p.getDisplayName().split("\\s+");
+            if (name.equalsIgnoreCase(Bukkit.getPlayer(player).getDisplayName())) {
 
-            }else{
+            } else {
                 YamlConfiguration c = new YamlConfiguration();
                 c.set("inventory.armor", p.getInventory().getArmorContents());
                 c.set("inventory.content", p.getInventory().getContents());
                 c.save(new File("plugins/RPG/Chars/" + player + "/" + charname[1] + "/" + charname[1] + "_inv.yml"));
             }
             p.getInventory().clear();
-            p.setDisplayName("§1[§7Normal§1]§2 " + name+"§f");
-            p.setPlayerListName("§1[§7Normal§1]§2 " + name+"§f");
+            p.setDisplayName("§1[§7Normal§1]§2 " + name + "§f");
+            p.setPlayerListName("§1[§7Normal§1]§2 " + name + "§f");
             p.setLevel(0);
             p.setExp(0);
             p.setGameMode(GameMode.ADVENTURE);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Fehler");
         }
     }
