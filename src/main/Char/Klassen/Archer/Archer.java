@@ -61,6 +61,8 @@ public class Archer extends CharPlayer implements Listener {
         p.setLevel(this.level);
         p.setExp(xp);
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
+        p.setCustomName("[Archer] " + name);
+        p.setCustomNameVisible(true);
         p.setPlayerListName("§1[§6Archer§1]§2 " + name);
     }
 
@@ -70,7 +72,8 @@ public class Archer extends CharPlayer implements Listener {
         p.getInventory().clear();
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
         p.setPlayerListName("§1[§6Archer§1]§2 " + name);
-        p.setCustomName("§1[§6Archer§1]§2 " + name);
+        p.setCustomName("[Archer] " + name);
+        p.setCustomNameVisible(true);
         p.getInventory().addItem(new ItemStack(Material.BOW));
         for (int i = 0; i < 16; i++) {
             p.getInventory().addItem(new ItemStack(Material.ARROW));

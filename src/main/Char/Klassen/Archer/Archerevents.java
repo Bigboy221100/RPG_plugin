@@ -124,11 +124,32 @@ public class Archerevents implements Listener {
     public void bowupgrades(Player p) {
         Inventory inv = p.getServer().createInventory(null, 54, "Upgraden sie ihren Bogen");
 
-        ItemStack power = new ItemStack(Material.ENCHANTED_BOOK);
-        ItemMeta metapower = power.getItemMeta();
-        metapower.setDisplayName("Power");
-        power.setItemMeta(metapower);
-        inv.setItem(3, power);
+        ItemStack power[] = new ItemStack[5];
+        for(int i=0;i<5;i++){
+            power[i]=new ItemStack(Material.ENCHANTED_BOOK);
+            ItemMeta metapower = power[i].getItemMeta();
+            metapower.setDisplayName("Power");
+            power[i].setItemMeta(metapower);
+            inv.setItem(2+(i*9), power[i]);
+        }
+        ItemStack punch[] = new ItemStack[5];
+        for(int i=0;i<5;i++){
+            punch[i]=new ItemStack(Material.ENCHANTED_BOOK);
+            ItemMeta metapunch = power[i].getItemMeta();
+            metapunch.setDisplayName("Punch");
+            punch[i].setItemMeta(metapunch);
+            inv.setItem(4+(i*9), punch[i]);
+        }
+        ItemStack flame[] = new ItemStack[2];
+        for(int i=0;i<2;i++){
+            flame[i]=new ItemStack(Material.ENCHANTED_BOOK);
+            ItemMeta metaflame = power[i].getItemMeta();
+            metaflame.setDisplayName("flame");
+            flame[i].setItemMeta(metaflame);
+        }
+        inv.setItem(33, flame[0]);
+        inv.setItem(42, flame[0]);
+
 
         ItemStack skillpoints = new ItemStack(Material.NETHER_STAR,(p.getLevel()/5));
         ItemMeta metaskill=skillpoints.getItemMeta();
