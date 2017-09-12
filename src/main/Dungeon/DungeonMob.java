@@ -1,6 +1,5 @@
 package main.Dungeon;
 
-import net.minecraft.server.v1_12_R1.EnumCreatureType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
@@ -14,11 +13,13 @@ import org.bukkit.entity.Zombie;
 public class DungeonMob {
     String mobName, type;
     Location locMob;
+    String dungeonName;
 
-    public DungeonMob(String mobName, Location locMob, String type) {
+    public DungeonMob(String mobName, Location locMob, String type, String dungeonName) {
         this.mobName = mobName;
         this.locMob = locMob;
         this.type = type;
+        this.dungeonName = dungeonName;
     }
 
     public void spawnMob() {

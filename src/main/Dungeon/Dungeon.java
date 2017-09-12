@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by maxim on 08.08.2017.
@@ -16,9 +17,12 @@ public class Dungeon implements CommandExecutor{
     Plugin pl;
     int dungeonid=0;
     ArrayList<DungeonArena> dungeonArenas = new ArrayList<DungeonArena>(0);
+    ArrayList<DungeonQueuePlayer> dungeonQueuePlayers = new ArrayList<DungeonQueuePlayer>(0);
+    ArrayList<DungeonQueue> dungeonQueues = new ArrayList<DungeonQueue>(0);
 
     public Dungeon(Plugin pl) {
         this.pl = pl;
+        queueTester();
     }
 
     @Override
@@ -55,11 +59,20 @@ public class Dungeon implements CommandExecutor{
                 }
             }
             if(args.length == 2) {
-                if(args[0].equalsIgnoreCase("starten")) {
+                if(args[0].equalsIgnoreCase("beenden")) {
                     for(DungeonArena a : dungeonArenas) {
                         if(a.name.equalsIgnoreCase(args[1])) {
-                            a.start(pl);
+                            a.beenden();
                             break;
+                        }
+                    }
+                }
+            }
+            if(args.length == 3) {
+                if(args[0].equalsIgnoreCase("beitreten")) {
+                    for(DungeonArena a: dungeonArenas) {
+                        if(a.name.equalsIgnoreCase(args[2])) {
+                            dungeonQueuePlayers.add(new DungeonQueuePlayer(a.name, p.getUniqueId()));
                         }
                     }
                 }
@@ -67,5 +80,37 @@ public class Dungeon implements CommandExecutor{
         }
 
         return false;
+    }
+
+    public void queueTester() {
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
+            int dungeonsize=2;
+            @Override
+            public void run() {
+                if(dungeonQueuePlayers.size() >= dungeonsize) {
+                    Player[]players = new Player[dungeonsize];
+                    String dungeonname="";
+                    for(int i=0; i<dungeonsize; i++) {
+                        players[i]=Bukkit.getServer().getPlayer(dungeonQueuePlayers.get(i).uuid);
+                    }
+                    dungeonname = dungeonQueuePlayers.get(0).dungeonname;
+                    dungeonQueues.add(new DungeonQueue(players, dungeonname));
+                    for(int i=0; i<dungeonsize; i++) {
+                        dungeonQueuePlayers.remove(i);
+                    }
+                }
+                if(dungeonQueues.size() > 0) {
+                    for(DungeonArena a: dungeonArenas) {
+                        if(a.istBeendet) {
+                            for(DungeonQueue q: dungeonQueues) {
+                                if(a.name.equalsIgnoreCase(q.dungeonname)) {
+                                    a.start(pl, q);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },20,20);
     }
 }
