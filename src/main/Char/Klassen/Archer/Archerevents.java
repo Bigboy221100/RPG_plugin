@@ -148,7 +148,7 @@ public class Archerevents implements Listener {
             flame[i].setItemMeta(metaflame);
         }
         inv.setItem(33, flame[0]);
-        inv.setItem(42, flame[0]);
+        inv.setItem(42, flame[1]);
 
 
         ItemStack skillpoints = new ItemStack(Material.NETHER_STAR,(p.getLevel()/5));
