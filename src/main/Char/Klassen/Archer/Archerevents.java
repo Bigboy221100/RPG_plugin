@@ -23,7 +23,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  * Created by Fabian on 02.08.2017.
  */
 public class Archerevents implements Listener {
-
+    boolean bowupgrade=false;
     @EventHandler
     public void onLevel(PlayerLevelChangeEvent e) {
         Player p = e.getPlayer();
@@ -110,10 +110,10 @@ public class Archerevents implements Listener {
     @EventHandler
     public void onPlayerInvItemClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        helpvoids help=new helpvoids();
         if (e.getSlot() == 10) {
             if(p.getLevel()>=5){
                 bowupgrades(p);
+                bowupgrade=true;
             }else{
                 p.sendMessage("Ihr Bogen ist noch nicht zum Upgraden bereit");
             }
@@ -126,7 +126,7 @@ public class Archerevents implements Listener {
 
         ItemStack power[] = new ItemStack[5];
         for(int i=0;i<5;i++){
-            power[i]=new ItemStack(Material.ENCHANTED_BOOK);
+            power[i]=new ItemStack(Material.BOOK);
             ItemMeta metapower = power[i].getItemMeta();
             metapower.setDisplayName("Power");
             power[i].setItemMeta(metapower);
@@ -134,7 +134,7 @@ public class Archerevents implements Listener {
         }
         ItemStack punch[] = new ItemStack[5];
         for(int i=0;i<5;i++){
-            punch[i]=new ItemStack(Material.ENCHANTED_BOOK);
+            punch[i]=new ItemStack(Material.BOOK);
             ItemMeta metapunch = power[i].getItemMeta();
             metapunch.setDisplayName("Punch");
             punch[i].setItemMeta(metapunch);
@@ -142,7 +142,7 @@ public class Archerevents implements Listener {
         }
         ItemStack flame[] = new ItemStack[2];
         for(int i=0;i<2;i++){
-            flame[i]=new ItemStack(Material.ENCHANTED_BOOK);
+            flame[i]=new ItemStack(Material.BOOK);
             ItemMeta metaflame = power[i].getItemMeta();
             metaflame.setDisplayName("flame");
             flame[i].setItemMeta(metaflame);
