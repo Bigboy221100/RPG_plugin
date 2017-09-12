@@ -112,7 +112,7 @@ public class Archerevents implements Listener {
         Player p = (Player) e.getWhoClicked();
         helpvoids help=new helpvoids();
         if (e.getSlot() == 10) {
-            if(p.getLevel()==5){
+            if(p.getLevel()>=5){
                 bowupgrades(p);
             }else{
                 p.sendMessage("Ihr Bogen ist noch nicht zum Upgraden bereit");
@@ -122,12 +122,20 @@ public class Archerevents implements Listener {
 
 
     public void bowupgrades(Player p) {
-        Inventory inv = p.getServer().createInventory(null, 27, "Upgraden sie ihren Bogen");
+        Inventory inv = p.getServer().createInventory(null, 54, "Upgraden sie ihren Bogen");
+
         ItemStack power = new ItemStack(Material.ENCHANTED_BOOK);
         ItemMeta metapower = power.getItemMeta();
         metapower.setDisplayName("Power");
         power.setItemMeta(metapower);
-        inv.setItem(12, power);
+        inv.setItem(3, power);
+
+        ItemStack skillpoints = new ItemStack(Material.NETHER_STAR,(p.getLevel()/5));
+        ItemMeta metaskill=skillpoints.getItemMeta();
+        metaskill.setDisplayName("Skillpoints");
+        skillpoints.setItemMeta(metaskill);
+        inv.setItem(53,skillpoints);
+
         p.openInventory(inv);
     }
 
