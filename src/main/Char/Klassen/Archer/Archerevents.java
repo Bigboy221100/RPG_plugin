@@ -3,6 +3,7 @@ package main.Char.Klassen.Archer;
 import main.helpvoids;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -109,7 +110,7 @@ public class Archerevents implements Listener {
     @EventHandler
     public void onPlayerInvItemClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        p.sendMessage(e.getSlot()+"");
+
         Inventory inv = p.getServer().createInventory(null, 54, "Upgraden sie ihren Bogen");
         ItemStack power[] = new ItemStack[5];
         ItemStack punch[] = new ItemStack[5];
@@ -160,12 +161,20 @@ public class Archerevents implements Listener {
                 }
             }
         }
-        if (e.getSlot() == 2) {
-            ItemMeta metapower = power[0].getItemMeta();
-            metapower.setDisplayName("Power");
-            power[0].setItemMeta(metapower);
-            inv.setItem(2, power[0]);
-            p.sendMessage("yeah");
+        //Buch auswahl system
+        ItemStack powerm = new ItemStack(Material.BOOK);
+        ItemMeta metapowerm = powerm.getItemMeta();
+        metapowerm.setDisplayName("Power");
+        powerm.setItemMeta(metapowerm);
+        try {
+            if (e.getInventory().getItem(2).equals(powerm)) {
+                if (e.getSlot() == 2) {
+                    power[0].addEnchantment(Enchantment.ARROW_DAMAGE,1);
+                    p.sendMessage("JA");
+                }
+            }
+        }catch(NullPointerException a){
+
         }
     }
 
