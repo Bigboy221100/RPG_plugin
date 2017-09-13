@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.io.BukkitObjectInputStream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +74,7 @@ public class Dungeon implements CommandExecutor{
                     for(DungeonArena a: dungeonArenas) {
                         if(a.name.equalsIgnoreCase(args[2])) {
                             dungeonQueuePlayers.add(new DungeonQueuePlayer(a.name, p.getUniqueId()));
+                            p.sendMessage("Du bist dem Dungeon " + a.name + " beigetreten");
                         }
                     }
                 }
@@ -84,7 +86,7 @@ public class Dungeon implements CommandExecutor{
 
     public void queueTester() {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
-            int dungeonsize=2;
+            int dungeonsize=1;
             @Override
             public void run() {
                 if(dungeonQueuePlayers.size() >= dungeonsize) {
@@ -98,6 +100,7 @@ public class Dungeon implements CommandExecutor{
                     for(int i=0; i<dungeonsize; i++) {
                         dungeonQueuePlayers.remove(i);
                     }
+                    Bukkit.broadcastMessage(dungeonQueuePlayers.size()+"");
                 }
                 if(dungeonQueues.size() > 0) {
                     for(DungeonArena a: dungeonArenas) {
@@ -105,6 +108,9 @@ public class Dungeon implements CommandExecutor{
                             for(DungeonQueue q: dungeonQueues) {
                                 if(a.name.equalsIgnoreCase(q.dungeonname)) {
                                     a.start(pl, q);
+                                    dungeonQueues.remove(q);
+                                    Bukkit.broadcastMessage(dungeonQueues.size()+"");
+                                    break;
                                 }
                             }
                         }

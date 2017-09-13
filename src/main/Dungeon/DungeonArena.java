@@ -27,7 +27,7 @@ public class DungeonArena implements Listener{
     boolean istBeendet=true;
     ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
     int mobsLeft=0;
-    Player[]currentPlayers = new Player[2];
+    Player[]currentPlayers = new Player[1];
     Objective obj;
 
     public DungeonArena(String name, Location spawn, Plugin pl, int dungeonid) {
@@ -35,6 +35,7 @@ public class DungeonArena implements Listener{
         this.spawn=spawn;
         this.dungeonid=dungeonid;
         this.pl = pl;
+        pl.getServer().getPluginManager().registerEvents(this, pl);
     }
 
     public void addMob(String mobName, Location locMob, String type) {
@@ -48,17 +49,19 @@ public class DungeonArena implements Listener{
             for (DungeonMob m : mobs) {
                 m.spawnMob();
             }
-            for(int i=0; i<2; i++) {
+            for(int i=0; i<currentPlayers.length; i++) {
                 currentPlayers[i]=Bukkit.getPlayer(q.uuids.get(i));
             }
             sendScoreboard();
-            pl.getServer().getPluginManager().registerEvents(this, pl);
             istBeendet = false;
         }
     }
 
     public void beenden() {
         istBeendet=true;
+        for(Player players: currentPlayers) {
+            players.setScoreboard(Bukkit.getServer().getScoreboardManager().getNewScoreboard());
+        }
     }
 
     public void sendScoreboard() {
@@ -82,11 +85,10 @@ public class DungeonArena implements Listener{
             for (DungeonMob m : mobs) {
                 if (e.getEntity().getName().equalsIgnoreCase(m.mobName) && !(e.getEntity() instanceof Player && m.dungeonName.equalsIgnoreCase(name))) {
                     Bukkit.broadcastMessage("Ein Mob weniger");
-                    for(int i=0; i <currentPlayers.length; i++) {
+                    for(int i=0;i<currentPlayers.length; i++) {
                         Objective obj = currentPlayers[i].getScoreboard().getObjective("aaa" + dungeonid);
                     }
                     obj.getScoreboard().resetScores("Mobs left: " + mobsLeft);
-
                     mobsLeft--;
                     Score testscore = obj.getScore("Mobs left: " + mobsLeft);
                     testscore.setScore(0);
