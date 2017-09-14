@@ -166,6 +166,9 @@ public class QuestSystem implements CommandExecutor{
 
             if (cmd.getName().equalsIgnoreCase("editTargetMission")) {
                 p.sendMessage("Not implemented yet");
+                p.sendMessage("Fick dich");
+
+
 
             }
 
