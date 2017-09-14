@@ -132,21 +132,22 @@ public class QuestSystem implements CommandExecutor{
             if (cmd.getName().equalsIgnoreCase("printQuest")) {
 
                 if (args.length == 1) {
-                    int questID;
-                    try {
-                        questID = Integer.parseInt(args[0]);
-                    } catch (NumberFormatException nfe) {
-                        p.sendMessage(args[0] + " ist keine valide Questnummer!");
-                        return false;
-                    }
-                    if (questID > quests.size()) {
-                        p.sendMessage(questID + " ist keine gültige Quest!");
-                        return false;
-                    }
 
-                    p.sendMessage(quests.get(questID - 1).toString());
-                    return true;
+                    if(!checkIfNumber(args[0],p)) return false;
 
+                    int questID = Integer.parseInt(args[0]);
+                    if(questID == 0) {
+                        String[] output = new String[quests.size()];
+                        for (int i = 0; i < output.length; i++) {
+                            output[i] = quests.get(i).toString();
+                        }
+                        p.sendMessage(output);
+                    } else {
+                        if (!questExists(args[0], p)) return false;
+                        p.sendMessage(quests.get(questID - 1).toString());
+
+                        return true;
+                    }
                 }
 
             }
