@@ -83,6 +83,7 @@ public class QuestSystem implements CommandExecutor{
                     }
 
                     p.sendMessage(quests.get(quests.size() - 1).toString());
+                    p.sendMessage(quests.size() + "");
                     return true;
                 } else {
                     p.sendMessage("Nicht genügend oder zuviele Argumente, benötigt wird: Quest-Type, Mindestlevel und QuestName");
@@ -130,6 +131,7 @@ public class QuestSystem implements CommandExecutor{
             }
 
             if (cmd.getName().equalsIgnoreCase("printQuest")) {
+                p.sendMessage(quests.size() + "");
 
                 if (args.length == 1) {
 

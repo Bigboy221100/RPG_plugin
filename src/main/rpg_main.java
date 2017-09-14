@@ -34,14 +34,15 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
 
         //QuestSystem
-        this.getCommand("createquest").setExecutor(new QuestSystem(this));
-        this.getCommand("adddescription").setExecutor(new QuestSystem(this));
-        this.getCommand("printquest").setExecutor(new QuestSystem(this));
-        this.getCommand("addmissiontarget").setExecutor(new QuestSystem(this));
-        this.getCommand("editmissiontarget").setExecutor(new QuestSystem(this));
-        this.getCommand("deletemissiontarget").setExecutor(new QuestSystem(this));
-        this.getCommand("spawnquestnpc").setExecutor(new QuestSystem(this));
-        this.getCommand("bindquest").setExecutor(new QuestSystem(this));
+        QuestSystem questSystem = new QuestSystem(this);
+        this.getCommand("createquest").setExecutor(questSystem);
+        this.getCommand("adddescription").setExecutor(questSystem);
+        this.getCommand("printquest").setExecutor(questSystem);
+        this.getCommand("addmissiontarget").setExecutor(questSystem);
+        this.getCommand("editmissiontarget").setExecutor(questSystem);
+        this.getCommand("deletemissiontarget").setExecutor(questSystem);
+        this.getCommand("spawnquestnpc").setExecutor(questSystem);
+        this.getCommand("bindquest").setExecutor(questSystem);
 
 
 
