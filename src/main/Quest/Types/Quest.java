@@ -22,6 +22,10 @@ public class Quest {
         this.description = description;
     }
 
+    public void addMissionTarget(int index,String description){
+        missionTargets.put(index,description);
+    }
+
     @Override
     public String toString() {
         return questName + " ID: " + questID + " LvlRequire: " + levelRequirement + " Reward: " + reward;
