@@ -28,19 +28,19 @@ commands:
           description: Erzeugt ein Minigame
      dungeon:
           description: Erzeugt einen dungeon
-     createQuest:
+     createquest:
           description: Erzeugt eine Quest
-     addDescription:
+     adddescription:
           description: Fügt einer Quest eine Beschreibung zu
-     printQuest:
+     printquest:
           description: Zeigt alle Informationen einer Quest an
-     addMissionTarget:
+     addmissiontarget:
           description: Fügt einer Quest ein Zwischenziel zu
-     editMissionTarget:
+     editmissiontarget:
           description: Editiert ein Zwischenziel
-     deleteMissionTarget:
+     deletemissiontarget:
           description: Löscht ein Zwischenziel
-     spawnQuestNPC:
+     spawnquestnpc:
           description: Spawnt einen NPC der für Quests genutzt werden kann
-     bindQuest:
+     bindquest:
           description: Bindet eine Quest an ein Objekt

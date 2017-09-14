@@ -5,6 +5,7 @@ import main.Char.charcommands.*;
 import main.Dungeon.Dungeon;
 import main.Minigame.Minigame;
 import main.Money.money;
+import main.Quest.QuestSystem;
 import main.text.info.commands;
 import main.text.info.version;
 import org.bukkit.Bukkit;
@@ -31,6 +32,18 @@ public class rpg_main extends JavaPlugin {
 
         this.getCommand("minigame").setExecutor(new Minigame(this));
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
+
+        //QuestSystem
+        this.getCommand("createquest").setExecutor(new QuestSystem(this));
+        this.getCommand("adddescription").setExecutor(new QuestSystem(this));
+        this.getCommand("printquest").setExecutor(new QuestSystem(this));
+        this.getCommand("addmissiontarget").setExecutor(new QuestSystem(this));
+        this.getCommand("editmissiontarget").setExecutor(new QuestSystem(this));
+        this.getCommand("deletemissiontarget").setExecutor(new QuestSystem(this));
+        this.getCommand("spawnquestnpc").setExecutor(new QuestSystem(this));
+        this.getCommand("bindquest").setExecutor(new QuestSystem(this));
+
+
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
