@@ -203,8 +203,17 @@ public class QuestSystem implements CommandExecutor{
 
             if (cmd.getName().equalsIgnoreCase("deleteMissionTarget")) {
 
-                p.sendMessage("Not implemented yet");
-                return true;
+                if(args.length > 2) {
+                    if (!questExists(args[0], p)) return false;
+                    Quest quest = quests.get(Integer.parseInt(args[0]) - 1);
+                    if (!checkIfNumber(args[1], p)) return false;
+                    quest.deleteMissionTarget(Integer.parseInt(args[1]));
+                    quests.set(Integer.parseInt(args[0]) - 1,quest);
+
+                    return true;
+                }
+                p.sendMessage("Nicht genug Argumente. Erwartet wird: questID, targetMissionNumber");
+                return false;
             }
 
             //Spawnt einen Quest NPC

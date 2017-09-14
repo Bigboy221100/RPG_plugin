@@ -15,7 +15,7 @@ public class Quest {
         this.questName = questName;
         description = "";
         missionTargets = new HashMap<>();
-        reward = "Einen Dildo"; // :P
+        reward = "Einen Keks"; // :P
     }
 
     public void setDescription(String description) {
@@ -27,6 +27,8 @@ public class Quest {
     }
 
     public void editMissionTarget(int index,String description) { missionTargets.replace(index,description);}
+
+    public void deleteMissionTarget(int index) { missionTargets.remove(index);}
 
     @Override
     public String toString() {
