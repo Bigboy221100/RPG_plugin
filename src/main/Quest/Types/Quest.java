@@ -26,6 +26,8 @@ public class Quest {
         missionTargets.put(index,description);
     }
 
+    public void editMissionTarget(int index,String description) { missionTargets.replace(index,description);}
+
     @Override
     public String toString() {
         return questName + " ID: " + questID + " LvlRequire: " + levelRequirement + " Reward: " + reward;

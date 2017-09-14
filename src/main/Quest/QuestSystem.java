@@ -170,6 +170,7 @@ public class QuestSystem implements CommandExecutor{
                     }
 
                     quest.addMissionTarget(position, description.toString());
+                    quests.set(Integer.parseInt(args[0]) - 1,quest);
                     return true;
 
                 } else {
@@ -181,10 +182,23 @@ public class QuestSystem implements CommandExecutor{
 
             if (cmd.getName().equalsIgnoreCase("editMissionTarget")) {
 
-                p.sendMessage("Not implemented yet");
-                return true;
+                if(args.length > 2){
+                    if(!questExists(args[0],p)) return false;
+                    Quest quest = quests.get(Integer.parseInt(args[0]) - 1);
+                    if(!checkIfNumber(args[1],p)) return false;
+                    int index = Integer.parseInt(args[1]);
 
+                    StringBuilder description = new StringBuilder();
+                    for (int i = 2; i < args.length; i++) {
+                        description.append(args[i]).append(" ");
+                    }
 
+                    quest.editMissionTarget(index,description.toString());
+
+                    return true;
+                }
+                p.sendMessage("Nicht genug Argumente. Erwartet wird: questID, targetMissionNumber, targetMissonDescription");
+                return false;
             }
 
             if (cmd.getName().equalsIgnoreCase("deleteMissionTarget")) {
