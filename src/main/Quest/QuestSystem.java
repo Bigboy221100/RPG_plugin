@@ -152,7 +152,7 @@ public class QuestSystem implements CommandExecutor{
             }
 
 
-            if (cmd.getName().equalsIgnoreCase("addTargetMission")) {
+            if (cmd.getName().equalsIgnoreCase("addMissionTarget")) {
 
                 if (args.length > 2) {
                     if (!questExists(args[0], p))
@@ -176,7 +176,7 @@ public class QuestSystem implements CommandExecutor{
 
             }
 
-            if (cmd.getName().equalsIgnoreCase("editTargetMission")) {
+            if (cmd.getName().equalsIgnoreCase("editMissionTarget")) {
 
                 p.sendMessage("Not implemented yet");
                 return true;
@@ -184,7 +184,7 @@ public class QuestSystem implements CommandExecutor{
 
             }
 
-            if (cmd.getName().equalsIgnoreCase("deleteTargetMission")) {
+            if (cmd.getName().equalsIgnoreCase("deleteMissionTarget")) {
 
                 p.sendMessage("Not implemented yet");
                 return true;
