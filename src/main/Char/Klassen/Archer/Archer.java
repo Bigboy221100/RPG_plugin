@@ -6,6 +6,7 @@ import main.Char.Klassen.CharPlayer;
 import main.helpvoids;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -64,6 +65,7 @@ public class Archer extends CharPlayer implements Listener {
         p.setCustomName("[Archer] " + name);
         p.setCustomNameVisible(true);
         p.setPlayerListName("§1[§6Archer§1]§2 " + name);
+        p.setGameMode(GameMode.ADVENTURE);
     }
 
     private void ausrüsten() {
@@ -75,6 +77,7 @@ public class Archer extends CharPlayer implements Listener {
         p.setCustomName("[Archer] " + name);
         p.setCustomNameVisible(true);
         p.getInventory().addItem(new ItemStack(Material.BOW));
+        p.setGameMode(GameMode.ADVENTURE);
         for (int i = 0; i < 16; i++) {
             p.getInventory().addItem(new ItemStack(Material.ARROW));
         }
