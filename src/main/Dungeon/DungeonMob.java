@@ -11,12 +11,13 @@ import org.bukkit.entity.Zombie;
  * Created by maxim on 08.09.2017.
  */
 public class DungeonMob {
-    String mobName, type;
+    String type;
     Location locMob;
     String dungeonName;
+    int wave;
+    String mobName;
 
-    public DungeonMob(String mobName, Location locMob, String type, String dungeonName) {
-        this.mobName = mobName;
+    public DungeonMob(Location locMob, String type, String dungeonName, int wave) {
         this.locMob = locMob;
         this.type = type;
         this.dungeonName = dungeonName;
@@ -24,17 +25,17 @@ public class DungeonMob {
 
     public void spawnMob() {
         if(type.equalsIgnoreCase("skeleton")) {
-            Bukkit.broadcastMessage("skeleton");
+            mobName = dungeonName + "-Skeleton";
             Skeleton s = (Skeleton) locMob.getWorld().spawnEntity(locMob, EntityType.SKELETON);
             s.setCustomName(mobName);
             s.setCustomNameVisible(true);
         }else if(type.equalsIgnoreCase("spider")) {
-            Bukkit.broadcastMessage("Spider");
+            mobName = dungeonName + "-Spider";
             Spider s = (Spider) locMob.getWorld().spawnEntity(locMob, EntityType.SPIDER);
             s.setCustomName(mobName);
             s.setCustomNameVisible(true);
         }else if(type.equalsIgnoreCase("zombie")) {
-            Bukkit.broadcastMessage("Spider");
+            mobName = dungeonName + "-Zombie";
             Zombie s = (Zombie) locMob.getWorld().spawnEntity(locMob, EntityType.ZOMBIE);
             s.setCustomName(mobName);
             s.setCustomNameVisible(true);
