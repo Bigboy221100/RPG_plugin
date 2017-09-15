@@ -58,6 +58,7 @@ public class Dungeon implements CommandExecutor{
                 }
                 if(args[0].equalsIgnoreCase("boss")) {
 
+                    
                 }
             }
             if(args.length == 2) {
