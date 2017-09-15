@@ -58,8 +58,9 @@ public class helpvoids {
             }
             klasse = reader.readLine();
         } catch (IOException e) {
-            p.sendMessage("IO Fehler");
-            System.out.println("IO Fehler");
+            p.sendMessage("Bitte loggen sie sich in einen Char ein");
+            p.setLevel(0);
+            p.setExp(0);
         } catch (NullPointerException a) {
             p.sendMessage("Null Fehler");
             System.out.println("Null Fehler");
@@ -68,9 +69,8 @@ public class helpvoids {
         return klasse;
     }
 
-    public int getcharactermoney(String displayname) {
+    public int getcharactermoney(String displayname, Player p) {
         int money = 0;
-        Player p = Bukkit.getServer().getPlayer(displayname);
         try {
             FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + displayname + "/" + displayname + ".txt");
             BufferedReader reader = new BufferedReader(fr);
