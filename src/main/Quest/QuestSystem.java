@@ -139,14 +139,10 @@ public class QuestSystem implements CommandExecutor{
 
                     int questID = Integer.parseInt(args[0]);
                     if(questID == 0) {
-                        String[] output = new String[quests.size()];
-                        for (int i = 0; i < output.length; i++) {
-                            output[i] = quests.get(i).toString();
-                        }
-                        p.sendMessage(output);
+                        quests.forEach(e -> e.writeToPlayer(p));
                     } else {
                         if (!questExists(args[0], p)) return false;
-                        p.sendMessage(quests.get(questID - 1).toString());
+                        quests.get(questID - 1).writeToPlayer(p);
 
                         return true;
                     }

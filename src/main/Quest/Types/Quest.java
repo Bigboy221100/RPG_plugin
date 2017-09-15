@@ -1,4 +1,6 @@
 package main.Quest.Types;
+import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 
 public class Quest {
@@ -30,8 +32,15 @@ public class Quest {
 
     public void deleteMissionTarget(int index) { missionTargets.remove(index);}
 
+    public void writeToPlayer(Player p){
+        p.sendMessage(questName + " ID: " + questID);
+        p.sendMessage(description);
+        p.sendMessage(missionTargets.toString());
+        p.sendMessage(reward);
+    }
+
     @Override
     public String toString() {
-        return questName + " ID: " + questID + " LvlRequire: " + levelRequirement + " Reward: " + reward;
+        return questName + " ID: " + questID;
     }
 }
