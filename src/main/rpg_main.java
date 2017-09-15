@@ -41,6 +41,7 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("addmissiontarget").setExecutor(questSystem);
         this.getCommand("editmissiontarget").setExecutor(questSystem);
         this.getCommand("deletemissiontarget").setExecutor(questSystem);
+        this.getCommand("editreward").setExecutor(questSystem);
         this.getCommand("spawnquestnpc").setExecutor(questSystem);
         this.getCommand("bindquest").setExecutor(questSystem);
 

@@ -39,6 +39,8 @@ public class Quest {
         p.sendMessage(reward);
     }
 
+    public void setReward(String reward){ this.reward = reward;}
+
     @Override
     public String toString() {
         return questName + " ID: " + questID;
