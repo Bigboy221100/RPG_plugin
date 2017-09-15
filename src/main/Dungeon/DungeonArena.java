@@ -27,7 +27,7 @@ public class DungeonArena implements Listener{
     boolean istBeendet=true;
     ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
     int mobsLeft=0;
-    Player[]currentPlayers = new Player[1];
+    Player[]currentPlayers;
     Objective obj;
 
     public DungeonArena(String name, Location spawn, Plugin pl, int dungeonid) {
@@ -38,19 +38,22 @@ public class DungeonArena implements Listener{
         pl.getServer().getPluginManager().registerEvents(this, pl);
     }
 
-    public void addMob(String mobName, Location locMob, String type) {
-        mobs.add(new DungeonMob(mobName, locMob, type, name));
+    public void addMob(Location locMob, String type, int wave) {
+        mobs.add(new DungeonMob(locMob, type, name, wave));
         Bukkit.broadcastMessage(mobs.size()+"");
     }
 
-    public void start(Plugin pl, DungeonQueue q) {
+    public void start(Player[]players) {
+        Bukkit.broadcastMessage("Dungeon startet ..." + players.length);
         if(istBeendet == true) {
             mobsLeft = mobs.size();
             for (DungeonMob m : mobs) {
                 m.spawnMob();
             }
-            for(int i=0; i<currentPlayers.length; i++) {
-                currentPlayers[i]=Bukkit.getPlayer(q.uuids.get(i));
+            currentPlayers=new Player[2];
+            for(int i=0; i<players.length; i++) {
+                currentPlayers[i] = players[i];
+                currentPlayers[i].teleport(spawn);
             }
             sendScoreboard();
             istBeendet = false;
@@ -59,8 +62,9 @@ public class DungeonArena implements Listener{
 
     public void beenden() {
         istBeendet=true;
-        for(Player players: currentPlayers) {
-            players.setScoreboard(Bukkit.getServer().getScoreboardManager().getNewScoreboard());
+        for(int i=0; i<currentPlayers.length; i++) {
+            currentPlayers[i].setScoreboard(Bukkit.getServer().getScoreboardManager().getNewScoreboard());
+            currentPlayers[i]=null;
         }
     }
 
@@ -73,6 +77,11 @@ public class DungeonArena implements Listener{
 
         Score zero = obj.getScore("Mobs left: " + mobsLeft);
         zero.setScore(0);
+        Score scorePlayer1 = obj.getScore("Player: " + currentPlayers[0].getDisplayName());
+        scorePlayer1.setScore(1);
+        Score scorePlayer2 = obj.getScore("Player:" + currentPlayers[1].getDisplayName());
+        scorePlayer2.setScore(2);
+
 
         for(int i=0; i <currentPlayers.length; i++) {
             currentPlayers[i].setScoreboard(board);

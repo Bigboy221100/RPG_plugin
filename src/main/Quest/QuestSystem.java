@@ -83,7 +83,6 @@ public class QuestSystem implements CommandExecutor{
                     }
 
                     p.sendMessage(quests.get(quests.size() - 1).toString());
-                    p.sendMessage(quests.size() + "");
                     return true;
                 } else {
                     p.sendMessage("Nicht genügend oder zuviele Argumente, benötigt wird: Quest-Type, Mindestlevel und QuestName");
@@ -126,12 +125,9 @@ public class QuestSystem implements CommandExecutor{
 
                     return false;
                 }
-
-
             }
 
             if (cmd.getName().equalsIgnoreCase("printQuest")) {
-                p.sendMessage(quests.size() + "");
 
                 if (args.length == 1) {
 
@@ -211,6 +207,40 @@ public class QuestSystem implements CommandExecutor{
                 p.sendMessage("Nicht genug Argumente. Erwartet wird: questID, targetMissionNumber");
                 return false;
             }
+
+            if(cmd.getName().equalsIgnoreCase("editReward")){
+                if (args.length > 1) {
+                    //erstes Argument ist die Quest ID
+                    int questID;
+                    try {
+                        questID = Integer.parseInt(args[0]);
+                    } catch (NumberFormatException nfe) {
+                        p.sendMessage(args[0] + " ist keine valide Questnummer!");
+                        return false;
+                    }
+                    if (questID > quests.size()) {
+                        p.sendMessage(questID + " ist keine gültige Quest!");
+                        return false;
+                    }
+                    //Alles danach ist die Description
+
+                    StringBuilder reward = new StringBuilder();
+                    for (int i = 1; i < args.length; i++) {
+                        reward.append(args[i]).append(" ");
+                    }
+
+                    Quest quest = quests.get(questID - 1);
+                    quest.setReward(reward.toString());
+                    quests.set(questID - 1, quest);
+
+                    return true;
+                } else {
+
+                    return false;
+                }
+
+            }
+
 
             //Spawnt einen Quest NPC
             if (cmd.getName().equalsIgnoreCase("spawnQuestNPC")) {

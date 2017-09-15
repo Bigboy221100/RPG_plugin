@@ -40,6 +40,8 @@ commands:
           description: Editiert ein Zwischenziel
      deletemissiontarget:
           description: Löscht ein Zwischenziel
+     editreward:
+          description: Editiert die Rewards
      spawnquestnpc:
           description: Spawnt einen NPC der für Quests genutzt werden kann
      bindquest:

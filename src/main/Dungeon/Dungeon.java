@@ -18,8 +18,8 @@ public class Dungeon implements CommandExecutor{
     Plugin pl;
     int dungeonid=0;
     ArrayList<DungeonArena> dungeonArenas = new ArrayList<DungeonArena>(0);
-    ArrayList<DungeonQueuePlayer> dungeonQueuePlayers = new ArrayList<DungeonQueuePlayer>(0);
     ArrayList<DungeonQueue> dungeonQueues = new ArrayList<DungeonQueue>(0);
+
 
     public Dungeon(Plugin pl) {
         this.pl = pl;
@@ -33,6 +33,7 @@ public class Dungeon implements CommandExecutor{
             if(args.length == 2) {
                 if(args[0].equalsIgnoreCase("erstellen")) {
                     dungeonArenas.add(new DungeonArena(args[1], p.getLocation(), pl, dungeonid));
+                    dungeonQueues.add(new DungeonQueue(args[1]));
                     dungeonid++;
                     Bukkit.broadcastMessage("Dungeon erstellt");
                 }
@@ -50,13 +51,14 @@ public class Dungeon implements CommandExecutor{
                 if(args[0].equalsIgnoreCase("mob")) {
                     for(DungeonArena a : dungeonArenas) {
                         if(a.name.equalsIgnoreCase(args[3])) {
-                            a.addMob(args[1], p.getLocation(), args[2]);
+                            a.addMob(p.getLocation(), args[1], Integer.parseInt(args[2]));
                             Bukkit.broadcastMessage("Mob " + args[1] + "wurde bei" + p.getLocation() + " erstellt!");
                         }
                     }
                 }
                 if(args[0].equalsIgnoreCase("boss")) {
 
+                    
                 }
             }
             if(args.length == 2) {
@@ -69,12 +71,16 @@ public class Dungeon implements CommandExecutor{
                     }
                 }
             }
-            if(args.length == 3) {
+            if(args.length == 2) {
                 if(args[0].equalsIgnoreCase("beitreten")) {
                     for(DungeonArena a: dungeonArenas) {
-                        if(a.name.equalsIgnoreCase(args[2])) {
-                            dungeonQueuePlayers.add(new DungeonQueuePlayer(a.name, p.getUniqueId()));
+                        if(a.name.equalsIgnoreCase(args[1])) {
                             p.sendMessage("Du bist dem Dungeon " + a.name + " beigetreten");
+                            for(DungeonQueue q: dungeonQueues) {
+                                if(q.dungeonname.equalsIgnoreCase(args[1])) {
+                                    q.addPlayerToQueue(p);
+                                }
+                            }
                         }
                     }
                 }
@@ -85,31 +91,20 @@ public class Dungeon implements CommandExecutor{
 
     public void queueTester() {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
-            int dungeonsize=1;
             @Override
             public void run() {
-                if(dungeonQueuePlayers.size() >= dungeonsize) {
-                    Player[]players = new Player[dungeonsize];
-                    String dungeonname="";
-                    for(int i=0; i<dungeonsize; i++) {
-                        players[i]=Bukkit.getServer().getPlayer(dungeonQueuePlayers.get(i).uuid);
-                    }
-                    dungeonname = dungeonQueuePlayers.get(0).dungeonname;
-                    dungeonQueues.add(new DungeonQueue(players, dungeonname));
-                    for(int i=0; i<dungeonsize; i++) {
-                        dungeonQueuePlayers.remove(i);
-                    }
-                    Bukkit.broadcastMessage(dungeonQueuePlayers.size()+"");
-                }
-                if(dungeonQueues.size() > 0) {
+                for(DungeonQueue q: dungeonQueues) {
                     for(DungeonArena a: dungeonArenas) {
-                        if(a.istBeendet) {
-                            for(DungeonQueue q: dungeonQueues) {
-                                if(a.name.equalsIgnoreCase(q.dungeonname)) {
-                                    a.start(pl, q);
-                                    dungeonQueues.remove(q);
-                                    Bukkit.broadcastMessage(dungeonQueues.size()+"");
-                                    break;
+                        if(q.dungeonname.equalsIgnoreCase(a.name)) {
+                            if(q.players.size() >= 2) {
+                                if(a.istBeendet==true) {
+                                    Bukkit.broadcastMessage("Queue erstellt");
+                                    Player[] players = new Player[2];
+                                    players[0] = q.players.get(0);
+                                    players[1] = q.players.get(1);
+                                    q.players.remove(0);
+                                    q.players.remove(0);
+                                    a.start(players);
                                 }
                             }
                         }
