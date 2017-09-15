@@ -13,10 +13,10 @@ import java.util.UUID;
 /**
  * Created by user on 27.07.2017.
  */
-public class loadcharacter implements CommandExecutor {
+public class Loadcharacter implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("loadcharacter")) {
+        if (cmd.getName().equalsIgnoreCase("Loadcharacter")) {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
                 if (p.hasPermission("rpg.character.load")) {

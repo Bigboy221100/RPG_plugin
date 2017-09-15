@@ -10,10 +10,10 @@ import org.bukkit.entity.Player;
 /**
  * Created by Fabian on 19.07.2017.
  */
-public class createnewcharacter implements CommandExecutor {
+public class Createnewchar implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (command.getName().equalsIgnoreCase("createnewcharacter")) {
+        if (command.getName().equalsIgnoreCase("Createnewchar")) {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
                 if (p.hasPermission("rpg.character.new")) {
@@ -25,7 +25,7 @@ public class createnewcharacter implements CommandExecutor {
                             p.sendMessage("Diese Klasse gibt es nicht");
                         }
                     } else {
-                        p.sendMessage("Fehler...  createnewcharacter <Klasse> <Name>");
+                        p.sendMessage("Fehler...  Createnewchar <Klasse> <Name>");
                     }
                 } else {
                     p.sendMessage("Du hast dafür keine Berechtigungen");

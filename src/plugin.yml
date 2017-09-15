@@ -20,10 +20,8 @@ commands:
           description: Speichert Inv
      loadinv:
           description: Ladet Inv
-     rpg commands:
-          description: Zeigt alle Befehle an
-     rpg version:
-          description: Zeigt Plugin Version an
+     commands:
+          description: Zeigt die Commands des RPG Plugins an
      minigame:
           description: Erzeugt ein Minigame
      dungeon:

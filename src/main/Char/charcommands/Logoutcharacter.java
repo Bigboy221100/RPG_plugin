@@ -10,10 +10,10 @@ import org.bukkit.entity.Player;
 /**
  * Created by user on 28.07.2017.
  */
-public class logoutcharacter implements CommandExecutor {
+public class Logoutcharacter implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("logoutcharacter")) {
+        if (cmd.getName().equalsIgnoreCase("Logoutcharacter")) {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
                 if (p.hasPermission("rpg.character.logout")) {

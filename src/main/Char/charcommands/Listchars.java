@@ -12,7 +12,7 @@ import java.io.File;
 /**
  * Created by user on 28.07.2017.
  */
-public class listchars implements CommandExecutor {
+public class Listchars implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("listcharacter")) {

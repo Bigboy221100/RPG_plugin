@@ -12,7 +12,7 @@ import java.io.File;
 /**
  * Created by user on 28.07.2017.
  */
-public class deletechar implements CommandExecutor {
+public class Deletechar implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("deletecharacter")) {
