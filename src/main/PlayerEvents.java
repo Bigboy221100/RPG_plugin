@@ -3,6 +3,7 @@ package main;
 import main.Char.Klassen.CharPlayer;
 import main.Char.Klassen.Normal;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -10,10 +11,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 /**
@@ -40,6 +44,13 @@ public class PlayerEvents implements Listener {
         CharPlayer charPlayer = new Normal(p);
         e.setJoinMessage("§1[§2+§1]§6 " + p.getName());
 
+        //-----------DungeonEvents--------------------------//
+        ItemStack item = new ItemStack(Material.EYE_OF_ENDER);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.GREEN + "Dungeons");
+        item.setItemMeta(meta);
+        p.getInventory().setItem(7, item);
+        //---------------------------------------------------//
     }
 
     @EventHandler
@@ -54,5 +65,14 @@ public class PlayerEvents implements Listener {
         e.setFoodLevel(20);
     }
 
-
+    @EventHandler
+    public void onInteract(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+        String itemname = e.getItem().getItemMeta().getDisplayName();
+        if (itemname.equals(ChatColor.GREEN + "Dungeons")) {
+            Bukkit.broadcastMessage("test");
+            Inventory inv = p.getServer().createInventory(null, 9   , "Dungeoninventory");
+            p.openInventory(inv);
+        }
+    }
 }

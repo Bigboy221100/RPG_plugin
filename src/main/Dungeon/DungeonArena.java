@@ -20,15 +20,16 @@ import java.util.UUID;
  * Created by maxim on 08.09.2017.
  */
 public class DungeonArena implements Listener{
-    String name;
-    Location spawn;
-    Plugin pl;
-    int dungeonid;
-    boolean istBeendet=true;
-    ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
-    int mobsLeft=0;
-    Player[]currentPlayers;
-    Objective obj;
+    public String name;
+    private Location spawn;
+    private Plugin pl;
+    public static int dungeonid;
+    public boolean istBeendet=true;
+    private ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
+    private int mobsLeft=0;
+    private Player[]currentPlayers;
+    private Objective obj;
+    private int wavesLeft=1;
 
     public DungeonArena(String name, Location spawn, Plugin pl, int dungeonid) {
         this.name=name;
@@ -77,11 +78,12 @@ public class DungeonArena implements Listener{
 
         Score zero = obj.getScore("Mobs left: " + mobsLeft);
         zero.setScore(0);
+        Score wave = obj.getScore("Waves: " + wavesLeft);
+        wave.setScore(1);
         Score scorePlayer1 = obj.getScore("Player: " + currentPlayers[0].getDisplayName());
-        scorePlayer1.setScore(1);
+        scorePlayer1.setScore(2);
         Score scorePlayer2 = obj.getScore("Player:" + currentPlayers[1].getDisplayName());
-        scorePlayer2.setScore(2);
-
+        scorePlayer2.setScore(3);
 
         for(int i=0; i <currentPlayers.length; i++) {
             currentPlayers[i].setScoreboard(board);
