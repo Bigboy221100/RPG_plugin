@@ -53,6 +53,6 @@ public class Quest {
 
     @Override
     public String toString() {
-        return questName + " ID: " + questID;
+        return questName + " ID: " + questID + " Type: " + questType.toString();
     }
 }
