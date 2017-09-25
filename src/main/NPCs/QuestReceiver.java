@@ -1,4 +1,4 @@
-package main.Quest.NPCs;
+package main.NPCs;
 
 public class QuestReceiver {
 
