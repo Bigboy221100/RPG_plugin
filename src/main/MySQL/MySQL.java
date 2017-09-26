@@ -53,6 +53,7 @@ public class MySQL {
                 System.out.println("Datenbank erstellt!");
             } catch (SQLException e) {
                 e.printStackTrace();
+
             }
         }
     }
