@@ -25,6 +25,8 @@ import java.sql.SQLException;
 public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
+
+        //---Character
         //Commands
         /*this.getCommand("Createnewchar").setExecutor(new Createnewchar());
         this.getCommand("Loadcharacter").setExecutor(new Loadcharacter());
@@ -34,9 +36,8 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("Moneyview").setExecutor(new Moneyview());
         this.getCommand("saveinv").setExecutor(new invtest());
         this.getCommand("loadinv").setExecutor(new invtest());
-
-        this.getCommand("commands").setExecutor(new Commands());*/
-
+        this.getCommand("commands").setExecutor(new Commands());
+        */
         //MySQL
         FileManager.setStandardMySQL();
         FileManager.readMySQL();
@@ -74,6 +75,10 @@ public class rpg_main extends JavaPlugin {
             e.printStackTrace();
         }
         //----------
+
+        MySQL.createTable();
+
+
 
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);

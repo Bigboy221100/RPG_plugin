@@ -50,6 +50,7 @@ public class MySQL {
             try {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS Dungeons (DungeonName VARCHAR(100), DungeonID VARCHAR(100), Spawn VARCHAR(100))");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS DungeonMobs (DungeonName VARCHAR(100), Location VARCHAR(100), MobType VARCHAR(100), Wave VARCHAR(100))");
+                con.createStatement().executeUpdate("CREATE TABLE if NOT EXISTS Characters (UUID VARCHAR(100), charname VARCHAR(100), charclass VARCHAR(100), charmoney VARCHAR(100), charlevel VARCHAR(100), charxp VARCHAR (100))");
                 System.out.println("Datenbank erstellt!");
             } catch (SQLException e) {
                 e.printStackTrace();
