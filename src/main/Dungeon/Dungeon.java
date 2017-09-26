@@ -23,10 +23,10 @@ import java.util.ArrayList;
  * Created by maxim on 08.08.2017.
  */
 public class Dungeon implements CommandExecutor, Listener{
-    Plugin pl;
+    private Plugin pl;
     public static int dungeonid;
     public static ArrayList<DungeonArena> dungeonArenas = new ArrayList<DungeonArena>(0);
-    ArrayList<DungeonQueue> dungeonQueues = new ArrayList<DungeonQueue>(0);
+    public static ArrayList<DungeonQueue> dungeonQueues = new ArrayList<DungeonQueue>(0);
 
 
     public Dungeon(Plugin pl) {
@@ -51,7 +51,7 @@ public class Dungeon implements CommandExecutor, Listener{
                         dungeonArenas.add(new DungeonArena(args[1], p.getLocation(), pl, dungeonid));
                         dungeonQueues.add(new DungeonQueue(args[1]));
                         Bukkit.broadcastMessage("Dungeon erstellt");
-                        MySQL.update("INSERT INTO Dungeons (DungeonName, DungeonID, Punkt1, Punkt2, Spawn) VALUES ('" + args[1] + "','" + dungeonid + "','" + 0 + "','" + 0 + "','"+p.getLocation().getX()+","+p.getLocation().getY()+","+p.getLocation().getZ()+"')");
+                        MySQL.update("INSERT INTO Dungeons (DungeonName, DungeonID, Spawn) VALUES ('" + args[1] + "','"+dungeonid+"','"+p.getLocation().getX()+","+p.getLocation().getY()+","+p.getLocation().getZ()+"')");
                         Bukkit.broadcastMessage("MySQL upgedatet!");
                         dungeonid++;
                     } else {

@@ -4,6 +4,8 @@ import main.Char.Klassen.Archer.Archerevents;
 import main.Char.charcommands.*;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
+import main.Dungeon.DungeonMob;
+import main.Dungeon.DungeonQueue;
 import main.Minigame.Minigame;
 import main.Money.Moneyview;
 import main.MySQL.FileManager;
@@ -50,18 +52,24 @@ public class rpg_main extends JavaPlugin {
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
         try {
             while (rs.next()) {
-                String[] loc = rs.getString(5).split(",");
+                String[] loc = rs.getString(3).split(",");
                 Dungeon.dungeonArenas.add(new DungeonArena(rs.getString(1), new Location(Bukkit.getServer().getWorld("world"), Double.parseDouble(loc[0]), Double.parseDouble(loc[1]), Double.parseDouble(loc[2])), this, Integer.parseInt(rs.getString(2))));
+                Dungeon.dungeonid=Integer.parseInt(rs.getString(2))+1;
+                Dungeon.dungeonQueues.add(new DungeonQueue(rs.getString(1)));
             }
-            int currenDungeonId=0;
-            for(DungeonArena a: Dungeon.dungeonArenas) {
-                Bukkit.broadcastMessage(a.name);
-                if(a.dungeonid>currenDungeonId) {
-                    currenDungeonId=a.dungeonid;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        rs = MySQL.getResultSet("SELECT * FROM DungeonMobs");
+        try {
+            while (rs.next()) {
+                for(DungeonArena a: Dungeon.dungeonArenas) {
+                    if(a.name.equalsIgnoreCase(rs.getString(1))) {
+                        String[]loc = rs.getString(2).split(",");
+                        a.mobs.add(new DungeonMob(new Location(Bukkit.getServer().getWorld("world"),Double.parseDouble(loc[0]),Double.parseDouble(loc[1]),Double.parseDouble(loc[2])), rs.getString(3), rs.getString(1), Integer.parseInt(rs.getString(4))));
+                    }
                 }
             }
-            currenDungeonId++;
-            Dungeon.dungeonid=currenDungeonId;
         } catch (SQLException e) {
             e.printStackTrace();
         }
