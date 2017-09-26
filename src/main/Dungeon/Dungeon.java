@@ -70,6 +70,7 @@ public class Dungeon implements CommandExecutor, Listener{
                     }
                 }
             }
+
             if(args.length == 4) {
                 if(args[0].equalsIgnoreCase("mob")) {
                     for(DungeonArena a : dungeonArenas) {
