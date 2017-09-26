@@ -11,6 +11,16 @@ public class Quest {
     protected HashMap<Integer,String> missionTargets;
     protected String reward;
 
+    public enum QuestTypes{
+        Killing,
+        Collection,
+        Escort,
+        Delivering,
+        Assasination
+    }
+
+    protected QuestTypes questType;
+
     Quest (int questID,int levelRequirement,String questName){
         this.questID = questID;
         this.levelRequirement = levelRequirement;
