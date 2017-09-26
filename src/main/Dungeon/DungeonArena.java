@@ -1,5 +1,6 @@
 package main.Dungeon;
 
+import main.MySQL.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class DungeonArena implements Listener{
     private Plugin pl;
     public static int dungeonid;
     public boolean istBeendet=true;
-    private ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
+    public ArrayList<DungeonMob> mobs = new ArrayList<DungeonMob>(0);
     private int mobsLeft=0;
     private Player[]currentPlayers;
     private Objective obj;
@@ -41,6 +42,7 @@ public class DungeonArena implements Listener{
 
     public void addMob(Location locMob, String type, int wave) {
         mobs.add(new DungeonMob(locMob, type, name, wave));
+        MySQL.update("INSERT INTO DungeonMobs (Dungeonname, Location, MobType, Wave) VALUES ('"+name+"','"+locMob.getX()+","+locMob.getY()+","+locMob.getZ()+"','"+type+"','"+wave+"')");
         Bukkit.broadcastMessage(mobs.size()+"");
     }
 

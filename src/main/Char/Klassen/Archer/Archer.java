@@ -41,7 +41,7 @@ public class Archer extends CharPlayer implements Listener {
         this.player = player;
         this.name = name;
         this.klasse = "Archer";
-        ausrüsten();
+        //ausrüsten();
     }
 
     //nur zum Laden gedacht
