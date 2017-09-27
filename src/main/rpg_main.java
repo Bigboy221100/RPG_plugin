@@ -1,18 +1,15 @@
 package main;
 
 import main.BanManager.BanManager;
-import main.Char.Klassen.Archer.Archerevents;
-import main.Char.charcommands.*;
+import main.Chars.Classes.Archer.Archerevents;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
 import main.Dungeon.DungeonQueue;
 import main.Minigame.Minigame;
-import main.Money.Moneyview;
 import main.MySQL.FileManager;
 import main.MySQL.MySQL;
 import main.Quest.QuestSystem;
-import main.text.info.Commands;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,18 +24,7 @@ public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
 
-        //---Character
-        //Commands
-        /*this.getCommand("Createnewchar").setExecutor(new Createnewchar());
-        this.getCommand("Loadcharacter").setExecutor(new Loadcharacter());
-        this.getCommand("Logoutcharacter").setExecutor(new Logoutcharacter());
-        this.getCommand("deletecharacter").setExecutor(new Deletechar());
-        this.getCommand("listcharacter").setExecutor(new Listchars());
-        this.getCommand("Moneyview").setExecutor(new Moneyview());
-        this.getCommand("saveinv").setExecutor(new invtest());
-        this.getCommand("loadinv").setExecutor(new invtest());
-        this.getCommand("commands").setExecutor(new Commands());
-        */
+
         //MySQL
         FileManager.setStandardMySQL();
         FileManager.readMySQL();
