@@ -1,22 +1,15 @@
-package main.Char.Klassen.Archer;
+package main.Chars.Classes.Archer;
 
 
-import com.sun.xml.internal.ws.api.addressing.WSEndpointReference;
-import main.Char.Klassen.CharPlayer;
-import main.helpvoids;
+import main.Chars.Classes.CharPlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.metadata.Metadatable;
 
 import java.io.*;
 import java.util.List;

@@ -1,4 +1,4 @@
-package main.Char.Klassen;
+package main.Chars.Classes;
 
 
 import javafx.event.EventHandler;

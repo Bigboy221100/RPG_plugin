@@ -1,18 +1,12 @@
-package main.Char.Klassen;
+package main.Chars.Classes;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by user on 28.07.2017.
