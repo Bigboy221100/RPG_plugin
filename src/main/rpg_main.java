@@ -3,6 +3,7 @@ package main;
 import main.BanManager.BanManager;
 import main.Chars.Classes.Archer.Archerevents;
 import main.Chars.Commands.CreatenewChar;
+import main.Chars.Commands.DeleteChar;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
@@ -27,6 +28,7 @@ public class rpg_main extends JavaPlugin {
 
         //Chars
         this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
+        this.getCommand("deletecharacter").setExecutor(new DeleteChar());
 
         //MySQL
         FileManager.setStandardMySQL();

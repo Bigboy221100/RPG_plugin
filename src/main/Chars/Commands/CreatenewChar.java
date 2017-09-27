@@ -22,7 +22,7 @@ public class CreatenewChar implements CommandExecutor{
                 Player p = (Player) sender;
                 if (p.hasPermission("rpg.character.new")) {
                     if (args.length == 2) {
-                        if((isUsed(args[1]))==false) {
+                        if((Charvoids.isUsed(args[1]))==false) {
                             if (args[0].equalsIgnoreCase("Archer")) {
                                 CharPlayer Char = new Archer(p.getUniqueId(), args[1]);
                                 p.sendMessage("Congratulation. You successfully create your Level 1 Archer "+args[1]+" .");
@@ -46,18 +46,6 @@ public class CreatenewChar implements CommandExecutor{
         return false;
     }
 
-    private boolean isUsed(String charname){
-        ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters");
-        try {
-            while(rs.next()) {
-                if(rs.getString("charname").equalsIgnoreCase(charname)) {
-                    return true;
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
 
 }

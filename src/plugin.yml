@@ -6,6 +6,8 @@ author: B1GB0Y
 commands:
      createnewcharacter:
           description: Erstelle einen neuen Character
+     deletecharacter:
+          description: Delete an existing char
      minigame:
           description: Erzeugt ein Minigame
      dungeon:
