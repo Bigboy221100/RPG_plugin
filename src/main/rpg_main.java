@@ -1,5 +1,6 @@
 package main;
 
+import main.BanManager.BanManager;
 import main.Char.Klassen.Archer.Archerevents;
 import main.Char.charcommands.*;
 import main.Dungeon.Dungeon;
@@ -47,7 +48,7 @@ public class rpg_main extends JavaPlugin {
         //MinigameSystem
         this.getCommand("minigame").setExecutor(new Minigame(this));
 
-        //----------DungeonSystem
+        //----------DungeonSystem---------//
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
 
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
@@ -74,10 +75,14 @@ public class rpg_main extends JavaPlugin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //----------
+        //-------------------//
 
-        MySQL.createTable();
-
+        //---------- BanManager ---------//
+        BanManager banManager = new BanManager(this);
+        this.getCommand("ban").setExecutor(banManager);
+        this.getCommand("unban").setExecutor(banManager);
+        this.getCommand("tempban").setExecutor(banManager);
+        //-------------------//
 
 
         //QuestSystem
