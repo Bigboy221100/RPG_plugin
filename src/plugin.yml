@@ -6,22 +6,6 @@ author: B1GB0Y
 commands:
      createnewcharacter:
           description: Erstelle einen neuen Character
-     loadcharacter:
-          description: Lädt einen Character
-     logoutcharacter:
-         description: Logout aus Character
-     deletecharacter:
-         description: Löscht Character
-     listcharacter:
-         description: Listet Character auf
-     money:
-         description: Zeigt das Geld deines Characters an
-     saveinv:
-          description: Speichert Inv
-     loadinv:
-          description: Ladet Inv
-     commands:
-          description: Zeigt die Commands des RPG Plugins an
      minigame:
           description: Erzeugt ein Minigame
      dungeon:

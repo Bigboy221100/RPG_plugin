@@ -2,6 +2,7 @@ package main;
 
 import main.BanManager.BanManager;
 import main.Chars.Classes.Archer.Archerevents;
+import main.Chars.Commands.CreatenewChar;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
@@ -24,6 +25,8 @@ public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
 
+        //Chars
+        this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
 
         //MySQL
         FileManager.setStandardMySQL();
@@ -63,6 +66,8 @@ public class rpg_main extends JavaPlugin {
         }
         //-------------------//
 
+        /*
+
         //---------- BanManager ---------//
         BanManager banManager = new BanManager(this);
         this.getCommand("ban").setExecutor(banManager);
@@ -70,7 +75,7 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("tempban").setExecutor(banManager);
         //-------------------//
 
-
+        */
 
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);
