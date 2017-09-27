@@ -33,6 +33,7 @@ public class CreatenewChar implements CommandExecutor{
             }else{
                 System.out.println("You can only use this command as a player");
             }
+
         }
         return false;
     }
