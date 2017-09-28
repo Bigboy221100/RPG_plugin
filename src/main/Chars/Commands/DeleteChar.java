@@ -6,6 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 /**
  * Created by user on 27.09.2017.
  */
@@ -18,9 +20,12 @@ public class DeleteChar implements CommandExecutor {
                 if (p.hasPermission("rpg.character.delete")) {
                     if (args.length == 1) {
                         if(Charvoids.isUsed(args[0])==true){
-                            //at the moment everyone can delete any char (bad)
-                            MySQL.update("DELETE FROM Characters WHERE charname='"+args[0]+"'");
-                            p.sendMessage("The character "+args[0]+ " was successfully deleted");
+                            if(Charvoids.charbelongsto(p.getUniqueId()+"")==true){
+                                MySQL.update("DELETE FROM Characters WHERE charname='"+args[0]+"' AND UUID='"+p.getUniqueId()+"'");
+                                p.sendMessage("The character "+args[0]+ " was successfully deleted");
+                            }else{
+                                p.sendMessage("This character does not belong to you");
+                            }
                         }else{
                             p.sendMessage("This character does not exist.");
                         }
