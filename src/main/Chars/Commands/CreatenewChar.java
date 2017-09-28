@@ -1,15 +1,12 @@
 package main.Chars.Commands;
 
+import main.Chars.Charvoids;
 import main.Chars.Classes.Archer.Archer;
 import main.Chars.Classes.CharPlayer;
-import main.MySQL.MySQL;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Created by user on 27.09.2017.

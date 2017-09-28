@@ -1,12 +1,11 @@
 package main.Chars.Commands;
 
+import main.Chars.Charvoids;
 import main.MySQL.MySQL;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 /**
  * Created by user on 27.09.2017.

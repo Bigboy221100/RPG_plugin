@@ -1,4 +1,4 @@
-package main.Chars.Commands;
+package main.Chars;
 
 import main.MySQL.MySQL;
 
