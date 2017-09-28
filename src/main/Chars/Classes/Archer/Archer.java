@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -83,6 +84,8 @@ public class Archer extends CharPlayer implements Listener {
         skull.setDisplayName("Benutzerinterface");
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
+
+        Inventory playerinv =p.getInventory();
 
         MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"')");
     }
