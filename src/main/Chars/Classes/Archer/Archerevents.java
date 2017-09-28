@@ -1,6 +1,5 @@
-package main.Char.Klassen.Archer;
+package main.Chars.Classes.Archer;
 
-import main.helpvoids;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -9,7 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -24,7 +22,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  * Created by Fabian on 02.08.2017.
  */
 public class Archerevents implements Listener {
-    @EventHandler
+    /*@EventHandler
     public void onLevel(PlayerLevelChangeEvent e) {
         Player p = e.getPlayer();
         helpvoids help = new helpvoids();
@@ -178,5 +176,5 @@ public class Archerevents implements Listener {
         }
     }
 
-
+*/
 }

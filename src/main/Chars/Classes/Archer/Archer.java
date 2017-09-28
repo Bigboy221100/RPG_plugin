@@ -1,22 +1,16 @@
-package main.Char.Klassen.Archer;
+package main.Chars.Classes.Archer;
 
 
-import com.sun.xml.internal.ws.api.addressing.WSEndpointReference;
-import main.Char.Klassen.CharPlayer;
-import main.helpvoids;
+import main.Chars.Classes.CharPlayer;
+import main.MySQL.MySQL;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.metadata.Metadatable;
 
 import java.io.*;
 import java.util.List;
@@ -41,7 +35,7 @@ public class Archer extends CharPlayer implements Listener {
         this.player = player;
         this.name = name;
         this.klasse = "Archer";
-        //ausrüsten();
+        ausrüsten();
     }
 
     //nur zum Laden gedacht
@@ -90,31 +84,7 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        PrintWriter pWriter = null;
-        try {
-            //create Char txt
-            File inv = new File("plugins/RPG/Chars/" + player + "/" + name + "/" + name + ".txt");
-            inv.getParentFile().mkdirs();
-            pWriter = new PrintWriter(new BufferedWriter(new FileWriter(inv)));
-            pWriter.println(player);
-            pWriter.println(name);
-            pWriter.println(klasse);
-            pWriter.println(money);
-            pWriter.println(level);
-            pWriter.println(xp);
-            //Create inv yml
-            YamlConfiguration c = new YamlConfiguration();
-            c.set("inventory.armor", p.getInventory().getArmorContents());
-            c.set("inventory.content", p.getInventory().getContents());
-            c.save(new File("plugins/RPG/Chars/" + player + "/" + name + "/" + name + "_inv.yml"));
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } finally {
-            if (pWriter != null) {
-                pWriter.flush();
-                pWriter.close();
-            }
-        }
+        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"')");
     }
 
 }

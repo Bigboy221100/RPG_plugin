@@ -1,17 +1,17 @@
 package main;
 
-import main.Char.Klassen.Archer.Archerevents;
-import main.Char.charcommands.*;
+import main.BanManager.BanManager;
+import main.Chars.Classes.Archer.Archerevents;
+import main.Chars.Commands.CreatenewChar;
+import main.Chars.Commands.DeleteChar;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
 import main.Dungeon.DungeonQueue;
 import main.Minigame.Minigame;
-import main.Money.Moneyview;
 import main.MySQL.FileManager;
 import main.MySQL.MySQL;
 import main.Quest.QuestSystem;
-import main.text.info.Commands;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,18 +26,10 @@ public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
 
-        //---Character
-        //Commands
-        /*this.getCommand("Createnewchar").setExecutor(new Createnewchar());
-        this.getCommand("Loadcharacter").setExecutor(new Loadcharacter());
-        this.getCommand("Logoutcharacter").setExecutor(new Logoutcharacter());
-        this.getCommand("deletecharacter").setExecutor(new Deletechar());
-        this.getCommand("listcharacter").setExecutor(new Listchars());
-        this.getCommand("Moneyview").setExecutor(new Moneyview());
-        this.getCommand("saveinv").setExecutor(new invtest());
-        this.getCommand("loadinv").setExecutor(new invtest());
-        this.getCommand("commands").setExecutor(new Commands());
-        */
+        //Chars
+        this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
+        this.getCommand("deletecharacter").setExecutor(new DeleteChar());
+
         //MySQL
         FileManager.setStandardMySQL();
         FileManager.readMySQL();
@@ -47,7 +39,7 @@ public class rpg_main extends JavaPlugin {
         //MinigameSystem
         this.getCommand("minigame").setExecutor(new Minigame(this));
 
-        //----------DungeonSystem
+        //----------DungeonSystem---------//
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
 
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
@@ -74,11 +66,18 @@ public class rpg_main extends JavaPlugin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //----------
+        //-------------------//
 
-        MySQL.createTable();
+        /*
 
+        //---------- BanManager ---------//
+        BanManager banManager = new BanManager(this);
+        this.getCommand("ban").setExecutor(banManager);
+        this.getCommand("unban").setExecutor(banManager);
+        this.getCommand("tempban").setExecutor(banManager);
+        //-------------------//
 
+        */
 
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);
