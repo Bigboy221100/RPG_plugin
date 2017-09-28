@@ -3,6 +3,7 @@ package main.Chars.Classes.Archer;
 
 import main.Chars.Classes.CharPlayer;
 import main.MySQL.MySQL;
+import main.invserial;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
