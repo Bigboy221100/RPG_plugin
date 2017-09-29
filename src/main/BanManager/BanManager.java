@@ -146,7 +146,7 @@ public class BanManager implements CommandExecutor, Listener{
                         if(date.getTime() < Long.parseLong(rs.getString("Period"))) {
                             long timeLeft=Long.parseLong(rs.getString("Period"))-date.getTime();
                             timeLeft=timeLeft/1000;
-                            e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "LIMITED BAN! \nReason: "+rs.getString("Grund")+"\nTime left: " + timeLeft);
+                            e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "LIMITED BAN! \nReason: "+rs.getString("Grund")+"\nTime left: " + timeLeft + " sec");
                             break;
                         }
 
