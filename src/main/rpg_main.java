@@ -90,6 +90,7 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("bindquest").setExecutor(questSystem);
 
 
+
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
 
