@@ -42,7 +42,7 @@ public class Archer extends CharPlayer implements Listener {
     }
 
     //nur zum Laden gedacht
-    public Archer(UUID player, String name, String klasse, int money, int level, int xp) {
+    public Archer(UUID player, String name, String klasse, int money, int level, int xp, String inv) {
         this.player = player;
         this.name = name;
         this.klasse = klasse;
@@ -51,11 +51,10 @@ public class Archer extends CharPlayer implements Listener {
         this.xp = xp;
         Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
-        YamlConfiguration c = YamlConfiguration.loadConfiguration(new File("plugins/RPG/Chars/" + player + "/" + name + "/" + name + "_inv.yml"));
-        ItemStack[] content = ((List<ItemStack>) c.get("inventory.armor")).toArray(new ItemStack[0]);
-        p.getInventory().setArmorContents(content);
-        content = ((List<ItemStack>) c.get("inventory.content")).toArray(new ItemStack[0]);
-        p.getInventory().setContents(content);
+
+        Inventory playerinv = InventoryStringDeSerializer.StringToInventory(inv);
+        p.getInventory().setContents(playerinv.getContents());
+
         p.setLevel(this.level);
         p.setExp(xp);
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
@@ -87,7 +86,7 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory());
+        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory(),p);
 
         MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv+"')");
     }

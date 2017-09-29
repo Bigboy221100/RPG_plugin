@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -13,8 +14,10 @@ import org.bukkit.inventory.ItemStack;
  * Created by user on 29.09.2017.
  */
 public class InventoryStringDeSerializer {
-    public static String InventoryToString (Inventory invInventory)
+    public static String InventoryToString (Inventory invInventory, Player player)
     {
+
+        invInventory.addItem(player.getInventory().getArmorContents());
         String serialization = invInventory.getSize() + ";";
         for (int i = 0; i < invInventory.getSize(); i++)
         {
