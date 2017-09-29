@@ -52,8 +52,14 @@ public class Archer extends CharPlayer implements Listener {
         Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
 
-        Inventory playerinv = InventoryStringDeSerializer.StringToInventory(inv);
-        p.getInventory().setContents(playerinv.getContents());
+        Inventory i = InventoryStringDeSerializer.StringToInventory(inv);
+        for (ItemStack is : i) {
+            if (is != null)
+            {
+                System.out.println(is);
+                p.getInventory().addItem(is);
+            }
+        }
 
         p.setLevel(this.level);
         p.setExp(xp);
@@ -86,7 +92,7 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory(),p);
+        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory());
 
         MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv+"')");
     }

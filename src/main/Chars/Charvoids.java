@@ -42,7 +42,9 @@ public class Charvoids {
     public static String getcharClass(String charname){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
-            return rs.getString("charclass");
+            while (rs.next()) {
+                return rs.getString("charclass");
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -52,7 +54,9 @@ public class Charvoids {
     public static String getcharname(String charname){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
-            return rs.getString("charname");
+            while (rs.next()) {
+                return rs.getString("charname");
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -62,7 +66,9 @@ public class Charvoids {
     public static int getcharmoney(String charname){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
-            return Integer.parseInt(rs.getString("charmoney"));
+            while (rs.next()) {
+                return Integer.parseInt(rs.getString("charmoney"));
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -72,7 +78,9 @@ public class Charvoids {
     public static int getcharlevel(String charname){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
-            return Integer.parseInt(rs.getString("charlevel"));
+            while (rs.next()) {
+                return Integer.parseInt(rs.getString("charlevel"));
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -82,7 +90,9 @@ public class Charvoids {
     public static int getcharxp(String charname){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
-            return Integer.parseInt(rs.getString("charxp"));
+            while (rs.next()) {
+                return Integer.parseInt(rs.getString("charxp"));
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -92,7 +102,9 @@ public class Charvoids {
     public static String getcharInv(String charname){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
-            return rs.getString("charlevel");
+            while (rs.next()) {
+                return rs.getString("charlevel");
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }
