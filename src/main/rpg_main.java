@@ -41,7 +41,6 @@ public class rpg_main extends JavaPlugin {
 
         //----------DungeonSystem---------//
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
-
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
         try {
             while (rs.next()) {
@@ -68,16 +67,12 @@ public class rpg_main extends JavaPlugin {
         }
         //-------------------//
 
-        /*
-
         //---------- BanManager ---------//
         BanManager banManager = new BanManager(this);
         this.getCommand("ban").setExecutor(banManager);
         this.getCommand("unban").setExecutor(banManager);
         this.getCommand("tempban").setExecutor(banManager);
         //-------------------//
-
-        */
 
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);

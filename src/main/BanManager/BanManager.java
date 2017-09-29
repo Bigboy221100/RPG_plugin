@@ -8,6 +8,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.ResultSet;
@@ -18,12 +22,12 @@ import java.util.UUID;
 /**
  * Created by maxim on 26.09.2017.
  */
-public class BanManager implements CommandExecutor{
-
+public class BanManager implements CommandExecutor, Listener{
     Plugin pl;
 
     public BanManager(Plugin pl) {
         this.pl = pl;
+        pl.getServer().getPluginManager().registerEvents(this, pl);
     }
 
     @Override
@@ -66,10 +70,10 @@ public class BanManager implements CommandExecutor{
                         try {
                             period=Integer.parseInt(args[1]);
                         } catch (Exception e) {}
-                        for (int i = 2; i < args.length; i++) {
-                            grund += args[i] + " ";
-                        }
                         if(period > 0) {
+                            for (int i = 2; i < args.length; i++) {
+                                grund += args[i] + " ";
+                            }
                             Date date = new Date();
                             p.sendMessage(date.getTime()+"");
                             tempbanPlayer(getPlayerUUID(args[0]), (date.getTime()+(period*1000)), grund);
@@ -113,6 +117,33 @@ public class BanManager implements CommandExecutor{
     }
 
     public String getPlayerUUID(String name) {
-        return Bukkit.getOfflinePlayer(name).getUniqueId().toString();
+        return Bukkit.getServer().getOfflinePlayer(name).getUniqueId().toString();
+    }
+
+    @EventHandler
+    public void PlayerLogin(PlayerLoginEvent e) {
+        Player p = e.getPlayer();
+        if(isBanned(getPlayerUUID(p.getName()))) {
+            ResultSet rs = MySQL.getResultSet("SELECT * FROM BanManager WHERE UUID='"+getPlayerUUID(p.getName())+"'");
+            try {
+                while(rs.next()) {
+                    int timeBanned=Integer.parseInt(rs.getString("Period"));
+                    Date date = new Date();
+                    e.disallow(PlayerLoginEvent.Result.KICK_BANNED,rs.getString("Grund"));
+                    p.sendMessage(timeBanned+"|"+date.getTime());
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+        }
+        e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "test");
+    }
+
+    @EventHandler
+    public void PlayerJoinListener(PlayerJoinEvent e) {
+        Player p = e.getPlayer();
+        if(isBanned(getPlayerUUID(p.getName()))) {
+
+        }
     }
 }
