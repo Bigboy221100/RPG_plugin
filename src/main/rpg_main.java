@@ -27,8 +27,8 @@ public class rpg_main extends JavaPlugin {
     public void onEnable() {
 
         //Chars
-        this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
-        this.getCommand("deletecharacter").setExecutor(new DeleteChar());
+        /*this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
+        this.getCommand("deletecharacter").setExecutor(new DeleteChar());*/
 
         //MySQL
         FileManager.setStandardMySQL();
@@ -87,8 +87,8 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("bindquest").setExecutor(questSystem);
 
 
-        Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
-        Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
+        //Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
+        //Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory", "true");
 

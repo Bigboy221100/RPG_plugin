@@ -44,6 +44,11 @@ public class BanManager implements CommandExecutor, Listener{
                         }
                         banPlayer(getPlayerUUID(args[0]), grund);
                         p.sendMessage("Spieler wurde gebannt!");
+                        for(Player pOnline: Bukkit.getServer().getOnlinePlayers()) {
+                            if(pOnline.getName().equalsIgnoreCase(args[0])) {
+                                pOnline.kickPlayer("You are banned from this server! \n " + grund);
+                            }
+                        }
                     } else {
                         p.sendMessage("Spieler wurde bereits gebannt!");
                     }
@@ -75,9 +80,13 @@ public class BanManager implements CommandExecutor, Listener{
                                 grund += args[i] + " ";
                             }
                             Date date = new Date();
-                            p.sendMessage(date.getTime()+"");
                             tempbanPlayer(getPlayerUUID(args[0]), (date.getTime()+(period*1000)), grund);
                             p.sendMessage("Spieler wurde gebannt!");
+                            for(Player pOnline: Bukkit.getServer().getOnlinePlayers()) {
+                                if(pOnline.getName().equalsIgnoreCase(args[0])) {
+                                    pOnline.kickPlayer("You are banned from this server! \n " + grund);
+                                }
+                            }
                         } else {
                             p.sendMessage("Spieler nicht gebannt (/tempban <Playername> <Period sec> <Reason>)!");
                         }
@@ -129,8 +138,18 @@ public class BanManager implements CommandExecutor, Listener{
             try {
                 while(rs.next()) {
                     if(rs.getString("UUID").equalsIgnoreCase(getPlayerUUID(p.getName()))) {
+                        if(rs.getString("Period").equalsIgnoreCase("-1")) {
+                            e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "PERMANENT BAN! \nReason: "+rs.getString("Grund")+"\nFor more information visit (Websitedomain)");
+                            break;
+                        }
+                        Date date = new Date();
+                        if(date.getTime() < Long.parseLong(rs.getString("Period"))) {
+                            long timeLeft=Long.parseLong(rs.getString("Period"))-date.getTime();
+                            timeLeft=timeLeft/1000;
+                            e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "LIMITED BAN! \nReason: "+rs.getString("Grund")+"\nTime left: " + timeLeft);
+                            break;
+                        }
 
-                        e.disallow(PlayerLoginEvent.Result.KICK_BANNED, rs.getString("Grund"));
                         break;
                     }
                 }
@@ -144,7 +163,16 @@ public class BanManager implements CommandExecutor, Listener{
     public void PlayerJoinListener(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         if(isBanned(getPlayerUUID(p.getName()))) {
-
+            ResultSet rs = MySQL.getResultSet("SELECT * FROM BanManager");
+            try {
+                while(rs.next()) {
+                    if(rs.getString("UUID").equalsIgnoreCase(getPlayerUUID(p.getName()))) {
+                        MySQL.update("DELETE FROM BanManager WHERE UUID='"+getPlayerUUID(p.getName())+"'");
+                    }
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }
