@@ -125,19 +125,18 @@ public class BanManager implements CommandExecutor, Listener{
     public void PlayerLogin(PlayerLoginEvent e) {
         Player p = e.getPlayer();
         if(isBanned(getPlayerUUID(p.getName()))) {
-            ResultSet rs = MySQL.getResultSet("SELECT * FROM BanManager WHERE UUID='"+getPlayerUUID(p.getName())+"'");
+            ResultSet rs = MySQL.getResultSet("SELECT * FROM BanManager");
             try {
                 while(rs.next()) {
-                    int timeBanned=Integer.parseInt(rs.getString("Period"));
-                    Date date = new Date();
-                    e.disallow(PlayerLoginEvent.Result.KICK_BANNED,rs.getString("Grund"));
-                    p.sendMessage(timeBanned+"|"+date.getTime());
+                    if(rs.getString("UUID").equalsIgnoreCase(getPlayerUUID(p.getName()))) {
+                        e.disallow(PlayerLoginEvent.Result.KICK_BANNED, rs.getString("Grund"));
+                        break;
+                    }
                 }
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
         }
-        e.disallow(PlayerLoginEvent.Result.KICK_BANNED, "test");
     }
 
     @EventHandler
