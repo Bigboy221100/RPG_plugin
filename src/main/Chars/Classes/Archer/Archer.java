@@ -52,8 +52,14 @@ public class Archer extends CharPlayer implements Listener {
         Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
 
-        Inventory playerinv = InventoryStringDeSerializer.StringToInventory(inv);
-        p.getInventory().setContents(playerinv.getContents());
+        Inventory i = InventoryStringDeSerializer.StringToInventory(inv);
+        for (ItemStack is : i) {
+            if (is != null)
+            {
+                System.out.println(is);
+                p.getInventory().addItem(is);
+            }
+        }
 
         p.setLevel(this.level);
         p.setExp(xp);

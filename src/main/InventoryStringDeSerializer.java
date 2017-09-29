@@ -58,7 +58,7 @@ public class InventoryStringDeSerializer {
     {
         String[] serializedBlocks = invString.split(";");
         String invInfo = serializedBlocks[0];
-        Inventory deserializedInventory = Bukkit.getServer().createInventory(null, Integer.valueOf(invInfo));
+        Inventory deserializedInventory = Bukkit.getServer().createInventory(null, 27);
 
         for (int i = 1; i < serializedBlocks.length; i++)
         {
@@ -77,8 +77,7 @@ public class InventoryStringDeSerializer {
             for (String itemInfo : serializedItemStack)
             {
                 String[] itemAttribute = itemInfo.split("@");
-                if (itemAttribute[0].equals("t"))
-                {
+                if (itemAttribute[0].equals("t")) {
                     is = new ItemStack(Material.getMaterial(Integer.valueOf(itemAttribute[1])));
                     createdItemStack = true;
                 }

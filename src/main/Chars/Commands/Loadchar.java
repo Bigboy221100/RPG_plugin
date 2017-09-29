@@ -19,7 +19,7 @@ public class Loadchar implements CommandExecutor {
                 Player p = (Player) sender;
                 if (p.hasPermission("rpg.character.load")) {
                     if (args.length == 1) {
-                        if (Charvoids.charbelongsto(p.getUniqueId() + "")) {
+                        if (Charvoids.charbelongsto(p.getUniqueId().toString())) {
                             if (Charvoids.isUsed(args[0]) == true) {
                                 if(Charvoids.getcharClass(args[0]).equalsIgnoreCase("Archer")) {
                                     CharPlayer charPlayer = new Archer(p.getUniqueId(),args[0],Charvoids.getcharClass(args[0]),Charvoids.getcharmoney(args[0]),Charvoids.getcharlevel(args[0]),Charvoids.getcharxp(args[0]),Charvoids.getcharInv(args[0]));
