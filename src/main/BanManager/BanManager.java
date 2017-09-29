@@ -90,6 +90,7 @@ public class BanManager implements CommandExecutor, Listener{
         return false;
     }
 
+
     public static void banPlayer(String uuid, String grund) {
         MySQL.update("INSERT INTO BanManager (UUID, Period, Grund) VALUES ('"+uuid+"','"+"-1"+"','"+grund+"')");
     }
