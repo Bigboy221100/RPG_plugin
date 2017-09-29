@@ -86,7 +86,7 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory(),p);
+        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory());
 
         MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv+"')");
     }

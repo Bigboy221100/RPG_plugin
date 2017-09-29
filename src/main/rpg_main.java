@@ -4,6 +4,7 @@ import main.BanManager.BanManager;
 import main.Chars.Classes.Archer.Archerevents;
 import main.Chars.Commands.CreatenewChar;
 import main.Chars.Commands.DeleteChar;
+import main.Chars.Commands.Loadchar;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
@@ -12,6 +13,7 @@ import main.Minigame.Minigame;
 import main.MySQL.FileManager;
 import main.MySQL.MySQL;
 import main.Quest.QuestSystem;
+import net.minecraft.server.v1_12_R1.CommandException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,15 +28,19 @@ public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
 
-        //Chars
-        this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
-        this.getCommand("deletecharacter").setExecutor(new DeleteChar());
+
 
         //MySQL
         FileManager.setStandardMySQL();
         FileManager.readMySQL();
         MySQL.connect();
         MySQL.createTable();
+
+        //Chars
+            this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
+            this.getCommand("deletecharacter").setExecutor(new DeleteChar());
+            this.getCommand("loadcharacter").setExecutor(new Loadchar());
+
 
         //MinigameSystem
         this.getCommand("minigame").setExecutor(new Minigame(this));

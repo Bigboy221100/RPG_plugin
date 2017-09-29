@@ -8,6 +8,8 @@ commands:
           description: Erstelle einen neuen Character
      deletecharacter:
           description: Delete an existing char
+     loadcharacter:
+          description: Load your character
      minigame:
           description: Erzeugt ein Minigame
      dungeon:
