@@ -27,9 +27,6 @@ import java.sql.SQLException;
 public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
-
-
-
         //MySQL
         FileManager.setStandardMySQL();
         FileManager.readMySQL();
