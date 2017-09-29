@@ -2,8 +2,9 @@ package main.Chars.Classes.Archer;
 
 
 import main.Chars.Classes.CharPlayer;
+import main.Chars.Playerinv;
+import main.InventoryStringDeSerializer;
 import main.MySQL.MySQL;
-import main.invserial;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -86,9 +87,9 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        Inventory playerinv =p.getInventory();
+        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory());
 
-        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"')");
+        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv+"')");
     }
 
 }
