@@ -129,6 +129,7 @@ public class BanManager implements CommandExecutor, Listener{
             try {
                 while(rs.next()) {
                     if(rs.getString("UUID").equalsIgnoreCase(getPlayerUUID(p.getName()))) {
+
                         e.disallow(PlayerLoginEvent.Result.KICK_BANNED, rs.getString("Grund"));
                         break;
                     }
