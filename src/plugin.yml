@@ -30,3 +30,9 @@ commands:
           description: Spawnt einen NPC der für Quests genutzt werden kann
      bindquest:
           description: Bindet eine Quest an ein Objekt
+     ban:
+          description: Bannt einer Spieler
+     unban:
+          description: Entbannt einen Spieler
+     tempban:
+          description: Bannt einen Spieler auf gewisse Zeit
