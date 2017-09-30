@@ -56,7 +56,6 @@ public class Archer extends CharPlayer implements Listener {
         for (ItemStack is : i) {
             if (is != null)
             {
-                System.out.println(is);
                 p.getInventory().addItem(is);
             }
         }
