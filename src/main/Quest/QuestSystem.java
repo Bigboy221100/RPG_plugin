@@ -83,6 +83,11 @@ public class QuestSystem implements CommandExecutor{
                     }
 
                     p.sendMessage(quests.get(quests.size() - 1).toString());
+
+                    QuestJSON json = new QuestJSON();
+                    json.setQuests(quests);
+                    json.writeQuest();
+
                     return true;
                 } else {
                     p.sendMessage("Nicht genügend oder zuviele Argumente, benötigt wird: Quest-Type, Mindestlevel und QuestName");

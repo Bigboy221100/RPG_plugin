@@ -1,4 +1,5 @@
 package main.Quest.Types;
+
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -30,6 +31,16 @@ public class Quest {
         reward = "Einen Keks"; // :P
     }
 
+    public Quest(int questID, int levelRequirement, String questName, String description, HashMap<Integer, String> missionTargets, String reward, QuestTypes questType) {
+        this.questID = questID;
+        this.levelRequirement = levelRequirement;
+        this.questName = questName;
+        this.description = description;
+        this.missionTargets = missionTargets;
+        this.reward = reward;
+        this.questType = questType;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -51,8 +62,38 @@ public class Quest {
 
     public void setReward(String reward){ this.reward = reward;}
 
+
     @Override
     public String toString() {
         return questName + " ID: " + questID + " Type: " + questType.toString();
     }
+
+    public int getQuestID() {
+        return questID;
+    }
+
+    public int getLevelRequirement() {
+        return levelRequirement;
+    }
+
+    public String getQuestName() {
+        return questName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public HashMap<Integer, String> getMissionTargets() {
+        return missionTargets;
+    }
+
+    public String getReward() {
+        return reward;
+    }
+
+    public QuestTypes getQuestType() {
+        return questType;
+    }
+
 }

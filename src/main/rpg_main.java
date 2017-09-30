@@ -15,11 +15,12 @@ import main.MySQL.MySQL;
 import main.News.News;
 import main.News.NewsManager;
 import main.Quest.QuestSystem;
-import net.minecraft.server.v1_12_R1.CommandException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -102,6 +103,17 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("editreward").setExecutor(questSystem);
         this.getCommand("spawnquestnpc").setExecutor(questSystem);
         this.getCommand("bindquest").setExecutor(questSystem);
+
+        File f = new File("plugins/RPG/Quests");
+        if(!f.exists()) {
+            f.mkdir();
+            f = new File("plugins/RPG/Quests/Quests.json");
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
