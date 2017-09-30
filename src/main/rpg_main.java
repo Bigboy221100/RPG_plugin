@@ -36,10 +36,10 @@ public class rpg_main extends JavaPlugin {
         MySQL.createTable();
 
         //Chars
-        /*    this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
+            this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
             this.getCommand("deletecharacter").setExecutor(new DeleteChar());
             this.getCommand("loadcharacter").setExecutor(new Loadchar());
-        */
+
 
         //MinigameSystem
         this.getCommand("minigame").setExecutor(new Minigame(this));
@@ -103,8 +103,8 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("spawnquestnpc").setExecutor(questSystem);
         this.getCommand("bindquest").setExecutor(questSystem);
 
-        //Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
-        //Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
+        Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory", "true");
 

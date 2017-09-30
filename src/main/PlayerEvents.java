@@ -61,7 +61,7 @@ public class PlayerEvents implements Listener {
     public void food(FoodLevelChangeEvent e) {
         e.setFoodLevel(20);
     }
-
+    /*
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -72,4 +72,5 @@ public class PlayerEvents implements Listener {
             p.openInventory(inv);
         }
     }
+    */
 }
