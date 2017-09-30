@@ -12,6 +12,8 @@ import main.Dungeon.DungeonQueue;
 import main.Minigame.Minigame;
 import main.MySQL.FileManager;
 import main.MySQL.MySQL;
+import main.News.News;
+import main.News.NewsManager;
 import main.Quest.QuestSystem;
 import net.minecraft.server.v1_12_R1.CommandException;
 import org.bukkit.Bukkit;
@@ -27,9 +29,6 @@ import java.sql.SQLException;
 public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
-
-
-
         //MySQL
         FileManager.setStandardMySQL();
         FileManager.readMySQL();
@@ -80,6 +79,18 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("tempban").setExecutor(banManager);
         //-------------------//
 
+        //---------- News ---------//
+        this.getCommand("news").setExecutor(new NewsManager(this));
+        ResultSet rs2 = MySQL.getResultSet("SELECT * FROM NewsManager");
+        try {
+            while (rs2.next()) {
+                NewsManager.newsManager.add(new News(rs2.getString("news"), Integer.parseInt(rs2.getString("newsTime")), this));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //-------------------//
+
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);
         this.getCommand("createquest").setExecutor(questSystem);
@@ -91,7 +102,6 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("editreward").setExecutor(questSystem);
         this.getCommand("spawnquestnpc").setExecutor(questSystem);
         this.getCommand("bindquest").setExecutor(questSystem);
-
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);

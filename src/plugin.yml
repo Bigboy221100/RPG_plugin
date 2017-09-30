@@ -38,3 +38,5 @@ commands:
           description: Entbannt einen Spieler
      tempban:
           description: Bannt einen Spieler auf gewisse Zeit
+     news:
+          description: A news plugin
