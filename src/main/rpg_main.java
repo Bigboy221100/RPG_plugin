@@ -111,7 +111,7 @@ public class rpg_main extends JavaPlugin {
         if(!f.exists())
             f.mkdir();
 
-        f = new File("plugins/RPG/Quests/QuestList.json");
+        f = new File("plugins/RPG/Quests/Quests.json");
         if(!f.exists())
             QuestSystem.quests = new ArrayList<>();
         else
