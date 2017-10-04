@@ -128,6 +128,7 @@ public class rpg_main extends JavaPlugin {
     public void onDisable() {
         System.out.println("Rpg disabled");
         QuestJSON.writeJSON();
+
         MySQL.close();
     }
 
