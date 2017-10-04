@@ -14,15 +14,16 @@ import main.MySQL.FileManager;
 import main.MySQL.MySQL;
 import main.News.News;
 import main.News.NewsManager;
+import main.Quest.QuestJSON;
 import main.Quest.QuestSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Fabian on 19.07.2017.
@@ -103,17 +104,18 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("editreward").setExecutor(questSystem);
         this.getCommand("spawnquestnpc").setExecutor(questSystem);
         this.getCommand("bindquest").setExecutor(questSystem);
+        this.getCommand("savequests").setExecutor(questSystem);
+        this.getCommand("loadquests").setExecutor(questSystem);
 
         File f = new File("plugins/RPG/Quests");
-        if(!f.exists()) {
+        if(!f.exists())
             f.mkdir();
-            f = new File("plugins/RPG/Quests/Quests.json");
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        f = new File("plugins/RPG/Quests/QuestList.json");
+        if(!f.exists())
+            QuestSystem.quests = new ArrayList<>();
+        else
+            QuestSystem.quests = QuestJSON.load();
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
@@ -125,6 +127,7 @@ public class rpg_main extends JavaPlugin {
 
     public void onDisable() {
         System.out.println("Rpg disabled");
+        QuestJSON.writeJSON();
         MySQL.close();
     }
 

@@ -32,6 +32,10 @@ commands:
           description: Spawnt einen NPC der für Quests genutzt werden kann
      bindquest:
           description: Bindet eine Quest an ein Objekt
+     savequests:
+          description: Speichert alle Quests im JSON-File
+     loadquests:
+          description: Lädt alle Quests aus dem JSON-File
      ban:
           description: Bannt einer Spieler
      unban:
