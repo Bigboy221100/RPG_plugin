@@ -9,6 +9,7 @@ import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
 import main.Dungeon.DungeonQueue;
+import main.Group.Groups;
 import main.Minigame.Minigame;
 import main.MySQL.FileManager;
 import main.MySQL.MySQL;
@@ -31,7 +32,7 @@ public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
         //MySQL
-        FileManager.setStandardMySQL();
+        /*FileManager.setStandardMySQL();
         FileManager.readMySQL();
         MySQL.connect();
         MySQL.createTable();
@@ -40,13 +41,13 @@ public class rpg_main extends JavaPlugin {
             this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
             this.getCommand("deletecharacter").setExecutor(new DeleteChar());
             this.getCommand("loadcharacter").setExecutor(new Loadchar());
-
+        */
 
         //MinigameSystem
         this.getCommand("minigame").setExecutor(new Minigame(this));
 
         //----------DungeonSystem---------//
-        this.getCommand("dungeon").setExecutor(new Dungeon(this));
+        /*this.getCommand("dungeon").setExecutor(new Dungeon(this));
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
         try {
             while (rs.next()) {
@@ -70,27 +71,32 @@ public class rpg_main extends JavaPlugin {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
         //-------------------//
 
         //---------- BanManager ---------//
-        BanManager banManager = new BanManager(this);
+        /*BanManager banManager = new BanManager(this);
         this.getCommand("ban").setExecutor(banManager);
         this.getCommand("unban").setExecutor(banManager);
         this.getCommand("tempban").setExecutor(banManager);
+        */
         //-------------------//
 
         //---------- News ---------//
-        this.getCommand("news").setExecutor(new NewsManager(this));
+        /*this.getCommand("news").setExecutor(new NewsManager(this));
         ResultSet rs2 = MySQL.getResultSet("SELECT * FROM NewsManager");
         try {
             while (rs2.next()) {
-                NewsManager.newsManager.add(new News(rs2.getString("news"), Integer.parseInt(rs2.getString("newsTime")), this));
+                NewsManager.newsManager.add(new News(rs2.getString("news"), rs2.getInt("newsTime"), this));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
         //-------------------//
+        //Groups
+        this.getCommand("group").setExecutor(new Groups(this));
+
+        //
 
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);
@@ -125,7 +131,7 @@ public class rpg_main extends JavaPlugin {
 
     public void onDisable() {
         System.out.println("Rpg disabled");
-        MySQL.close();
+        //MySQL.close();
     }
 
 }

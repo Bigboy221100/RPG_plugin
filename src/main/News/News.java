@@ -16,11 +16,10 @@ public class News{
     public News(String news, int time, Plugin pl) {
         this.news=news;
         this.time=time;
-
         this.id = Bukkit.getScheduler().scheduleSyncRepeatingTask(pl, new Runnable() {
             @Override
             public void run() {
-                for(Player p : Bukkit.getOnlinePlayers()) {
+                for(Player p : Bukkit.getServer().getOnlinePlayers()) {
                     p.sendMessage(ChatColor.GOLD+"[NewsManager] " + ChatColor.RED+news);
                 }
             }

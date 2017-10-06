@@ -68,7 +68,6 @@ public class NewsManager implements CommandExecutor{
                     }
                 }
             }
-
         }
         return false;
     }

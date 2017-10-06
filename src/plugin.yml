@@ -40,3 +40,5 @@ commands:
           description: Bannt einen Spieler auf gewisse Zeit
      news:
           description: A news plugin
+     group:
+          descirption: A group plugin
