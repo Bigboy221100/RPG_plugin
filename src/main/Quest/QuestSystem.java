@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class QuestSystem implements CommandExecutor{
     private Plugin pl;
-    private ArrayList<Quest> quests = new ArrayList<>();
+    public static ArrayList<Quest> quests;
 
     public QuestSystem(Plugin pl){
         this.pl = pl;
@@ -84,9 +84,6 @@ public class QuestSystem implements CommandExecutor{
 
                     p.sendMessage(quests.get(quests.size() - 1).toString());
 
-                    QuestJSON json = new QuestJSON();
-                    json.setQuests(quests);
-                    json.writeQuest();
 
                     return true;
                 } else {
@@ -261,6 +258,13 @@ public class QuestSystem implements CommandExecutor{
                 return true;
             }
 
+            if(cmd.getName().equalsIgnoreCase("savequests"))
+                QuestJSON.writeJSON();
+
+            if(cmd.getName().equalsIgnoreCase("laodquests"))
+                quests = QuestJSON.load();
+
+
         } else {
             System.out.println("Sie sind kein Spieler");
         }
@@ -289,6 +293,9 @@ public class QuestSystem implements CommandExecutor{
             return false;
         }
     }
+
+
+
 }
 
 

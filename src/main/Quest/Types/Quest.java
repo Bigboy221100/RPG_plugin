@@ -2,14 +2,14 @@ package main.Quest.Types;
 
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Quest {
     protected int questID;
     protected int levelRequirement;
     protected String questName;
     protected String description;
-    protected HashMap<Integer,String> missionTargets;
+    protected ArrayList<String> missionTargets;
     protected String reward;
 
     public enum QuestTypes{
@@ -27,11 +27,11 @@ public class Quest {
         this.levelRequirement = levelRequirement;
         this.questName = questName;
         description = "";
-        missionTargets = new HashMap<>();
+        missionTargets = new ArrayList<>();
         reward = "Einen Keks"; // :P
     }
 
-    public Quest(int questID, int levelRequirement, String questName, String description, HashMap<Integer, String> missionTargets, String reward, QuestTypes questType) {
+    public Quest(int questID, int levelRequirement, String questName, String description, ArrayList<String> missionTargets, String reward, QuestTypes questType) {
         this.questID = questID;
         this.levelRequirement = levelRequirement;
         this.questName = questName;
@@ -46,10 +46,10 @@ public class Quest {
     }
 
     public void addMissionTarget(int index,String description){
-        missionTargets.put(index,description);
+        missionTargets.add(index,description);
     }
 
-    public void editMissionTarget(int index,String description) { missionTargets.replace(index,description);}
+    public void editMissionTarget(int index,String description) { missionTargets.set(index,description);}
 
     public void deleteMissionTarget(int index) { missionTargets.remove(index);}
 
@@ -62,38 +62,19 @@ public class Quest {
 
     public void setReward(String reward){ this.reward = reward;}
 
-
     @Override
     public String toString() {
-        return questName + " ID: " + questID + " Type: " + questType.toString();
+        ArrayList<String> tmp = missionTargets;
+        tmp.forEach(e -> e = "\"" + e + "\"");
+        return "{ \"questID\": " + questID + "," +
+                " \"questname\": \"" + questName + "\"," +
+                " \"questType\": \"" + questType + "\"," +
+                " \"levelRequirement\": " + levelRequirement + "," +
+                " \"description\": \"" + description + "\"," +
+                " \"missionTargets\": " + tmp.toString() + "," +
+                " \"reward\": \"" + reward  + "\" }";
     }
 
-    public int getQuestID() {
-        return questID;
-    }
 
-    public int getLevelRequirement() {
-        return levelRequirement;
-    }
-
-    public String getQuestName() {
-        return questName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public HashMap<Integer, String> getMissionTargets() {
-        return missionTargets;
-    }
-
-    public String getReward() {
-        return reward;
-    }
-
-    public QuestTypes getQuestType() {
-        return questType;
-    }
 
 }

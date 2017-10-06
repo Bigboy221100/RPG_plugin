@@ -103,7 +103,7 @@ public class Charvoids {
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE charname='"+charname+"'");
         try{
             while (rs.next()) {
-                return rs.getString("charlevel");
+                return rs.getString("charinv");
             }
         }catch (SQLException e){
             e.printStackTrace();
