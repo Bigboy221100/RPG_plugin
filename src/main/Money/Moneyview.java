@@ -1,5 +1,6 @@
 package main.Money;
 
+import main.Chars.Charvoids;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,20 +19,12 @@ public class Moneyview implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("Moneyview")) {
             if (sender instanceof Player) {
                 Player p = (Player) sender;
-                if (p.hasPermission("rpg.Moneyview.credit")) try {
-                    String charname[] = p.getDisplayName().split("\\s+");
-                    FileReader fr = new FileReader("plugins/RPG/Chars/" + p.getUniqueId() + "/" + charname[1] + "/" + charname[1] + ".txt");
-                    BufferedReader reader = new BufferedReader(fr);
-                    reader.readLine();
-                    reader.readLine();
-                    reader.readLine();
-                    int money=Integer.parseInt(reader.readLine());
-                    int gold=money/1000000;
-                    int silver=(money/1000)%100;
-                    int bronze=money%100;
-                    p.sendMessage("§6G: " + gold + " §7S: "+ silver + " §4B: " + bronze);
-                } catch (IOException e) {
-                    p.sendMessage("Fehler");
+                if (p.hasPermission("rpg.moneyview.credit")) {
+                    int money = Charvoids.getcharmoney(p.getDisplayName());
+                    int gold = money / 1000000;
+                    int silver = (money / 1000) % 100;
+                    int bronze = money % 100;
+                    p.sendMessage("§6G: " + gold + " §7S: " + silver + " §4B: " + bronze);
                 }
             }
         }

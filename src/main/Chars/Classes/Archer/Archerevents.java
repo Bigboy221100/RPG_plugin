@@ -25,7 +25,6 @@ public class Archerevents implements Listener {
     /*@EventHandler
     public void onLevel(PlayerLevelChangeEvent e) {
         Player p = e.getPlayer();
-        helpvoids help = new helpvoids();
         help.setcharacterlevel(p.getDisplayName(), p, e.getNewLevel());
         if ((help.getcharacterklasse(p.getDisplayName() + "", p)).equalsIgnoreCase("Archer")) {
             p.sendMessage("Sie sind nun Level " + e.getNewLevel());
@@ -63,7 +62,7 @@ public class Archerevents implements Listener {
         }
     }
 
-
+    */
     @EventHandler
     public void repairWeapons(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
@@ -104,7 +103,7 @@ public class Archerevents implements Listener {
             }
         }
     }
-
+    /*
     @EventHandler
     public void onPlayerInvItemClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();

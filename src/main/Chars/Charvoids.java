@@ -1,6 +1,7 @@
 package main.Chars;
 
 import main.MySQL.MySQL;
+import sun.security.mscapi.KeyStore;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -85,6 +86,10 @@ public class Charvoids {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public static void setcharlevel(int level, String charname){
+        MySQL.update("UPDATE Characters SET charlevel=\""+ level + "\" WHERE charname=\""+ charname +"\"");
     }
 
     public static int getcharxp(String charname){
