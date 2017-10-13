@@ -1,5 +1,6 @@
 package main.Chars.Classes.Archer;
 
+import main.Chars.Charvoids;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -22,11 +23,12 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  * Created by Fabian on 02.08.2017.
  */
 public class Archerevents implements Listener {
-    /*@EventHandler
+    @EventHandler
     public void onLevel(PlayerLevelChangeEvent e) {
         Player p = e.getPlayer();
-        help.setcharacterlevel(p.getDisplayName(), p, e.getNewLevel());
-        if ((help.getcharacterklasse(p.getDisplayName() + "", p)).equalsIgnoreCase("Archer")) {
+        String help[]=p.getDisplayName().split(" ");
+        Charvoids.setcharlevel(e.getNewLevel(),help[1]);
+        if ((Charvoids.getcharClass(help[1])).equalsIgnoreCase("Archer")) {
             p.sendMessage("Sie sind nun Level " + e.getNewLevel());
             switch (e.getNewLevel()) {
                 case 2:
@@ -62,7 +64,7 @@ public class Archerevents implements Listener {
         }
     }
 
-    */
+
     @EventHandler
     public void repairWeapons(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {

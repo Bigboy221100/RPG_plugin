@@ -1,6 +1,7 @@
 package main;
 
 import main.BanManager.BanManager;
+import main.Chars.Charevents;
 import main.Chars.Classes.Archer.Archerevents;
 import main.Chars.Commands.CreatenewChar;
 import main.Chars.Commands.DeleteChar;
@@ -119,6 +120,7 @@ public class rpg_main extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
+        Bukkit.getPluginManager().registerEvents(new Charevents(),this);
 
         Bukkit.getWorld("world").setGameRuleValue("keepInventory", "true");
 

@@ -115,5 +115,21 @@ public class Charvoids {
         return null;
     }
 
+    public static void setcharinv(String inv, String charname){
+        MySQL.update("UPDATE Characters SET charinv=\""+ inv + "\" WHERE charname=\""+ charname +"\"");
+    }
+
+    public static String getcurrentchar(String UUID){
+        ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE UUID='"+UUID+"' AND currentplaying=1");
+        try{
+            while (rs.next()) {
+                return rs.getString("charname");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 }
