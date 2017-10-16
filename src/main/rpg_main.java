@@ -5,6 +5,7 @@ import main.Chars.Charevents;
 import main.Chars.Classes.Archer.Archerevents;
 import main.Chars.Commands.CreatenewChar;
 import main.Chars.Commands.DeleteChar;
+import main.Chars.Commands.ListChar;
 import main.Chars.Commands.Loadchar;
 import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
@@ -42,6 +43,7 @@ public class rpg_main extends JavaPlugin {
             this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
             this.getCommand("deletecharacter").setExecutor(new DeleteChar());
             this.getCommand("loadcharacter").setExecutor(new Loadchar());
+            this.getCommand("listcharacter").setExecutor(new ListChar());
 
 
         //MinigameSystem
