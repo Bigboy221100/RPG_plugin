@@ -4,6 +4,7 @@ import main.MySQL.MySQL;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -131,5 +132,19 @@ public class Charvoids {
         return null;
     }
 
+    public static Object [] getuserchars(String UUID){
+        ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE UUID='"+UUID+"'");
+        ArrayList <String> help=new ArrayList<>();
+        try{
+            while (rs.next()) {
+                help.add(rs.getString("charname"));
+            }
+            Object []erg=help.toArray();
+            return erg;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }
