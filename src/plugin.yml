@@ -10,6 +10,8 @@ commands:
           description: Delete an existing char
      loadcharacter:
           description: Load your character
+     listcharacter:
+          description: List your character
      minigame:
           description: Erzeugt ein Minigame
      dungeon:
