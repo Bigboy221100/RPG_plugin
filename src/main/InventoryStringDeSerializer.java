@@ -16,8 +16,10 @@ import org.bukkit.inventory.ItemStack;
 public class InventoryStringDeSerializer {
     public static String InventoryToString (Inventory invInventory, Player player)
     {
-
-        invInventory.addItem(player.getInventory().getArmorContents());
+        System.out.println(player.getInventory().getArmorContents());
+        if(player.getInventory().getArmorContents()!=null) {
+            invInventory.addItem(player.getInventory().getArmorContents());
+        }
         String serialization = invInventory.getSize() + ";";
         for (int i = 0; i < invInventory.getSize(); i++)
         {

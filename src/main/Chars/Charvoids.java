@@ -130,6 +130,16 @@ public class Charvoids {
         }
         return null;
     }
+    public static void logoutcurrentchar(String UUID){
+        ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE UUID='"+UUID+"' AND currentplaying=1");
+        try{
+            while (rs.next()) {
+                MySQL.update("UPDATE Characters SET Characters.currentplaying=0;");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     public static Object [] getuserchars(String UUID){
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Characters WHERE UUID='"+UUID+"'");

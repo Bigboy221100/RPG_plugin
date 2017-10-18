@@ -20,6 +20,7 @@ public class Charevents implements Listener {
         String name=Charvoids.getcurrentchar(p.getUniqueId()+"");
         String inv = InventoryStringDeSerializer.InventoryToString(p.getInventory(),p);
         Charvoids.setcharinv(inv,name);
+        Charvoids.logoutcurrentchar(p.getUniqueId()+"");
         CharPlayer charPlayer = new Normal(p);
     }
 }
