@@ -116,7 +116,8 @@ public class Charvoids {
     }
 
     public static void setcharinv(String inv, String charname){
-        MySQL.update("UPDATE Characters SET charinv=\""+ inv + "\" WHERE charname=\""+ charname +"\"");
+        MySQL.update("UPDATE Characters SET charinv="+ inv + " WHERE charname="+ charname +"");
+        System.out.println("update done");
     }
 
     public static String getcurrentchar(String UUID){

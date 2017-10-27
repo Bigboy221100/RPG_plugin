@@ -46,7 +46,7 @@ public class MySQL {
             try {
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS Dungeons (DungeonName VARCHAR(100), DungeonID VARCHAR(100), Spawn VARCHAR(100))");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS DungeonMobs (DungeonName VARCHAR(100), Location VARCHAR(100), MobType VARCHAR(100), Wave VARCHAR(100))");
-                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS Characters (UUID VARCHAR(100), charname VARCHAR(100), charclass VARCHAR(100), charmoney VARCHAR(100), charlevel VARCHAR(100), charxp VARCHAR (100), charinv VARCHAR(600), currentplaying BOOL)");
+                con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS Characters (UUID VARCHAR(100), charname VARCHAR(100), charclass VARCHAR(100), charmoney VARCHAR(100), charlevel VARCHAR(100), charxp VARCHAR (100), charinv VARCHAR(1500), currentplaying BOOL)");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS BanManager (UUID VARCHAR(100), Period VARCHAR(100), Grund VARCHAR(100))");
                 con.createStatement().executeUpdate("CREATE TABLE IF NOT EXISTS NewsManager (id VARCHAR(100), newsTime VARCHAR(100), news VARCHAR(100))");
                 System.out.println("Datenbank erstellt!");

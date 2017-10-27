@@ -1,5 +1,4 @@
-package main.text;
-
+package main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;

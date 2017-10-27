@@ -32,39 +32,43 @@ public class Archerevents implements Listener {
         String help[] = p.getDisplayName().split(" ");
         if (Charvoids.getcurrentchar(p.getUniqueId() + "") == null) {
             Charvoids.setcharlevel(e.getNewLevel(), help[1]);
-            if ((Charvoids.getcharClass(help[1])).equalsIgnoreCase("Archer")) {
-                p.sendMessage("Sie sind nun Level " + e.getNewLevel());
-                switch (e.getNewLevel()) {
-                    case 2:
-                        ItemStack chestp = new ItemStack(Material.LEATHER_CHESTPLATE);
-                        LeatherArmorMeta chest = (LeatherArmorMeta) chestp.getItemMeta();
-                        chest.setColor(Color.ORANGE);
-                        chest.setUnbreakable(true);
-                        p.getInventory().setChestplate(chestp);
-                        break;
-                    case 3:
-                        ItemStack leggi = new ItemStack(Material.LEATHER_LEGGINGS);
-                        LeatherArmorMeta trouser = (LeatherArmorMeta) leggi.getItemMeta();
-                        trouser.setColor(Color.ORANGE);
-                        trouser.setUnbreakable(true);
-                        p.getInventory().setLeggings(leggi);
-                        break;
-                    case 4:
-                        ItemStack helme = new ItemStack(Material.LEATHER_HELMET);
-                        LeatherArmorMeta helm = (LeatherArmorMeta) helme.getItemMeta();
-                        helm.setColor(Color.ORANGE);
-                        helm.setUnbreakable(true);
-                        p.getInventory().setHelmet(helme);
-                        break;
-                    case 5:
-                        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-                        LeatherArmorMeta boot = (LeatherArmorMeta) boots.getItemMeta();
-                        boot.setColor(Color.ORANGE);
-                        boot.setUnbreakable(true);
-                        p.getInventory().setBoots(boots);
-                        p.sendMessage("Ihr Bogen ist zum Upgraden bereit!");
-                        break;
+            try {
+                if ((Charvoids.getcharClass(help[1])).equalsIgnoreCase("Archer")) {
+                    p.sendMessage("Sie sind nun Level " + e.getNewLevel());
+                    switch (e.getNewLevel()) {
+                        case 2:
+                            ItemStack chestp = new ItemStack(Material.LEATHER_CHESTPLATE);
+                            LeatherArmorMeta chest = (LeatherArmorMeta) chestp.getItemMeta();
+                            chest.setColor(Color.ORANGE);
+                            chest.setUnbreakable(true);
+                            p.getInventory().setChestplate(chestp);
+                            break;
+                        case 3:
+                            ItemStack leggi = new ItemStack(Material.LEATHER_LEGGINGS);
+                            LeatherArmorMeta trouser = (LeatherArmorMeta) leggi.getItemMeta();
+                            trouser.setColor(Color.ORANGE);
+                            trouser.setUnbreakable(true);
+                            p.getInventory().setLeggings(leggi);
+                            break;
+                        case 4:
+                            ItemStack helme = new ItemStack(Material.LEATHER_HELMET);
+                            LeatherArmorMeta helm = (LeatherArmorMeta) helme.getItemMeta();
+                            helm.setColor(Color.ORANGE);
+                            helm.setUnbreakable(true);
+                            p.getInventory().setHelmet(helme);
+                            break;
+                        case 5:
+                            ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+                            LeatherArmorMeta boot = (LeatherArmorMeta) boots.getItemMeta();
+                            boot.setColor(Color.ORANGE);
+                            boot.setUnbreakable(true);
+                            p.getInventory().setBoots(boots);
+                            p.sendMessage("Ihr Bogen ist zum Upgraden bereit!");
+                            break;
+                    }
                 }
+            } catch (NullPointerException a) {
+
             }
         }
     }

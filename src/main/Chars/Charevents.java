@@ -2,8 +2,7 @@ package main.Chars;
 
 import main.Chars.Classes.CharPlayer;
 import main.Chars.Classes.Normal;
-import main.InventoryStringDeSerializer;
-import main.MySQL.MySQL;
+import main.InvSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,12 +14,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class Charevents implements Listener {
 
     @EventHandler
-    public void onCharLeave(PlayerQuitEvent e){
-        Player p= e.getPlayer();
-        String name=Charvoids.getcurrentchar(p.getUniqueId()+"");
-        String inv = InventoryStringDeSerializer.InventoryToString(p.getInventory(),p);
-        Charvoids.setcharinv(inv,name);
-        Charvoids.logoutcurrentchar(p.getUniqueId()+"");
+    public void onCharLeave(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        String name = Charvoids.getcurrentchar(p.getUniqueId() + "");
+        String inv[] = InvSerializer.playerInventoryToBase64(p.getInventory());
+        System.out.println(inv[0]);
+        Charvoids.setcharinv(inv[0], name);
+        Charvoids.logoutcurrentchar(p.getUniqueId() + "");
         CharPlayer charPlayer = new Normal(p);
     }
 }
