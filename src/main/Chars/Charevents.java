@@ -18,7 +18,6 @@ public class Charevents implements Listener {
         Player p = e.getPlayer();
         String name = Charvoids.getcurrentchar(p.getUniqueId() + "");
         String inv[] = InvSerializer.playerInventoryToBase64(p.getInventory());
-        System.out.println(inv[0]);
         Charvoids.setcharinv(inv[0], name);
         Charvoids.logoutcurrentchar(p.getUniqueId() + "");
         CharPlayer charPlayer = new Normal(p);

@@ -47,7 +47,6 @@ public class Archer extends CharPlayer implements Listener {
         this.xp = xp;
         Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
-        System.out.println(inv);
         try {
             ItemStack[]test2 = InvSerializer.itemStackArrayFromBase64(inv);
             for (ItemStack is : test2) {
@@ -96,7 +95,6 @@ public class Archer extends CharPlayer implements Listener {
         p.getInventory().setItem(8, head);
 
         String playerinv[]=InvSerializer.playerInventoryToBase64(p.getInventory());
-        System.out.println(playerinv[0]);
 
         MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv, currentplaying) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv[0]+"',true)");
     }
