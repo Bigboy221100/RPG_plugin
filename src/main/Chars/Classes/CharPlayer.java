@@ -11,7 +11,7 @@ public class CharPlayer {
     protected String klasse;
     protected int money;
     protected int level;
-    protected int xp;
+    protected double xp;
 
     public CharPlayer(UUID player, String name, String klasse) {
         this.player = player;
@@ -39,7 +39,7 @@ public class CharPlayer {
         return level;
     }
 
-    public int getXp() {
+    public double getXp() {
         return xp;
     }
 

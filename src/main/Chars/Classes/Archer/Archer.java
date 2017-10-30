@@ -38,7 +38,7 @@ public class Archer extends CharPlayer implements Listener {
     }
 
     //nur zum Laden gedacht
-    public Archer(UUID player, String name, String klasse, int money, int level, int xp, String inv) {
+    public Archer(UUID player, String name, String klasse, int money, int level, double xp, String inv) {
         this.player = player;
         this.name = name;
         this.klasse = klasse;
@@ -62,7 +62,7 @@ public class Archer extends CharPlayer implements Listener {
 
 
         p.setLevel(this.level);
-        p.setExp(xp);
+        p.setExp((float)xp);
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
         p.setCustomName("[Archer] " + name);
         p.setCustomNameVisible(true);
