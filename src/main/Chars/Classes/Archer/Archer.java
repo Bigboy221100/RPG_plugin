@@ -48,28 +48,23 @@ public class Archer extends CharPlayer implements Listener {
         Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
         try {
-            ItemStack[]test2 = InvSerializer.itemStackArrayFromBase64(inv);
+            ItemStack[] test2 = InvSerializer.itemStackArrayFromBase64(inv);
             for (ItemStack is : test2) {
-                if (is != null)
-                {
+                if (is != null) {
                     p.getInventory().addItem(is);
                 }
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
-
-
         p.setLevel(this.level);
-        p.setExp((float)xp);
+        p.setExp((float) xp);
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
         p.setCustomName("[Archer] " + name);
         p.setCustomNameVisible(true);
         p.setPlayerListName("§1[§6Archer§1]§2 " + name);
         p.setGameMode(GameMode.ADVENTURE);
-
-
     }
 
     private void ausrüsten() {
@@ -94,9 +89,9 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        String playerinv[]=InvSerializer.playerInventoryToBase64(p.getInventory());
+        String playerinv[] = InvSerializer.playerInventoryToBase64(p.getInventory());
 
-        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv, currentplaying) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv[0]+"',true)");
+        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv, currentplaying) VALUES ('" + player + "','" + name + "','" + klasse + "','" + money + "','" + level + "','" + xp + "','" + playerinv[0] + "',true)");
     }
 
 }
