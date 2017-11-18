@@ -48,6 +48,8 @@ public class rpg_main extends JavaPlugin {
 
         //----------DungeonSystem---------//
         this.getCommand("dungeon").setExecutor(new Dungeon(this));
+
+
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
         try {
             while (rs.next()) {
