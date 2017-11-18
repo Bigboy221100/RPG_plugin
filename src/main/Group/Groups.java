@@ -97,6 +97,7 @@ public class Groups implements CommandExecutor{
         p.sendMessage("Player not online!");
     }
 
+
     public boolean isInGroup(Player p) {
         for(Group g: groups) {
             for(Player playersInGroup: g.groupPlayers) {
