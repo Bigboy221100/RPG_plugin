@@ -2,21 +2,17 @@ package main.Chars.Classes.Archer;
 
 
 import main.Chars.Classes.CharPlayer;
-import main.Chars.Playerinv;
-import main.InventoryStringDeSerializer;
+import main.InvSerializer;
 import main.MySQL.MySQL;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.io.*;
-import java.util.List;
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -42,7 +38,7 @@ public class Archer extends CharPlayer implements Listener {
     }
 
     //nur zum Laden gedacht
-    public Archer(UUID player, String name, String klasse, int money, int level, int xp, String inv) {
+    public Archer(UUID player, String name, String klasse, int money, int level, double xp, String inv) {
         this.player = player;
         this.name = name;
         this.klasse = klasse;
@@ -51,14 +47,19 @@ public class Archer extends CharPlayer implements Listener {
         this.xp = xp;
         Player p = Bukkit.getPlayer(player);
         p.getInventory().clear();
-        Inventory i = InventoryStringDeSerializer.StringToInventory(inv);
-        for(int u=0;u<36;u++){
-           p.getInventory().setItem(u,i.getItem(u));
-            System.out.println(i.getItem(u));
-        }
+        try {
+            ItemStack[] test2 = InvSerializer.itemStackArrayFromBase64(inv);
+            for (ItemStack is : test2) {
+                if (is != null) {
+                    p.getInventory().addItem(is);
+                }
 
+            }
+        } catch (IOException e) {
+
+        }
         p.setLevel(this.level);
-        p.setExp(xp);
+        p.setExp((float) xp);
         p.setDisplayName("§1[§6Archer§1]§2 " + name);
         p.setCustomName("[Archer] " + name);
         p.setCustomNameVisible(true);
@@ -88,9 +89,9 @@ public class Archer extends CharPlayer implements Listener {
         head.setItemMeta(skull);
         p.getInventory().setItem(8, head);
 
-        String playerinv = InventoryStringDeSerializer.InventoryToString(p.getInventory());
+        String playerinv[] = InvSerializer.playerInventoryToBase64(p.getInventory());
 
-        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv) VALUES ('"+player+"','"+name+"','"+klasse+"','"+money+"','"+level+"','"+xp+"','"+playerinv+"')");
+        MySQL.update("INSERT INTO Characters (UUID, charname, charclass, charmoney, charlevel, charxp, charinv, currentplaying) VALUES ('" + player + "','" + name + "','" + klasse + "','" + money + "','" + level + "','" + xp + "','" + playerinv[0] + "',true)");
     }
 
 }

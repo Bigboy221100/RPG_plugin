@@ -20,6 +20,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 /**
  * Created by user on 28.07.2017.
  */
+
+//Only use for global playerevents
+//Make own playervents for other things
 public class PlayerEvents implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
@@ -53,7 +56,6 @@ public class PlayerEvents implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         Player p = (Player) e.getPlayer();
-        CharPlayer charPlayer = new Normal(p);
         e.setQuitMessage("§1[§2-§1]§6 " + p.getName());
     }
 

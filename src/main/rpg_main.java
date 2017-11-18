@@ -9,21 +9,21 @@ import main.Dungeon.Dungeon;
 import main.Dungeon.DungeonArena;
 import main.Dungeon.DungeonMob;
 import main.Dungeon.DungeonQueue;
-import main.Group.Groups;
 import main.Minigame.Minigame;
 import main.MySQL.FileManager;
 import main.MySQL.MySQL;
 import main.News.News;
 import main.News.NewsManager;
+import main.Quest.QuestJSON;
 import main.Quest.QuestSystem;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Fabian on 19.07.2017.
@@ -32,7 +32,7 @@ public class rpg_main extends JavaPlugin {
 
     public void onEnable() {
         //MySQL
-        /*FileManager.setStandardMySQL();
+        FileManager.setStandardMySQL();
         FileManager.readMySQL();
         MySQL.connect();
         MySQL.createTable();
@@ -41,13 +41,13 @@ public class rpg_main extends JavaPlugin {
             this.getCommand("createnewcharacter").setExecutor(new CreatenewChar());
             this.getCommand("deletecharacter").setExecutor(new DeleteChar());
             this.getCommand("loadcharacter").setExecutor(new Loadchar());
-        */
+
 
         //MinigameSystem
         this.getCommand("minigame").setExecutor(new Minigame(this));
 
         //----------DungeonSystem---------//
-        /*this.getCommand("dungeon").setExecutor(new Dungeon(this));
+        this.getCommand("dungeon").setExecutor(new Dungeon(this));
         ResultSet rs = MySQL.getResultSet("SELECT * FROM Dungeons");
         try {
             while (rs.next()) {
@@ -71,32 +71,27 @@ public class rpg_main extends JavaPlugin {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         //-------------------//
 
         //---------- BanManager ---------//
-        /*BanManager banManager = new BanManager(this);
+        BanManager banManager = new BanManager(this);
         this.getCommand("ban").setExecutor(banManager);
         this.getCommand("unban").setExecutor(banManager);
         this.getCommand("tempban").setExecutor(banManager);
-        */
         //-------------------//
 
         //---------- News ---------//
-        /*this.getCommand("news").setExecutor(new NewsManager(this));
+        this.getCommand("news").setExecutor(new NewsManager(this));
         ResultSet rs2 = MySQL.getResultSet("SELECT * FROM NewsManager");
         try {
             while (rs2.next()) {
-                NewsManager.newsManager.add(new News(rs2.getString("news"), rs2.getInt("newsTime"), this));
+                NewsManager.newsManager.add(new News(rs2.getString("news"), Integer.parseInt(rs2.getString("newsTime")), this));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }*/
+        }
         //-------------------//
-        //Groups
-        this.getCommand("group").setExecutor(new Groups(this));
-
-        //
 
         //QuestSystem
         QuestSystem questSystem = new QuestSystem(this);
@@ -109,17 +104,18 @@ public class rpg_main extends JavaPlugin {
         this.getCommand("editreward").setExecutor(questSystem);
         this.getCommand("spawnquestnpc").setExecutor(questSystem);
         this.getCommand("bindquest").setExecutor(questSystem);
+        this.getCommand("savequests").setExecutor(questSystem);
+        this.getCommand("loadquests").setExecutor(questSystem);
 
         File f = new File("plugins/RPG/Quests");
-        if(!f.exists()) {
+        if(!f.exists())
             f.mkdir();
-            f = new File("plugins/RPG/Quests/Quests.json");
-            try {
-                f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        f = new File("plugins/RPG/Quests/Quests.json");
+        if(!f.exists())
+            QuestSystem.quests = new ArrayList<>();
+        else
+            QuestSystem.quests = QuestJSON.load();
 
         Bukkit.getPluginManager().registerEvents(new PlayerEvents(), this);
         Bukkit.getPluginManager().registerEvents(new Archerevents(), this);
@@ -131,7 +127,9 @@ public class rpg_main extends JavaPlugin {
 
     public void onDisable() {
         System.out.println("Rpg disabled");
-        //MySQL.close();
+        QuestJSON.writeJSON();
+
+        MySQL.close();
     }
 
 }
