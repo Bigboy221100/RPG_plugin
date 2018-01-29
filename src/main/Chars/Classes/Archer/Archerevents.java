@@ -114,7 +114,7 @@ public class Archerevents implements Listener {
             }
         }
     }
-    /*
+
     @EventHandler
     public void onPlayerInvItemClick(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
@@ -185,6 +185,4 @@ public class Archerevents implements Listener {
 
         }
     }
-
-*/
 }
